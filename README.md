@@ -15,11 +15,11 @@ GitHub Pages上の静的サイトとして毎日自動で公開するツール�
 ## 全体の流れ
 
 ```
-楽天市場ランキングAPI（総合ランキング）で商品を取得
+楽天市場ランキングAPI（総合ランキング、1〜30位を取得）
    ↓
-直近30日間に紹介済みの商品を除外
+6記事×5商品に分割（1〜5位, 6〜10位, ... 26〜30位）
    ↓
-Claude CLIで紹介記事を生成
+Claude CLIで記事ごとに紹介文を生成
    ↓
 src/content/articles/ にMarkdownとして保存
    ↓
@@ -27,6 +27,12 @@ git commit → push
    ↓
 GitHub Actionsが自動ビルド・GitHub Pagesへデプロイ
 ```
+
+デフォルトでは**毎日ランキング1〜30位を丸ごとカバー**する設定（`articlesPerDay: 6` ×
+`productsPerArticle: 5`）になっています。この設定の場合、直近の重複除外は行いません
+（上位商品が連日ランクインするのは当然で、それをそのまま見せるのが正しい挙動のため）。
+`articlesPerDay × productsPerArticle` を取得件数（30）より小さくすると、自動的に
+「直近30日以内に紹介済みの商品を除外して厳選する」モードに切り替わります。
 
 ## セットアップ手順（初回のみ・ユーザー側の作業）
 
@@ -41,8 +47,12 @@ GitHub Actionsが自動ビルド・GitHub Pagesへデプロイ
 ### 2. 楽天ウェブサービス（RWS）でアプリIDを発行
 
 1. [楽天ウェブサービス](https://webservice.rakuten.co.jp/)にログイン（楽天会員IDでOK）
-2. 「アプリID発行」から新規アプリを登録（無料・即時発行のことが多いです）
-3. 発行された **アプリID（applicationId）** を控える
+2. 「アプリID発行」から新規アプリを登録
+   - Application type: **Web Application**
+   - Allowed websites: **自分のサイトのドメイン**（例: `nagi-biz.github.io`。楽天側のドメインではない）
+   - API Access Scopes: **Rakuten Ichiba API のみ**でよい
+3. 発行された **アプリケーションID（applicationId）** と **アクセスキー（accessKey、`pk_`で始まる文字列）** を控える
+   （2026年の基盤刷新以降、両方が必須になっています）
 
 ### 3. 認証情報の設定
 
@@ -51,10 +61,15 @@ GitHub Actionsが自動ビルド・GitHub Pagesへデプロイ
 
 ```json
 {
-  "applicationId": "取得したアプリID",
-  "affiliateId": "取得したアフィリエイトID"
+  "applicationId": "取得したアプリケーションID",
+  "accessKey": "取得したアクセスキー（pk_で始まる文字列）",
+  "affiliateId": "取得したアフィリエイトID",
+  "siteUrl": "https://nagi-biz.github.io/RakutenAutoShop/"
 }
 ```
+
+`siteUrl` はRWS側に登録した「Allowed websites」のURLと一致させてください。
+一致しないと楽天API側から `REQUEST_CONTEXT_BODY_HTTP_REFERRER_MISSING` エラーで拒否されます。
 
 ### 4. GitHubリポジトリの作成・GitHub Pages有効化
 
@@ -96,6 +111,32 @@ npm run dev                   # ローカルプレビュー
 `publish.enabled: false` にすると生成のみ（git commitもしない）、
 `publish.live: false` にすると**ローカルコミットのみ**（pushしない＝実質下書き）になります。
 問題が起きた場合はまず `publish.live` を `false` にして安全モードに戻してください。
+
+## サイトを検索エンジンに見つけてもらう（周知の第一歩）
+
+サイトを作っただけでは検索結果には出てきません。以下はユーザー側の一度きりの手続きです。
+
+### 1. Google Search Console
+1. [Google Search Console](https://search.google.com/search-console)にアクセスし、
+   プロパティとして `https://nagi-biz.github.io/RakutenAutoShop/` を追加
+2. 所有権確認は「URLプレフィックス」→「HTMLタグ」方式が簡単
+   （発行された`<meta name="google-site-verification" ...>`タグを
+   `src/layouts/BaseLayout.astro`の`<head>`内に追加してpushすれば確認できます。私に貼り付け内容を
+   教えてもらえれば追加します）
+3. 確認できたら「サイトマップ」メニューから `sitemap-index.xml` を送信
+   （フルURL: `https://nagi-biz.github.io/RakutenAutoShop/sitemap-index.xml`）
+
+### 2. Bing Webmaster Tools
+1. [Bing Webmaster Tools](https://www.bing.com/webmasters)でGoogle Search Consoleからのインポートが可能（ほぼワンクリック）
+2. 同様にサイトマップURLを送信
+
+これで数日〜数週間かけて検索エンジンにインデックスされ始めます。すぐには効果が出ないので、
+気長に待つ必要があります。
+
+### 3. SNSでの自動告知（将来の拡張）
+新記事の公開ごとにX(Twitter)へタイトル+リンクを自動ポストする仕組みも追加できます。
+`NoteAutoPost`と同様、X Developer Portalでのアプリ登録（審査あり）が必要になるので、
+やりたくなったタイミングで声をかけてください。
 
 ## リスク・注意点
 
