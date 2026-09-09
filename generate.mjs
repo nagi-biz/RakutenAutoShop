@@ -159,12 +159,14 @@ async function main() {
   });
 
   let applicationId = null;
+  let accessKey = null;
   let affiliateId = null;
+  let siteUrl = null;
   if (!MOCK) {
     const rakutenConfig = loadJson(RAKUTEN_CONFIG_PATH, null);
-    if (!rakutenConfig || !rakutenConfig.applicationId) {
+    if (!rakutenConfig || !rakutenConfig.applicationId || !rakutenConfig.accessKey) {
       log(
-        'エラー: rakuten-config.json が見つからないか applicationId が未設定です。' +
+        'エラー: rakuten-config.json が見つからないか applicationId/accessKey が未設定です。' +
           'rakuten-config.example.json をコピーして値を設定してください（--mockなら不要）。',
       );
       flushLog();
@@ -172,7 +174,9 @@ async function main() {
       return;
     }
     applicationId = rakutenConfig.applicationId;
+    accessKey = rakutenConfig.accessKey;
     affiliateId = rakutenConfig.affiliateId;
+    siteUrl = rakutenConfig.siteUrl;
   }
 
   if (!MOCK) {
@@ -192,7 +196,7 @@ async function main() {
   try {
     rankingItems = MOCK
       ? mockRankingItems()
-      : await fetchRankingItems({ applicationId, affiliateId });
+      : await fetchRankingItems({ applicationId, accessKey, affiliateId, siteUrl });
   } catch (err) {
     log(`エラー: 楽天ランキングの取得に失敗しました: ${err.message}`);
     flushLog();

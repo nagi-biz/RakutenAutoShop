@@ -1,4 +1,6 @@
 {
-  "applicationId": "楽天ウェブサービス(RWS)で発行したアプリID",
-  "affiliateId": "楽天アフィリエイトのアフィリエイトID"
+  "applicationId": "楽天ウェブサービス(RWS)で発行したアプリケーションID",
+  "accessKey": "楽天ウェブサービス(RWS)で発行したアクセスキー（pk_で始まる文字列）",
+  "affiliateId": "楽天アフィリエイトのアフィリエイトID",
+  "siteUrl": "https://nagi-biz.github.io/RakutenAutoShop/"
 }
