@@ -1,0 +1,44 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export async function getStaticPaths() {
+  const articles = await getCollection('articles');
+  return articles.map((article) => ({
+    params: { id: article.id },
+    props: { article },
+  }));
+}
+
+const { article } = Astro.props;
+const { Content } = await render(article);
+---
+
+<BaseLayout title={`${article.data.title} — 楽天お買い物ラボ`}>
+  <article>
+    <h1>{article.data.title}</h1>
+    <p style="color:#666; font-size:0.9rem;">
+      {article.data.pubDate.toLocaleDateString('ja-JP')}
+    </p>
+    <Content />
+    <h2>紹介した商品</h2>
+    <ol>
+      {
+        article.data.products.map((p) => (
+          <li style="margin-bottom:1.5rem; list-style:none;">
+            <a href={p.affiliateUrl} rel="nofollow sponsored" target="_blank">
+              <img src={p.imageUrl} alt={p.name} style="max-width:200px; display:block;" />
+              <strong>{p.name}</strong>
+            </a>
+            <div>
+              {p.shopName} / ¥{p.price.toLocaleString('ja-JP')}
+            </div>
+            <a href={p.affiliateUrl} rel="nofollow sponsored" target="_blank">
+              楽天市場で見る
+            </a>
+          </li>
+        ))
+      }
+    </ol>
+  </article>
+</BaseLayout>

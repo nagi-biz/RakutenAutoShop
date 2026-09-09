@@ -1,0 +1,8 @@
+{
+  "articlesPerDay": 1,
+  "productsPerArticle": 5,
+  "publish": {
+    "enabled": true,
+    "live": true
+  }
+}

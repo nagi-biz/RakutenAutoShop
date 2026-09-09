@@ -1,0 +1,82 @@
+---
+interface Props {
+  title: string;
+  description?: string;
+}
+const { title, description = '楽天ランキングで話題の商品を毎日紹介します。' } = Astro.props;
+---
+
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="description" content={description} />
+    <title>{title}</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --bg: #fafaf7;
+        --fg: #222;
+        --muted: #666;
+        --accent: #bf0000;
+        --card-bg: #fff;
+        --border: #e5e2da;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--fg);
+        font-family: 'Hiragino Sans', 'Yu Gothic', system-ui, sans-serif;
+        line-height: 1.8;
+      }
+      header {
+        padding: 1.5rem 1rem;
+        border-bottom: 1px solid var(--border);
+        background: var(--card-bg);
+      }
+      header a {
+        color: var(--fg);
+        text-decoration: none;
+        font-weight: 700;
+        font-size: 1.2rem;
+      }
+      main {
+        max-width: 760px;
+        margin: 0 auto;
+        padding: 1.5rem 1rem 4rem;
+      }
+      footer {
+        text-align: center;
+        color: var(--muted);
+        font-size: 0.8rem;
+        padding: 2rem 1rem;
+      }
+      .disclosure {
+        font-size: 0.75rem;
+        color: var(--muted);
+        border: 1px solid var(--border);
+        background: var(--card-bg);
+        border-radius: 8px;
+        padding: 0.75rem 1rem;
+        margin-bottom: 1.5rem;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <a href={`${import.meta.env.BASE_URL}`}>楽天お買い物ラボ</a>
+    </header>
+    <main>
+      <p class="disclosure">
+        本サイトの商品リンクには楽天アフィリエイトプログラムによるアフィリエイトリンクが含まれます。
+      </p>
+      <slot />
+    </main>
+    <footer>&copy; {new Date().getFullYear()} 楽天お買い物ラボ</footer>
+  </body>
+</html>
