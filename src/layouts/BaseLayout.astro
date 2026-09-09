@@ -10,6 +10,12 @@ const { title, description = '楽天ランキングで話題の商品を毎日�
   <head>
     <meta charset="utf-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="楽天お買い物ラボ"
+      href={`${import.meta.env.BASE_URL}/rss.xml`}
+    />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
     <meta name="description" content={description} />

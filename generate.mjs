@@ -204,14 +204,24 @@ async function main() {
     return;
   }
 
-  const usedCodes = new Set(history.itemCodes.map((e) => e.itemCode));
-  let fresh = rankingItems.filter((it) => !usedCodes.has(it.itemCode));
-  if (fresh.length < config.productsPerArticle) {
-    log(
-      `直近${HISTORY_TRIM_DAYS}日以内に未紹介の商品が${fresh.length}件しかないため、` +
-        `既出の商品も含めてランキング上位から補います。`,
-    );
+  // articlesPerDay×productsPerArticleが取得したランキング件数以上（=ランキング全体を
+  // カバーする設定）の場合は「今日のランキングをそのまま出す」ことが目的なので、
+  // 重複除外はしない（上位商品が連日居座るのは当然で、それこそが見せたい内容のため）。
+  // 逆にランキングの一部だけを厳選して出す設定のときだけ、直近30日の重複を避ける。
+  const totalNeeded = config.articlesPerDay * config.productsPerArticle;
+  let fresh;
+  if (totalNeeded >= rankingItems.length) {
     fresh = rankingItems;
+  } else {
+    const usedCodes = new Set(history.itemCodes.map((e) => e.itemCode));
+    fresh = rankingItems.filter((it) => !usedCodes.has(it.itemCode));
+    if (fresh.length < totalNeeded) {
+      log(
+        `直近${HISTORY_TRIM_DAYS}日以内に未紹介の商品が${fresh.length}件しかないため、` +
+          `既出の商品も含めてランキング上位から補います。`,
+      );
+      fresh = rankingItems;
+    }
   }
 
   const successes = [];

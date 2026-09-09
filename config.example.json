@@ -1,5 +1,5 @@
 {
-  "articlesPerDay": 1,
+  "articlesPerDay": 6,
   "productsPerArticle": 5,
   "publish": {
     "enabled": true,

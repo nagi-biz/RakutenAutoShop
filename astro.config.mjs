@@ -1,5 +1,6 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
+import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 // GitHub Pages（プロジェクトページ）にデプロイする前提の設定。
@@ -8,4 +9,5 @@ import { defineConfig } from 'astro/config';
 export default defineConfig({
   site: 'https://nagi-biz.github.io',
   base: '/RakutenAutoShop',
+  integrations: [sitemap()],
 });
