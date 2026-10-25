@@ -131,6 +131,64 @@ function parseArticle(text) {
   };
 }
 
+// 2026-09-09/09-10 の記事重複（reports/2026-10-21_楽天買い物ラボ_記事重複調査.md）を受けた再発防止策。
+// 楽天総合ランキングが複数日停滞すると、articlesPerDay×productsPerArticleが
+// ランキング総数以上の設定では「今日のランキングをそのまま出す」分岐（下記）が
+// 履歴チェックを素通りし、前回と事実上同一の記事が生成されてしまう。
+// ここでは「今日のランキングをそのまま出す」設計自体は変えず（それが意図した挙動のため）、
+// 直前の生成日の記事と比べて明らかに同一内容になっている場合だけ検知し、
+// フロントマターに duplicateCheck を残して公開前チェック（shop-release）の目に留まるようにする。
+const DUPLICATE_ITEMCODE_OVERLAP_THRESHOLD = 0.8; // 5商品中4件以上一致なら要注意
+const DUPLICATE_TITLE_SIMILARITY_THRESHOLD = 0.75; // タイトルの言い回しがほぼ同じ場合の補助判定
+
+// 直近で記録された日付のうち、今日より前の最新日のものだけを「直前の生成分」として取り出す。
+// published-articles.json は複数記事をフラットな配列で持つため、日付でグルーピングしてから選ぶ。
+function getPriorArticles(published, todayDate) {
+  const priorDates = [...new Set(published.map((p) => p.date))].filter((d) => d < todayDate).sort();
+  const latestPriorDate = priorDates[priorDates.length - 1];
+  if (!latestPriorDate) return [];
+  return published.filter((p) => p.date === latestPriorDate);
+}
+
+// 商品IDの一致率（0〜1）。URLはアフィリエイトのトラッキングパラメータ等で揺れることがあるため、
+// 商品の同一性判定はitemCode（楽天の商品コード）を正とする。
+function itemCodeOverlapRatio(codesA, codesB) {
+  if (codesA.length === 0) return 0;
+  const setB = new Set(codesB);
+  const overlap = codesA.filter((code) => setB.has(code)).length;
+  return overlap / codesA.length;
+}
+
+// タイトルの簡易類似度（文字bi-gramのJaccard係数）。言い回しを変えただけの言い換え記事を
+// 補助的に検知する（商品ID一致ほど確実ではないため、しきい値は高めに設定している）。
+function titleSimilarity(a, b) {
+  const bigrams = (s) => {
+    const clean = String(s).replace(/[\s\p{P}\p{S}]/gu, '');
+    const set = new Set();
+    for (let i = 0; i < clean.length - 1; i++) set.add(clean.slice(i, i + 2));
+    return set;
+  };
+  const setA = bigrams(a);
+  const setB = bigrams(b);
+  if (setA.size === 0 || setB.size === 0) return 0;
+  let intersection = 0;
+  for (const g of setA) if (setB.has(g)) intersection++;
+  const union = setA.size + setB.size - intersection;
+  return union === 0 ? 0 : intersection / union;
+}
+
+// 直前の生成分の記事それぞれと比較し、最も似ているものを1件選ぶ。
+function findClosestPriorArticle(itemCodes, priorArticles) {
+  let best = null;
+  for (const prior of priorArticles) {
+    const ratio = itemCodeOverlapRatio(itemCodes, prior.itemCodes || []);
+    if (!best || ratio > best.ratio) {
+      best = { prior, ratio };
+    }
+  }
+  return best;
+}
+
 function mockArticle(products) {
   return {
     title: `【mock】今売れているもの${products.length}選`,
@@ -191,6 +249,9 @@ async function main() {
   }
 
   const history = loadJson(HISTORY_PATH, { itemCodes: [] });
+  const published = loadJson(PUBLISHED_PATH, []);
+  const todayDate = todayStr();
+  const priorArticles = getPriorArticles(published, todayDate);
 
   let rankingItems;
   try {
@@ -206,7 +267,10 @@ async function main() {
 
   // articlesPerDay×productsPerArticleが取得したランキング件数以上（=ランキング全体を
   // カバーする設定）の場合は「今日のランキングをそのまま出す」ことが目的なので、
-  // 重複除外はしない（上位商品が連日居座るのは当然で、それこそが見せたい内容のため）。
+  // ここでの選定上は重複除外をしない（上位商品が連日居座るのは当然で、それこそが見せたい
+  // 内容のため）。ただしランキングが停滞して前回生成分と事実上同一になるケースへの対策として、
+  // 下の記事生成ループで直前の生成分との一致率を検知し、frontmatterにフラグを残す
+  // （reports/2026-10-21_楽天買い物ラボ_記事重複調査.md）。
   // 逆にランキングの一部だけを厳選して出す設定のときだけ、直近30日の重複を避ける。
   const totalNeeded = config.articlesPerDay * config.productsPerArticle;
   let fresh;
@@ -242,11 +306,38 @@ async function main() {
       const date = todayStr();
       const idxStr = String(articleIdx + 1).padStart(2, '0');
       const id = `${date}-${idxStr}`;
+
+      // 直前の生成分との重複チェック（商品IDの一致率を主、タイトル類似度を補助とする）。
+      const itemCodes = products.map((p) => p.itemCode);
+      const closest = findClosestPriorArticle(itemCodes, priorArticles);
+      let duplicateCheck;
+      let duplicateFlagged = false;
+      if (closest) {
+        const simRatio = titleSimilarity(article.title, closest.prior.title);
+        duplicateFlagged =
+          closest.ratio >= DUPLICATE_ITEMCODE_OVERLAP_THRESHOLD ||
+          (closest.ratio >= 0.6 && simRatio >= DUPLICATE_TITLE_SIMILARITY_THRESHOLD);
+        duplicateCheck = {
+          flagged: duplicateFlagged,
+          itemCodeOverlapRatio: Math.round(closest.ratio * 100) / 100,
+          titleSimilarity: Math.round(simRatio * 100) / 100,
+          comparedTo: closest.prior.id,
+        };
+        if (duplicateFlagged) {
+          log(
+            `記事${articleIdx + 1} (${id}): 直前の生成分（${closest.prior.id}）と商品の一致率` +
+              `${Math.round(closest.ratio * 100)}%・タイトル類似度${Math.round(simRatio * 100)}%のため` +
+              `重複の疑いとしてフラグを立てます（内容は生成を継続し、公開前チェックで確認してください）。`,
+          );
+        }
+      }
+
       const frontmatter = {
         title: article.title,
         pubDate: date,
         imageKeyword: undefined,
         products,
+        duplicateCheck,
       };
       // undefinedのキーはJSON.stringifyで自然に消えるのでそのままでよい。
       const markdown = buildMarkdown(frontmatter, article.body);
@@ -260,7 +351,7 @@ async function main() {
         history.itemCodes.push({ itemCode: p.itemCode, date });
       }
 
-      successes.push({ id, title: article.title, products });
+      successes.push({ id, title: article.title, products, duplicateFlagged });
     } catch (err) {
       log(`記事${articleIdx + 1}: 生成に失敗しました: ${err.message}`);
       failures.push({ articleIdx, message: err.message });
@@ -270,7 +361,6 @@ async function main() {
   history.itemCodes = trimOlderThan(history.itemCodes, HISTORY_TRIM_DAYS);
   saveJson(HISTORY_PATH, history);
 
-  const published = loadJson(PUBLISHED_PATH, []);
   for (const s of successes) {
     published.push({
       date: todayStr(),
@@ -281,14 +371,29 @@ async function main() {
   }
   saveJson(PUBLISHED_PATH, published.slice(-200));
 
-  log(`生成結果: 成功${successes.length}件 / 失敗${failures.length}件`);
+  const duplicateFlaggedIds = successes.filter((s) => s.duplicateFlagged).map((s) => s.id);
+  log(
+    `生成結果: 成功${successes.length}件 / 失敗${failures.length}件` +
+      (duplicateFlaggedIds.length > 0 ? ` / 重複疑いフラグ${duplicateFlaggedIds.length}件（${duplicateFlaggedIds.join(', ')}）` : ''),
+  );
 
   if (DO_PUBLISH && config.publish?.enabled && successes.length > 0) {
+    // 重複疑いフラグが1件でも立った生成バッチは、GitHub Pagesに反映される
+    // git pushだけは見送り、ローカルコミットまでにとどめる（公開の一歩手前を
+    // 承認ポイントにする、という代表の方針に合わせた安全策）。
+    // commit自体は実施するため「途中でも最後まで作り上げる」生成フローは止めない。
+    const pushAllowed = !!config.publish.live && duplicateFlaggedIds.length === 0;
+    if (!!config.publish.live && duplicateFlaggedIds.length > 0) {
+      log(
+        `重複の疑いがある記事（${duplicateFlaggedIds.join(', ')}）が含まれるため、安全のため今回はpushを見送り、` +
+          `ローカルコミットのみ行います。shop-release担当の確認後、問題なければ手動でgit pushしてください。`,
+      );
+    }
     try {
       const result = await publishToGit({
         cwd: ROOT,
         message: `記事追加: ${successes.map((s) => s.title).join(', ')}`,
-        push: !!config.publish.live,
+        push: pushAllowed,
       });
       log(`git公開: ${result}`);
     } catch (err) {

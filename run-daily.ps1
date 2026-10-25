@@ -12,4 +12,7 @@ if (-not (Test-Path $nodeExe)) {
 }
 
 & $nodeExe (Join-Path $PSScriptRoot "generate.mjs") --publish
-exit $LASTEXITCODE
+$code = $LASTEXITCODE
+# 新しい記事の PR 画像（記事の先頭・SNS のリンク表示用）を作って公開する
+& $nodeExe (Join-Path $PSScriptRoot "pr-image.mjs") --publish
+exit $code

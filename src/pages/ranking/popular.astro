@@ -1,0 +1,82 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+// 人気ランキング：
+// 現状サイトにはPV・クリックなどの実アクセスデータがないため、
+// 「人気」の代理指標として、各商品が元の楽天ランキングで獲得していた rank 番号
+// （1に近いほど楽天ランキング上位＝人気が高い）を使い、rank 昇順に並べる。
+// 同じ rank の場合は、掲載記事の pubDate が新しい方を優先する。
+//
+// 将来、GA等のアクセス解析やアフィリエイトのクリック・成果データが蓄積したら、
+// この代理指標から実際のクリック数・成果件数ベースの集計に切り替える想定
+// （販売戦略担当 shop-strategy の施策案 2026-10-20_楽天買い物ラボ_カテゴリ構成案.md より）。
+const allArticles = await getCollection('articles');
+
+const products = allArticles.flatMap((article) =>
+  article.data.products.map((product) => ({
+    ...product,
+    articleId: article.id,
+    articleTitle: article.data.title,
+    pubDate: article.data.pubDate,
+  })),
+);
+
+const ranked = products.sort((a, b) => {
+  if (a.rank !== b.rank) return a.rank - b.rank;
+  return b.pubDate.valueOf() - a.pubDate.valueOf();
+});
+---
+
+<BaseLayout
+  title="人気ランキング — 楽天お買い物ラボ"
+  description="楽天ランキングの順位を参考指標として並べた、商品の人気ランキングです。"
+>
+  <h1>人気ランキング</h1>
+  <p>
+    楽天ランキングでの元の順位（1位に近いほど上位）を人気の目安として、商品を並べています。
+  </p>
+  <ol style="list-style:none; padding:0;">
+    {
+      ranked.map((product) => (
+        <li style="margin-bottom:1.5rem; padding-bottom:1.5rem; border-bottom:1px solid #e5e2da; display:flex; gap:1rem; align-items:flex-start;">
+          <span style="flex:0 0 auto; min-width:2.5rem; font-weight:700; color:#bf0000; font-size:1.1rem;">
+            {product.rank}位
+          </span>
+          <a
+            href={product.affiliateUrl}
+            rel="nofollow sponsored"
+            target="_blank"
+            style="flex:0 0 auto; text-decoration:none; color:inherit;"
+          >
+            <img
+              src={product.imageUrl}
+              alt={product.name}
+              style="width:96px; height:96px; object-fit:cover; display:block; border-radius:4px;"
+            />
+          </a>
+          <div style="flex:1 1 auto; min-width:0;">
+            <a
+              href={product.affiliateUrl}
+              rel="nofollow sponsored"
+              target="_blank"
+              style="text-decoration:none; color:inherit;"
+            >
+              <strong style="display:block; margin:0 0 0.3rem;">{product.name}</strong>
+            </a>
+            <p style="margin:0 0 0.3rem; color:#666; font-size:0.9rem;">
+              {product.shopName} / ¥{product.price.toLocaleString('ja-JP')}
+            </p>
+            <a
+              href={`${import.meta.env.BASE_URL}/articles/${product.articleId}/`}
+              style="font-size:0.85rem;"
+            >
+              掲載記事「{product.articleTitle}」を見る
+            </a>
+          </div>
+        </li>
+      ))
+    }
+  </ol>
+  {ranked.length === 0 && <p>まだ商品がありません。</p>}
+</BaseLayout>

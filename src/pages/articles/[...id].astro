@@ -1,5 +1,6 @@
 ---
 import { getCollection, render } from 'astro:content';
+import fs from 'node:fs';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
 export async function getStaticPaths() {
@@ -12,10 +13,13 @@ export async function getStaticPaths() {
 
 const { article } = Astro.props;
 const { Content } = await render(article);
+// PR 画像（pr-image.mjs が public/pr/<記事ID>.png に作る）。あれば記事の先頭と SNS のリンク表示に使う
+const pr = fs.existsSync(`public/pr/${article.id}.png`) ? `${import.meta.env.BASE_URL}/pr/${article.id}.png` : null;
 ---
 
-<BaseLayout title={`${article.data.title} — 楽天お買い物ラボ`}>
+<BaseLayout title={`${article.data.title} — 楽天お買い物ラボ`} image={pr ?? undefined}>
   <article>
+    {pr && <img src={pr} alt={article.data.title} width="1200" height="630" style="width:100%; height:auto; border-radius:12px; margin-bottom:1rem;" />}
     <h1>{article.data.title}</h1>
     <p style="color:#666; font-size:0.9rem;">
       {article.data.pubDate.toLocaleDateString('ja-JP')}

@@ -1,0 +1,66 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="運営者情報 — 楽天お買い物ラボ"
+  description="楽天お買い物ラボの運営会社・運営方針についてのご案内です。"
+>
+  <h1>運営者情報</h1>
+
+  <h2>運営会社</h2>
+  <table style="border-collapse:collapse; width:100%; margin-bottom:1.5rem;">
+    <tbody>
+      <tr>
+        <th style="text-align:left; vertical-align:top; padding:0.5rem 1rem 0.5rem 0; white-space:nowrap; color:#666; font-weight:500;">
+          会社名
+        </th>
+        <td style="padding:0.5rem 0;">梛合同会社（Nagi Godo Kaisha）</td>
+      </tr>
+      <tr>
+        <th style="text-align:left; vertical-align:top; padding:0.5rem 1rem 0.5rem 0; white-space:nowrap; color:#666; font-weight:500;">
+          所在地
+        </th>
+        <td style="padding:0.5rem 0;">〒902-0077 沖縄県那覇市長田2-22-15</td>
+      </tr>
+      <tr>
+        <th style="text-align:left; vertical-align:top; padding:0.5rem 1rem 0.5rem 0; white-space:nowrap; color:#666; font-weight:500;">
+          代表者
+        </th>
+        <td style="padding:0.5rem 0;">代表社員 谷口 優樹</td>
+      </tr>
+      <tr>
+        <th style="text-align:left; vertical-align:top; padding:0.5rem 1rem 0.5rem 0; white-space:nowrap; color:#666; font-weight:500;">
+          設立
+        </th>
+        <td style="padding:0.5rem 0;">2025年12月23日</td>
+      </tr>
+      <tr>
+        <th style="text-align:left; vertical-align:top; padding:0.5rem 1rem 0.5rem 0; white-space:nowrap; color:#666; font-weight:500;">
+          事業内容
+        </th>
+        <td style="padding:0.5rem 0;">コンサルティング業（デジタルコンテンツの企画・運営を含む）</td>
+      </tr>
+      <tr>
+        <th style="text-align:left; vertical-align:top; padding:0.5rem 1rem 0.5rem 0; white-space:nowrap; color:#666; font-weight:500;">
+          お問い合わせ
+        </th>
+        <td style="padding:0.5rem 0;">
+          <a href={`${import.meta.env.BASE_URL}/contact/`}>お問い合わせページ</a>
+          をご覧ください。
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>サイトの運営方針</h2>
+  <p>
+    「楽天お買い物ラボ」は、梛合同会社が運営する商品紹介サイトです。楽天ランキングなどをもとに話題の商品をピックアップし、紹介しています。
+  </p>
+  <p>
+    本サイトに掲載している商品リンクには、楽天アフィリエイトプログラムによるアフィリエイトリンクが含まれます。読者の方が本サイト経由で商品を購入された場合、当社に成果報酬が支払われることがあります。本サイトは、こうしたアフィリエイト収益によって運営されています。
+  </p>
+  <p>
+    紹介する商品・価格・在庫状況などの情報は、できる限り正確な内容を心がけていますが、掲載時点の情報であり、実際の商品ページの情報と異なる場合があります。ご購入の際は、リンク先の商品ページにて最新の情報をご確認ください。
+  </p>
+</BaseLayout>

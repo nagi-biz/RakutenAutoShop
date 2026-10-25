@@ -2,8 +2,10 @@
 interface Props {
   title: string;
   description?: string;
+  image?: string;
 }
-const { title, description = '楽天ランキングで話題の商品を毎日紹介します。' } = Astro.props;
+const { title, description = '楽天ランキングで話題の商品を毎日紹介します。', image } = Astro.props;
+const ogImage = image ? new URL(image, Astro.site).href : null;
 ---
 
 <html lang="ja">
@@ -20,6 +22,10 @@ const { title, description = '楽天ランキングで話題の商品を毎日�
     <meta name="generator" content={Astro.generator} />
     <meta name="description" content={description} />
     <title>{title}</title>
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    {ogImage && <meta property="og:image" content={ogImage} />}
+    <meta name="twitter:card" content={ogImage ? 'summary_large_image' : 'summary'} />
     <style>
       :root {
         color-scheme: light;
@@ -51,6 +57,26 @@ const { title, description = '楽天ランキングで話題の商品を毎日�
         font-weight: 700;
         font-size: 1.2rem;
       }
+      header .site-header {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: baseline;
+        gap: 0.5rem 1.2rem;
+      }
+      header nav.global-nav {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+      }
+      header nav.global-nav a {
+        font-weight: 500;
+        font-size: 0.95rem;
+        color: var(--muted);
+        text-decoration: none;
+      }
+      header nav.global-nav a:hover {
+        color: var(--accent);
+      }
       main {
         max-width: 760px;
         margin: 0 auto;
@@ -61,6 +87,16 @@ const { title, description = '楽天ランキングで話題の商品を毎日�
         color: var(--muted);
         font-size: 0.8rem;
         padding: 2rem 1rem;
+      }
+      footer nav {
+        margin-bottom: 0.75rem;
+      }
+      footer nav a {
+        color: var(--muted);
+        text-decoration: underline;
+      }
+      footer nav span {
+        margin: 0 0.5rem;
       }
       .disclosure {
         font-size: 0.75rem;
@@ -75,7 +111,13 @@ const { title, description = '楽天ランキングで話題の商品を毎日�
   </head>
   <body>
     <header>
-      <a href={`${import.meta.env.BASE_URL}`}>楽天お買い物ラボ</a>
+      <div class="site-header">
+        <a href={`${import.meta.env.BASE_URL}`}>楽天お買い物ラボ</a>
+        <nav class="global-nav">
+          <a href={`${import.meta.env.BASE_URL}/ranking/new/`}>新着ランキング</a>
+          <a href={`${import.meta.env.BASE_URL}/ranking/popular/`}>人気ランキング</a>
+        </nav>
+      </div>
     </header>
     <main>
       <p class="disclosure">
@@ -83,6 +125,13 @@ const { title, description = '楽天ランキングで話題の商品を毎日�
       </p>
       <slot />
     </main>
-    <footer>&copy; {new Date().getFullYear()} 楽天お買い物ラボ</footer>
+    <footer>
+      <nav>
+        <a href={`${import.meta.env.BASE_URL}/about/`}>運営者情報</a><span>・</span>
+        <a href={`${import.meta.env.BASE_URL}/privacy/`}>プライバシーポリシー</a><span>・</span>
+        <a href={`${import.meta.env.BASE_URL}/contact/`}>お問い合わせ</a>
+      </nav>
+      &copy; {new Date().getFullYear()} 楽天お買い物ラボ
+    </footer>
   </body>
 </html>

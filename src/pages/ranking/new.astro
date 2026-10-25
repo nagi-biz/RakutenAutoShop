@@ -1,0 +1,40 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+// 新着ランキング：記事を pubDate の新しい順（降順）に並べる。
+// ソートロジックはトップページ（src/pages/index.astro）と同じもの。
+const allArticles = await getCollection('articles');
+const articles = allArticles.sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+---
+
+<BaseLayout
+  title="新着ランキング — 楽天お買い物ラボ"
+  description="楽天お買い物ラボで紹介した記事を、公開が新しい順に並べたランキングです。"
+>
+  <h1>新着ランキング</h1>
+  <p>公開日が新しい順に記事を並べています。最新の話題の商品からチェックできます。</p>
+  <ul style="list-style:none; padding:0;">
+    {
+      articles.map((article, index) => (
+        <li style="margin-bottom:1.5rem; padding-bottom:1.5rem; border-bottom:1px solid #e5e2da;">
+          <a
+            href={`${import.meta.env.BASE_URL}/articles/${article.id}/`}
+            style="text-decoration:none; color:inherit;"
+          >
+            <p style="margin:0 0 0.2rem; color:#bf0000; font-weight:700; font-size:0.85rem;">
+              NEW {index + 1}
+            </p>
+            <h2 style="margin:0 0 0.3rem;">{article.data.title}</h2>
+            <p style="margin:0; color:#666; font-size:0.9rem;">
+              {article.data.pubDate.toLocaleDateString('ja-JP')}
+            </p>
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+  {articles.length === 0 && <p>まだ記事がありません。</p>}
+</BaseLayout>
