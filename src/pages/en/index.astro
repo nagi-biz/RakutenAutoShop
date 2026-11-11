@@ -1,5 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
+import fs from 'node:fs';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getUI } from '../../i18n/ui';
 
@@ -8,16 +9,26 @@ const t = getUI('en');
 const allArticles = await getCollection('articles');
 // 英語版がある記事は英語ページへリンクし、英語タイトルで表示する
 const enById = new Map((await getCollection('articlesEn')).map((a) => [a.id, a]));
+
+// カードのサムネイル: PR 画像があればそれ、無ければ先頭商品の画像を使う。
+// 商品画像はサムネイル用パラメータ（_ex=128x128）が小さいため、表示用に大きなサイズを要求する。
+const base = import.meta.env.BASE_URL;
+const thumbOf = (article: (typeof allArticles)[number]) =>
+  fs.existsSync(`public/pr/${article.id}.png`)
+    ? `${base}/pr/${article.id}.png`
+    : article.data.products[0].imageUrl.replace(/_ex=\d+x\d+/, '_ex=400x400');
+
 const articles = allArticles
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
   .map((article) => {
     const en = enById.get(article.id);
     return {
       href: en
-        ? `${import.meta.env.BASE_URL}/en/articles/${article.id}/`
-        : `${import.meta.env.BASE_URL}/articles/${article.id}/`,
+        ? `${base}/en/articles/${article.id}/`
+        : `${base}/articles/${article.id}/`,
       title: en ? en.data.title : article.data.title,
       pubDate: article.data.pubDate,
+      thumb: thumbOf(article),
     };
   });
 ---
@@ -31,15 +42,18 @@ const articles = allArticles
     Articles shown with an English title have a full English version; the rest
     link to the Japanese article for now.
   </p>
-  <ul style="list-style:none; padding:0;">
+  <ul class="card-grid">
     {
       articles.map((article) => (
-        <li style="margin-bottom:1.5rem; padding-bottom:1.5rem; border-bottom:1px solid #e5e2da;">
-          <a href={article.href} style="text-decoration:none; color:inherit;">
-            <h2 style="margin:0 0 0.3rem;">{article.title}</h2>
-            <p style="margin:0; color:#666; font-size:0.9rem;">
-              {article.pubDate.toLocaleDateString(t.dateLocale)}
-            </p>
+        <li class="article-card">
+          <a href={article.href}>
+            <img src={article.thumb} alt="" loading="lazy" />
+            <div class="article-card-body">
+              <h2>{article.title}</h2>
+              <p class="article-card-date">
+                {article.pubDate.toLocaleDateString(t.dateLocale)}
+              </p>
+            </div>
           </a>
         </li>
       ))
