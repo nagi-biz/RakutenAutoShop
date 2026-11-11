@@ -1,29 +1,89 @@
 ---
+import { getUI, otherLang, type Lang } from '../i18n/ui';
+
 interface Props {
   title: string;
   description?: string;
   image?: string;
+  /** ページの言語。既定は 'ja' */
+  lang?: Lang;
+  /**
+   * 他言語版ページのパス（ベースURLを含まない、'/' 始まり）。
+   * 例: 日本語トップからは '/en/'、英語トップからは '/'。
+   * 指定がある場合、言語スイッチャーはそこへリンクし、hreflangも出力する。
+   * 指定がない場合、スイッチャーは他言語のトップページへリンクする。
+   */
+  altPath?: string;
 }
-const { title, description = '楽天ランキングで話題の商品を毎日紹介します。', image } = Astro.props;
+const {
+  title,
+  description,
+  image,
+  lang = 'ja',
+  altPath,
+} = Astro.props;
+const t = getUI(lang);
+const pageDescription = description ?? t.defaultDescription;
 const ogImage = image ? new URL(image, Astro.site).href : null;
+
+const base = import.meta.env.BASE_URL;
+const other = otherLang(lang);
+
+// ヘッダーのサイト名リンク先（自言語のトップ）
+const homeHref = lang === 'ja' ? `${base}` : `${base}/en/`;
+
+// 言語スイッチャーのリンク先
+const switcherHref = altPath
+  ? `${base}${altPath}`
+  : other === 'en'
+    ? `${base}/en/`
+    : `${base}`;
+
+// hreflang（他言語版があるページのみ出力）
+const selfUrl = new URL(Astro.url.pathname, Astro.site).href;
+const altUrl = altPath ? new URL(`${base}${altPath}`, Astro.site).href : null;
+const defaultUrl = lang === 'ja' ? selfUrl : altUrl;
+
+// ナビ: ランキングページは現状日本語のみのため、英語ページからも日本語版へリンクする。
+// 英語ページには買い方ガイドへのリンクを追加する。
+const navItems =
+  lang === 'ja'
+    ? [
+        { label: t.navNew, href: `${base}/ranking/new/` },
+        { label: t.navPopular, href: `${base}/ranking/popular/` },
+      ]
+    : [
+        { label: t.navNew, href: `${base}/ranking/new/` },
+        { label: t.navPopular, href: `${base}/ranking/popular/` },
+        { label: t.navGuide, href: `${base}/en/guide/` },
+      ];
 ---
 
-<html lang="ja">
+<html lang={lang}>
   <head>
     <meta charset="utf-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link
       rel="alternate"
       type="application/rss+xml"
-      title="楽天お買い物ラボ"
-      href={`${import.meta.env.BASE_URL}/rss.xml`}
+      title={t.siteName}
+      href={`${base}/rss.xml`}
     />
+    {
+      altUrl && (
+        <>
+          <link rel="alternate" hreflang={lang} href={selfUrl} />
+          <link rel="alternate" hreflang={other} href={altUrl} />
+          <link rel="alternate" hreflang="x-default" href={defaultUrl} />
+        </>
+      )
+    }
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
-    <meta name="description" content={description} />
+    <meta name="description" content={pageDescription} />
     <title>{title}</title>
     <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
+    <meta property="og:description" content={pageDescription} />
     {ogImage && <meta property="og:image" content={ogImage} />}
     <meta name="twitter:card" content={ogImage ? 'summary_large_image' : 'summary'} />
     <style>
@@ -77,6 +137,16 @@ const ogImage = image ? new URL(image, Astro.site).href : null;
       header nav.global-nav a:hover {
         color: var(--accent);
       }
+      header a.lang-switch {
+        margin-left: auto;
+        font-weight: 500;
+        font-size: 0.9rem;
+        color: var(--muted);
+        text-decoration: underline;
+      }
+      header a.lang-switch:hover {
+        color: var(--accent);
+      }
       main {
         max-width: 760px;
         margin: 0 auto;
@@ -112,26 +182,30 @@ const ogImage = image ? new URL(image, Astro.site).href : null;
   <body>
     <header>
       <div class="site-header">
-        <a href={`${import.meta.env.BASE_URL}`}>楽天お買い物ラボ</a>
+        <a href={homeHref}>{t.siteName}</a>
         <nav class="global-nav">
-          <a href={`${import.meta.env.BASE_URL}/ranking/new/`}>新着ランキング</a>
-          <a href={`${import.meta.env.BASE_URL}/ranking/popular/`}>人気ランキング</a>
+          {
+            navItems.map((item) => (
+              <a href={item.href}>{item.label}</a>
+            ))
+          }
         </nav>
+        <a class="lang-switch" href={switcherHref}>{t.switcherLabel}</a>
       </div>
     </header>
     <main>
       <p class="disclosure">
-        本サイトの商品リンクには楽天アフィリエイトプログラムによるアフィリエイトリンクが含まれます。
+        {t.disclosure}
       </p>
       <slot />
     </main>
     <footer>
       <nav>
-        <a href={`${import.meta.env.BASE_URL}/about/`}>運営者情報</a><span>・</span>
-        <a href={`${import.meta.env.BASE_URL}/privacy/`}>プライバシーポリシー</a><span>・</span>
-        <a href={`${import.meta.env.BASE_URL}/contact/`}>お問い合わせ</a>
+        <a href={`${base}/about/`}>{t.footerAbout}</a><span>・</span>
+        <a href={`${base}/privacy/`}>{t.footerPrivacy}</a><span>・</span>
+        <a href={`${base}/contact/`}>{t.footerContact}</a>
       </nav>
-      &copy; {new Date().getFullYear()} 楽天お買い物ラボ
+      &copy; {new Date().getFullYear()} {t.siteName}
     </footer>
   </body>
 </html>
