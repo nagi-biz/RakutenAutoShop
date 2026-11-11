@@ -1,28 +1,37 @@
 ---
 import { getCollection } from 'astro:content';
+import fs from 'node:fs';
 import BaseLayout from '../layouts/BaseLayout.astro';
 
 const allArticles = await getCollection('articles');
 const articles = allArticles.sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 );
+
+// カードのサムネイル: PR 画像があればそれ、無ければ先頭商品の画像を使う。
+// 商品画像はサムネイル用パラメータ（_ex=128x128）が小さいため、表示用に大きなサイズを要求する。
+const base = import.meta.env.BASE_URL;
+const thumbOf = (article: (typeof articles)[number]) =>
+  fs.existsSync(`public/pr/${article.id}.png`)
+    ? `${base}/pr/${article.id}.png`
+    : article.data.products[0].imageUrl.replace(/_ex=\d+x\d+/, '_ex=400x400');
 ---
 
 <BaseLayout title="楽天お買い物ラボ — 今売れているものまとめ" lang="ja" altPath="/en/">
   <h1>今売れているものまとめ</h1>
   <p>楽天ランキングをもとに、話題の商品を毎日ピックアップして紹介しています。</p>
-  <ul style="list-style:none; padding:0;">
+  <ul class="card-grid">
     {
       articles.map((article) => (
-        <li style="margin-bottom:1.5rem; padding-bottom:1.5rem; border-bottom:1px solid #e5e2da;">
-          <a
-            href={`${import.meta.env.BASE_URL}/articles/${article.id}/`}
-            style="text-decoration:none; color:inherit;"
-          >
-            <h2 style="margin:0 0 0.3rem;">{article.data.title}</h2>
-            <p style="margin:0; color:#666; font-size:0.9rem;">
-              {article.data.pubDate.toLocaleDateString('ja-JP')}
-            </p>
+        <li class="article-card">
+          <a href={`${base}/articles/${article.id}/`}>
+            <img src={thumbOf(article)} alt="" loading="lazy" />
+            <div class="article-card-body">
+              <h2>{article.data.title}</h2>
+              <p class="article-card-date">
+                {article.data.pubDate.toLocaleDateString('ja-JP')}
+              </p>
+            </div>
           </a>
         </li>
       ))
