@@ -10,4 +10,13 @@ export default defineConfig({
   site: 'https://nagi-biz.github.io',
   base: '/RakutenAutoShop',
   integrations: [sitemap()],
+  // 多言語化（Phase 1）: 日本語を既定とし、URLは従来通りプレフィックスなし。
+  // 英語ページは /en/ 配下に手動で配置する。設計: docs/i18n-design.md
+  i18n: {
+    locales: ['ja', 'en'],
+    defaultLocale: 'ja',
+    routing: {
+      prefixDefaultLocale: false,
+    },
+  },
 });
