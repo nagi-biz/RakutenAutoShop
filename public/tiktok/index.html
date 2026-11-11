@@ -31,6 +31,17 @@
   header h1{font-size:26px;letter-spacing:.06em;margin-top:12px}
   header p{font-size:13.5px;line-height:1.65;opacity:.96;margin-top:6px}
   header .handles{font-size:12.5px;opacity:.9;margin-top:8px}
+  .lang-toggle{display:flex;gap:8px;justify-content:center;margin:18px 0 0}
+  .lang-btn{
+    font:inherit;font-size:13px;font-weight:600;cursor:pointer;
+    background:var(--card);color:var(--sub);
+    border:1px solid var(--line);border-radius:999px;padding:7px 20px;
+    box-shadow:0 3px 10px rgba(200,110,60,.07);
+  }
+  .lang-btn.active{
+    background:linear-gradient(135deg,var(--coral),var(--orange));
+    color:#fff;border-color:transparent;
+  }
   .pick{
     display:block;text-decoration:none;color:var(--ink);
     background:linear-gradient(135deg,#fff3d6,#ffe9d2);
@@ -70,118 +81,148 @@
   <header>
     <img src="icon.png" alt="ALICE World">
     <h1>ALICE World</h1>
-    <p>🇯🇵 Japan finds: snacks, beauty &amp; stationery ✨<br>日本のいいものを、動画で紹介しています</p>
+    <p data-ja="🇯🇵 日本のいいもの、お菓子・コスメ・文具を動画で紹介しています ✨" data-en="🇯🇵 Japan finds: snacks, beauty &amp; stationery, introduced on TikTok ✨">🇯🇵 日本のいいもの、お菓子・コスメ・文具を動画で紹介しています ✨</p>
     <p class="handles">TikTok @aliceworld.japan ・ @alice.world26</p>
   </header>
 
+  <div class="lang-toggle" role="group" aria-label="Language">
+    <button type="button" class="lang-btn active" data-set-lang="ja">日本語</button>
+    <button type="button" class="lang-btn" data-set-lang="en">English</button>
+  </div>
+
   <!-- 本日のおすすめ / Today's Pick（毎日差し替え） -->
   <a class="pick" href="https://a.r10.to/h5UEvg">
-    <div class="label">⭐ TODAY'S PICK ／ 本日のおすすめ</div>
-    <div class="name">🍪 Shiroi Koibito – 24 cookies</div>
-    <div class="meta">Hokkaido's famous langue de chat, white & dark chocolate · ¥3,000 · free shipping ／ 北海道の銘菓「白い恋人」24枚入</div>
-    <div class="go">楽天で見る →</div>
+    <div class="label" data-ja="⭐ 本日のおすすめ" data-en="⭐ TODAY'S PICK">⭐ 本日のおすすめ</div>
+    <div class="name" data-ja="🍪 白い恋人 24枚入" data-en="🍪 Shiroi Koibito Cookies (24 pcs)">🍪 白い恋人 24枚入</div>
+    <div class="meta" data-ja="北海道の銘菓、ホワイト＆ブラックチョコのラングドシャ · ¥3,000 · 送料無料" data-en="Hokkaido's famous langue de chat, white &amp; dark chocolate · ¥3,000 · Free shipping">北海道の銘菓、ホワイト＆ブラックチョコのラングドシャ · ¥3,000 · 送料無料</div>
+    <div class="go" data-ja="楽天で見る →" data-en="View on Rakuten →">楽天で見る →</div>
   </a>
 
-  <h2>🛒 TikTok @aliceworld.japan (English)</h2>
+  <h2 data-ja="🛒 TikTok @aliceworld.japan（海外向け）" data-en="🛒 TikTok @aliceworld.japan (Overseas picks)">🛒 TikTok @aliceworld.japan（海外向け）</h2>
 
   <a class="btn" href="https://a.r10.to/hR9kZX">
     <span class="emoji">🍜</span>
-    <span class="txt"><span class="name">Ichiran Ramen – 5 servings</span><div class="meta">Hakata tonkotsu ramen · ¥2,672 on Rakuten</div></span>
+    <span class="txt"><span class="name" data-ja="一蘭ラーメン 博多細麺ストレート 5食入" data-en="Ichiran Ramen – 5 servings">一蘭ラーメン 博多細麺ストレート 5食入</span><div class="meta" data-ja="博多とんこつラーメン · 楽天で2,672円" data-en="Hakata tonkotsu ramen · ¥2,672 on Rakuten">博多とんこつラーメン · 楽天で2,672円</div></span>
     <span class="arrow">›</span>
   </a>
 
   <a class="btn" href="https://hb.afl.rakuten.co.jp/ichiba/592bc0a6.8648ff3b.592bc0a7.238d22f9/?pc=https://item.rakuten.co.jp/sundrug/4902201183031/&amp;link_type=hybrid_url&amp;ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJoeWJyaWRfdXJsIiwic2l6ZSI6IjI0MHgyNDAiLCJuYW0iOjEsIm5hbXAiOiJyaWdodCIsImNvbSI6MSwiY29tcCI6ImRvd24iLCJwcmljZSI6MSwiYm9yIjoxLCJjb2wiOjEsImJidG4iOjEsInByb2QiOjAsImFtcCI6ZmFsc2V9">
     <span class="emoji">🍵</span>
-    <span class="txt"><span class="name">KitKat Deep Matcha</span><div class="meta">Rich matcha KitKat · ¥399 on Rakuten</div></span>
+    <span class="txt"><span class="name" data-ja="キットカット 濃い抹茶（10枚）" data-en="KitKat Deep Matcha (10 bars)">キットカット 濃い抹茶（10枚）</span><div class="meta" data-ja="濃い抹茶のキットカット · 楽天で399円" data-en="Rich matcha KitKat · ¥399 on Rakuten">濃い抹茶のキットカット · 楽天で399円</div></span>
     <span class="arrow">›</span>
   </a>
 
   <a class="btn" href="https://hb.afl.rakuten.co.jp/ichiba/592bc32a.ff67565a.592bc32b.d31f063b/?pc=https://item.rakuten.co.jp/yyshop-japan/jan-4901301447647/&amp;link_type=hybrid_url&amp;ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJoeWJyaWRfdXJsIiwic2l6ZSI6IjI0MHgyNDAiLCJuYW0iOjEsIm5hbXAiOiJyaWdodCIsImNvbSI6MSwiY29tcCI6ImRvd24iLCJwcmljZSI6MSwiYm9yIjoxLCJjb2wiOjEsImJidG4iOjEsInByb2QiOjAsImFtcCI6ZmFsc2V9">
     <span class="emoji">💧</span>
-    <span class="txt"><span class="name">Bioré UV Aqua Rich</span><div class="meta">SPF50+ PA++++ sunscreen · ¥763 on Rakuten</div></span>
+    <span class="txt"><span class="name" data-ja="ビオレUV アクアリッチ ウォータリーエッセンス" data-en="Bioré UV Aqua Rich SPF50+">ビオレUV アクアリッチ ウォータリーエッセンス</span><div class="meta" data-ja="SPF50+ PA++++の日焼け止め · 楽天で763円" data-en="SPF50+ PA++++ sunscreen · ¥763 on Rakuten">SPF50+ PA++++の日焼け止め · 楽天で763円</div></span>
     <span class="arrow">›</span>
   </a>
 
   <a class="btn" href="https://hb.afl.rakuten.co.jp/ichiba/592bc4d1.cc943806.592bc4d2.79d6952b/?pc=https://item.rakuten.co.jp/nanohanadrg/4992440034713/&amp;link_type=hybrid_url&amp;ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJoeWJyaWRfdXJsIiwic2l6ZSI6IjI0MHgyNDAiLCJuYW0iOjEsIm5hbXAiOiJyaWdodCIsImNvbSI6MSwiY29tcCI6ImRvd24iLCJwcmljZSI6MSwiYm9yIjoxLCJjb2wiOjEsImJidG4iOjEsInByb2QiOjAsImFtcCI6ZmFsc2V9">
     <span class="emoji">🍚</span>
-    <span class="txt"><span class="name">Keana Nadeshiko Rice Mask</span><div class="meta">10 sheets · ¥715 on Rakuten</div></span>
+    <span class="txt"><span class="name" data-ja="毛穴撫子 お米のマスク（10枚入）" data-en="Keana Nadeshiko Rice Mask (10 sheets)">毛穴撫子 お米のマスク（10枚入）</span><div class="meta" data-ja="シートマスク 10枚入 · 楽天で715円" data-en="10 sheets · ¥715 on Rakuten">シートマスク 10枚入 · 楽天で715円</div></span>
     <span class="arrow">›</span>
   </a>
 
   <a class="btn" href="https://hb.afl.rakuten.co.jp/ichiba/593abc15.ff17c2d2.593abc16.3250213d/?pc=https://item.rakuten.co.jp/komamono-honpo/ljp-20s4/&amp;link_type=hybrid_url&amp;ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJoeWJyaWRfdXJsIiwic2l6ZSI6IjI0MHgyNDAiLCJuYW0iOjEsIm5hbXAiOiJyaWdodCIsImNvbSI6MSwiY29tcCI6ImRvd24iLCJwcmljZSI6MSwiYm9yIjoxLCJjb2wiOjEsImJidG4iOjEsInByb2QiOjAsImFtcCI6ZmFsc2V9">
     <span class="emoji">✏️</span>
-    <span class="txt"><span class="name">Pilot Juice Up 04 gel pen</span><div class="meta">Ultra-fine 0.4mm · ¥275 on Rakuten</div></span>
+    <span class="txt"><span class="name" data-ja="PILOT ジュースアップ 04 ゲルボールペン" data-en="PILOT Juice up 04 Gel Pen">PILOT ジュースアップ 04 ゲルボールペン</span><div class="meta" data-ja="極細0.4mm · 楽天で275円" data-en="Ultra-fine 0.4mm · ¥275 on Rakuten">極細0.4mm · 楽天で275円</div></span>
     <span class="arrow">›</span>
   </a>
 
   <a class="btn" href="https://a.r10.to/hRCgDR">
     <span class="emoji">🍫</span>
-    <span class="txt"><span class="name">Pocky Chocolate – 10 boxes</span><div class="meta">Japan's iconic snack stick · ¥2,090 on Rakuten</div></span>
+    <span class="txt"><span class="name" data-ja="ポッキー チョコレート（10箱）" data-en="Pocky Chocolate – 10 boxes">ポッキー チョコレート（10箱）</span><div class="meta" data-ja="日本の定番スティックスナック · 楽天で2,090円" data-en="Japan's iconic snack stick · ¥2,090 on Rakuten">日本の定番スティックスナック · 楽天で2,090円</div></span>
     <span class="arrow">›</span>
   </a>
 
   <a class="btn" href="https://a.r10.to/hYzV7E">
     <span class="emoji">🍣</span>
-    <span class="txt"><span class="name">Popin' Cookin' Sushi Candy Kit</span><div class="meta">DIY candy kit, 5-pack · ¥2,043 on Rakuten</div></span>
+    <span class="txt"><span class="name" data-ja="ポッピンクッキン たのしいおすしやさん" data-en="Popin' Cookin' Sushi Kit">ポッピンクッキン たのしいおすしやさん</span><div class="meta" data-ja="手作りお菓子キット 5個セット · 楽天で2,043円" data-en="DIY candy kit, 5-pack · ¥2,043 on Rakuten">手作りお菓子キット 5個セット · 楽天で2,043円</div></span>
     <span class="arrow">›</span>
   </a>
 
   <a class="btn" href="https://a.r10.to/hPsnWS">
     <span class="emoji">🍬</span>
-    <span class="txt"><span class="name">Dagashi Treasure Box</span><div class="meta">About 50 Japanese dagashi snacks · ¥2,106 on Rakuten</div></span>
+    <span class="txt"><span class="name" data-ja="駄菓子宝箱 お菓子詰め合わせ（約50個）" data-en="Japanese Dagashi Snack Box (50 pcs)">駄菓子宝箱 お菓子詰め合わせ（約50個）</span><div class="meta" data-ja="駄菓子 約50個入り · 楽天で2,106円" data-en="About 50 Japanese dagashi snacks · ¥2,106 on Rakuten">駄菓子 約50個入り · 楽天で2,106円</div></span>
     <span class="arrow">›</span>
   </a>
 
   <a class="btn" href="https://a.r10.to/h5UEvg">
     <span class="emoji">🍪</span>
-    <span class="txt"><span class="name">Shiroi Koibito – 24 cookies</span><div class="meta">Hokkaido langue de chat · ¥3,000 on Rakuten</div></span>
+    <span class="txt"><span class="name" data-ja="白い恋人 24枚入" data-en="Shiroi Koibito Cookies (24 pcs)">白い恋人 24枚入</span><div class="meta" data-ja="北海道のラングドシャ · 楽天で3,000円" data-en="Hokkaido langue de chat · ¥3,000 on Rakuten">北海道のラングドシャ · 楽天で3,000円</div></span>
     <span class="arrow">›</span>
   </a>
 
-  <h2>🛒 TikTok @alice.world26（日本向け）</h2>
+  <h2 data-ja="🛒 TikTok @alice.world26（日本向け）" data-en="🛒 TikTok @alice.world26 (Japan picks)">🛒 TikTok @alice.world26（日本向け）</h2>
 
   <a class="btn" href="https://a.r10.to/h57nMm">
     <span class="emoji">👀</span>
-    <span class="txt"><span class="name">めぐりズム 蒸気めぐるアイマスク 12枚入</span><div class="meta">約40℃の蒸気で目元リラックス · 楽天で1,265円</div></span>
+    <span class="txt"><span class="name" data-ja="めぐりズム 蒸気めぐるアイマスク 12枚入" data-en="MegRhythm Steam Eye Mask (12 pcs)">めぐりズム 蒸気めぐるアイマスク 12枚入</span><div class="meta" data-ja="約40℃の蒸気で目元リラックス · 楽天で1,265円" data-en="Soothing ~40°C steam for your eyes · ¥1,265 on Rakuten">約40℃の蒸気で目元リラックス · 楽天で1,265円</div></span>
     <span class="arrow">›</span>
   </a>
 
   <a class="btn" href="https://a.r10.to/h5ulLB">
     <span class="emoji">🔥</span>
-    <span class="txt"><span class="name">桐灰カイロ 貼る レギュラー 30個入</span><div class="meta">冬の寒さ対策に · 楽天で1,065円</div></span>
+    <span class="txt"><span class="name" data-ja="桐灰カイロ 貼る レギュラー 30個入" data-en="Kiribai Stick-on Body Warmers (30 pcs)">桐灰カイロ 貼る レギュラー 30個入</span><div class="meta" data-ja="冬の寒さ対策に · 楽天で1,065円" data-en="Stay warm this winter · ¥1,065 on Rakuten">冬の寒さ対策に · 楽天で1,065円</div></span>
     <span class="arrow">›</span>
   </a>
 
   <a class="btn" href="https://a.r10.to/hYm5ka">
     <span class="emoji">🌸</span>
-    <span class="txt"><span class="name">ユースキン ハナ ハンドクリーム サクラ 50g</span><div class="meta">ほんのり桜の香り · 楽天で770円</div></span>
+    <span class="txt"><span class="name" data-ja="ユースキン ハナ ハンドクリーム サクラ 50g" data-en="Yuskin Hana Hand Cream – Sakura">ユースキン ハナ ハンドクリーム サクラ 50g</span><div class="meta" data-ja="ほんのり桜の香り · 楽天で770円" data-en="Light sakura scent · ¥770 on Rakuten">ほんのり桜の香り · 楽天で770円</div></span>
     <span class="arrow">›</span>
   </a>
 
   <a class="btn" href="https://a.r10.to/h4DZQA">
     <span class="emoji">🍬</span>
-    <span class="txt"><span class="name">龍角散 のどすっきり飴 100g</span><div class="meta">乾燥の季節の常備飴 · 楽天で256円</div></span>
+    <span class="txt"><span class="name" data-ja="龍角散 のどすっきり飴 100g" data-en="Ryukakusan Throat Candy 100g">龍角散 のどすっきり飴 100g</span><div class="meta" data-ja="乾燥の季節の常備飴 · 楽天で256円" data-en="A must-have for the dry season · ¥256 on Rakuten">乾燥の季節の常備飴 · 楽天で256円</div></span>
     <span class="arrow">›</span>
   </a>
 
   <a class="btn" href="https://a.r10.to/hP60hH">
     <span class="emoji">😴</span>
-    <span class="txt"><span class="name">のどぬ〜る ぬれマスク 就寝用 3セット入</span><div class="meta">ぬれフィルターで寝ている間の乾燥対策 · 楽天で366円</div></span>
+    <span class="txt"><span class="name" data-ja="のどぬ〜る ぬれマスク 就寝用 3セット入" data-en="Kobayashi Nodonuru Wet Mask for Sleep (3 sets)">のどぬ〜る ぬれマスク 就寝用 3セット入</span><div class="meta" data-ja="ぬれフィルターで寝ている間の乾燥対策 · 楽天で366円" data-en="Wet filter guards against dryness while you sleep · ¥366 on Rakuten">ぬれフィルターで寝ている間の乾燥対策 · 楽天で366円</div></span>
     <span class="arrow">›</span>
   </a>
 
   <a class="btn" href="https://a.r10.to/hPDkRR">
     <span class="emoji">💋</span>
-    <span class="txt"><span class="name">DHC 薬用リップクリーム 1.5g</span><div class="meta">乾燥する季節の定番リップ · 楽天で578円</div></span>
+    <span class="txt"><span class="name" data-ja="DHC 薬用リップクリーム 1.5g" data-en="DHC Medicated Lip Cream">DHC 薬用リップクリーム 1.5g</span><div class="meta" data-ja="乾燥する季節の定番リップ · 楽天で578円" data-en="A dry-season staple lip cream · ¥578 on Rakuten">乾燥する季節の定番リップ · 楽天で578円</div></span>
     <span class="arrow">›</span>
   </a>
 
   <footer>
-    Prices are as checked on the day each video was posted and may change. / 価格は動画投稿時点のもので、変更される場合があります。<br>
-    This page contains Rakuten Affiliate links. / 本ページのリンクには楽天アフィリエイトプログラムによるアフィリエイトリンクが含まれます。<br>
+    <span data-ja="価格は動画投稿時点のもので、変更される場合があります。" data-en="Prices are as checked on the day each video was posted and may change.">価格は動画投稿時点のもので、変更される場合があります。</span><br>
+    <span data-ja="本ページのリンクには楽天アフィリエイトプログラムによるアフィリエイトリンクが含まれます。" data-en="This page contains Rakuten Affiliate links.">本ページのリンクには楽天アフィリエイトプログラムによるアフィリエイトリンクが含まれます。</span><br>
     © 2026 ALICE World
   </footer>
 
 </div>
+<script>
+(function(){
+  var KEY = 'aliceworld-lang';
+  function apply(lang){
+    document.documentElement.lang = lang;
+    document.querySelectorAll('[data-ja]').forEach(function(el){
+      el.textContent = (lang === 'en') ? el.getAttribute('data-en') : el.getAttribute('data-ja');
+    });
+    document.querySelectorAll('.lang-btn').forEach(function(b){
+      b.classList.toggle('active', b.getAttribute('data-set-lang') === lang);
+    });
+  }
+  var saved = 'ja';
+  try { saved = localStorage.getItem(KEY) || 'ja'; } catch(e){}
+  if (saved !== 'en') saved = 'ja';
+  apply(saved);
+  document.querySelectorAll('.lang-btn').forEach(function(b){
+    b.addEventListener('click', function(){
+      var lang = b.getAttribute('data-set-lang');
+      try { localStorage.setItem(KEY, lang); } catch(e){}
+      apply(lang);
+    });
+  });
+})();
+</script>
 </body>
 </html>
