@@ -21,6 +21,9 @@ const ja = {
   homeHeading: '今売れているものまとめ',
   homeIntro: '楽天ランキングをもとに、話題の商品を毎日ピックアップして紹介しています。',
   homeEmpty: 'まだ記事がありません。',
+  // 記事ページ
+  productsHeading: '紹介した商品',
+  viewOnRakuten: '楽天市場で見る',
   dateLocale: 'ja-JP',
   // 言語スイッチャー（相手言語の名称で表示する）
   switcherLabel: 'English',
@@ -45,6 +48,9 @@ const en: UIDict = {
   homeIntro:
     'Every day we pick out trending products from the Rakuten Ichiba rankings and introduce them here.',
   homeEmpty: 'No articles yet.',
+  // Article pages
+  productsHeading: 'Products in this article',
+  viewOnRakuten: 'View on Rakuten',
   dateLocale: 'en-US',
   switcherLabel: '日本語',
 };
