@@ -1,0 +1,40 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getUI } from '../../i18n/ui';
+
+const t = getUI('en');
+
+const allArticles = await getCollection('articles');
+const articles = allArticles.sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+---
+
+<BaseLayout title={t.homeTitle} lang="en" altPath="/">
+  <h1>{t.homeHeading}</h1>
+  <p>{t.homeIntro}</p>
+  <p>
+    New to shopping on Rakuten Ichiba from outside Japan?
+    <a href={`${import.meta.env.BASE_URL}/en/guide/`}>Read our How to Buy guide</a>.
+    Article titles below are in Japanese for now — English article pages are on the way.
+  </p>
+  <ul style="list-style:none; padding:0;">
+    {
+      articles.map((article) => (
+        <li style="margin-bottom:1.5rem; padding-bottom:1.5rem; border-bottom:1px solid #e5e2da;">
+          <a
+            href={`${import.meta.env.BASE_URL}/articles/${article.id}/`}
+            style="text-decoration:none; color:inherit;"
+          >
+            <h2 style="margin:0 0 0.3rem;">{article.data.title}</h2>
+            <p style="margin:0; color:#666; font-size:0.9rem;">
+              {article.data.pubDate.toLocaleDateString(t.dateLocale)}
+            </p>
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+  {articles.length === 0 && <p>{t.homeEmpty}</p>}
+</BaseLayout>
