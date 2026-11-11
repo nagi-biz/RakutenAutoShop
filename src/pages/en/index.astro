@@ -6,9 +6,20 @@ import { getUI } from '../../i18n/ui';
 const t = getUI('en');
 
 const allArticles = await getCollection('articles');
-const articles = allArticles.sort(
-  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
-);
+// 英語版がある記事は英語ページへリンクし、英語タイトルで表示する
+const enById = new Map((await getCollection('articlesEn')).map((a) => [a.id, a]));
+const articles = allArticles
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .map((article) => {
+    const en = enById.get(article.id);
+    return {
+      href: en
+        ? `${import.meta.env.BASE_URL}/en/articles/${article.id}/`
+        : `${import.meta.env.BASE_URL}/articles/${article.id}/`,
+      title: en ? en.data.title : article.data.title,
+      pubDate: article.data.pubDate,
+    };
+  });
 ---
 
 <BaseLayout title={t.homeTitle} lang="en" altPath="/">
@@ -17,19 +28,17 @@ const articles = allArticles.sort(
   <p>
     New to shopping on Rakuten Ichiba from outside Japan?
     <a href={`${import.meta.env.BASE_URL}/en/guide/`}>Read our How to Buy guide</a>.
-    Article titles below are in Japanese for now — English article pages are on the way.
+    Articles shown with an English title have a full English version; the rest
+    link to the Japanese article for now.
   </p>
   <ul style="list-style:none; padding:0;">
     {
       articles.map((article) => (
         <li style="margin-bottom:1.5rem; padding-bottom:1.5rem; border-bottom:1px solid #e5e2da;">
-          <a
-            href={`${import.meta.env.BASE_URL}/articles/${article.id}/`}
-            style="text-decoration:none; color:inherit;"
-          >
-            <h2 style="margin:0 0 0.3rem;">{article.data.title}</h2>
+          <a href={article.href} style="text-decoration:none; color:inherit;">
+            <h2 style="margin:0 0 0.3rem;">{article.title}</h2>
             <p style="margin:0; color:#666; font-size:0.9rem;">
-              {article.data.pubDate.toLocaleDateString(t.dateLocale)}
+              {article.pubDate.toLocaleDateString(t.dateLocale)}
             </p>
           </a>
         </li>
