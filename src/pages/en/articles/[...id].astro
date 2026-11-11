@@ -25,26 +25,26 @@ const pr = fs.existsSync(`public/pr/${article.id}.png`) ? `${import.meta.env.BAS
   altPath={`/articles/${article.id}/`}
   image={pr ?? undefined}
 >
-  <article>
-    {pr && <img src={pr} alt={article.data.title} width="1200" height="630" style="width:100%; height:auto; border-radius:12px; margin-bottom:1rem;" />}
+  <article class="article">
+    {pr && <img class="article-hero" src={pr} alt={article.data.title} width="1200" height="630" />}
     <h1>{article.data.title}</h1>
-    <p style="color:#666; font-size:0.9rem;">
+    <p class="article-date">
       {article.data.pubDate.toLocaleDateString(t.dateLocale)}
     </p>
     <Content />
     <h2>{t.productsHeading}</h2>
-    <ol>
+    <ol class="product-list">
       {
         article.data.products.map((p) => (
-          <li style="margin-bottom:1.5rem; list-style:none;">
-            <a href={p.affiliateUrl} rel="nofollow sponsored" target="_blank">
-              <img src={p.imageUrl} alt={p.name} style="max-width:200px; display:block;" />
-              <strong>{p.name}</strong>
+          <li class="product-card">
+            <a class="product-main" href={p.affiliateUrl} rel="nofollow sponsored" target="_blank">
+              <img src={p.imageUrl} alt={p.name} loading="lazy" />
+              <strong class="product-name">{p.name}</strong>
             </a>
-            <div>
-              {p.shopName} / ¥{p.price.toLocaleString(t.dateLocale)}
+            <div class="product-meta">
+              {p.shopName} / <span class="price">¥{p.price.toLocaleString(t.dateLocale)}</span>
             </div>
-            <a href={p.affiliateUrl} rel="nofollow sponsored" target="_blank">
+            <a class="btn-buy" href={p.affiliateUrl} rel="nofollow sponsored" target="_blank">
               {t.viewOnRakuten}
             </a>
           </li>
