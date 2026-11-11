@@ -24,26 +24,26 @@ const pr = fs.existsSync(`public/pr/${article.id}.png`) ? `${import.meta.env.BAS
   image={pr ?? undefined}
   altPath={hasEn ? `/en/articles/${article.id}/` : undefined}
 >
-  <article>
-    {pr && <img src={pr} alt={article.data.title} width="1200" height="630" style="width:100%; height:auto; border-radius:12px; margin-bottom:1rem;" />}
+  <article class="article">
+    {pr && <img class="article-hero" src={pr} alt={article.data.title} width="1200" height="630" />}
     <h1>{article.data.title}</h1>
-    <p style="color:#666; font-size:0.9rem;">
+    <p class="article-date">
       {article.data.pubDate.toLocaleDateString('ja-JP')}
     </p>
     <Content />
     <h2>紹介した商品</h2>
-    <ol>
+    <ol class="product-list">
       {
         article.data.products.map((p) => (
-          <li style="margin-bottom:1.5rem; list-style:none;">
-            <a href={p.affiliateUrl} rel="nofollow sponsored" target="_blank">
-              <img src={p.imageUrl} alt={p.name} style="max-width:200px; display:block;" />
-              <strong>{p.name}</strong>
+          <li class="product-card">
+            <a class="product-main" href={p.affiliateUrl} rel="nofollow sponsored" target="_blank">
+              <img src={p.imageUrl} alt={p.name} loading="lazy" />
+              <strong class="product-name">{p.name}</strong>
             </a>
-            <div>
-              {p.shopName} / ¥{p.price.toLocaleString('ja-JP')}
+            <div class="product-meta">
+              {p.shopName} / <span class="price">¥{p.price.toLocaleString('ja-JP')}</span>
             </div>
-            <a href={p.affiliateUrl} rel="nofollow sponsored" target="_blank">
+            <a class="btn-buy" href={p.affiliateUrl} rel="nofollow sponsored" target="_blank">
               楽天市場で見る
             </a>
           </li>
