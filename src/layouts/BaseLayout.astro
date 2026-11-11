@@ -87,14 +87,21 @@ const navItems =
     {ogImage && <meta property="og:image" content={ogImage} />}
     <meta name="twitter:card" content={ogImage ? 'summary_large_image' : 'summary'} />
     <style>
+      /* デザイン案A「コーラルポップ」: TikTokリンク集ページ（public/tiktok/）と
+         同じブランドアイデンティティ（コーラル→オレンジ、白カード、角丸16px）。 */
       :root {
         color-scheme: light;
-        --bg: #fafaf7;
-        --fg: #222;
-        --muted: #666;
-        --accent: #bf0000;
+        --bg: #fff7f2;
+        --fg: #2b2320;
+        --muted: #8a7a72;
+        --coral: #ff6b4a;
+        --orange: #ff9e4a;
+        --accent: #ff5a36;
         --card-bg: #fff;
-        --border: #e5e2da;
+        --card-tint: #fff8f3;
+        --border: #ffe3d6;
+        --shadow: 0 3px 10px rgba(200, 110, 60, 0.08);
+        --shadow-lg: 0 8px 24px rgba(255, 150, 60, 0.18);
       }
       * {
         box-sizing: border-box;
@@ -103,25 +110,48 @@ const navItems =
         margin: 0;
         background: var(--bg);
         color: var(--fg);
-        font-family: 'Hiragino Sans', 'Yu Gothic', system-ui, sans-serif;
+        font-family:
+          -apple-system, BlinkMacSystemFont, 'Hiragino Kaku Gothic ProN',
+          'Hiragino Sans', 'Noto Sans JP', 'Yu Gothic', system-ui, sans-serif;
         line-height: 1.8;
+        -webkit-font-smoothing: antialiased;
       }
+      a {
+        color: var(--accent);
+      }
+      /* ===== ヘッダー（グラデーション帯） ===== */
       header {
-        padding: 1.5rem 1rem;
-        border-bottom: 1px solid var(--border);
-        background: var(--card-bg);
-      }
-      header a {
-        color: var(--fg);
-        text-decoration: none;
-        font-weight: 700;
-        font-size: 1.2rem;
+        background: linear-gradient(135deg, var(--coral), var(--orange));
+        border-radius: 0 0 28px 28px;
+        box-shadow: 0 6px 18px rgba(255, 150, 60, 0.25);
+        color: #fff;
+        padding: 1rem 1rem 1.2rem;
       }
       header .site-header {
+        max-width: 960px;
+        margin: 0 auto;
         display: flex;
         flex-wrap: wrap;
-        align-items: baseline;
-        gap: 0.5rem 1.2rem;
+        align-items: center;
+        gap: 0.6rem 1.2rem;
+      }
+      header a.brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.6rem;
+        color: #fff;
+        text-decoration: none;
+        font-weight: 700;
+        font-size: 1.25rem;
+        letter-spacing: 0.02em;
+      }
+      header img.brand-icon {
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        border: 2px solid rgba(255, 255, 255, 0.85);
+        background: #fff;
+        box-shadow: 0 4px 12px rgba(180, 60, 20, 0.3);
       }
       header nav.global-nav {
         display: flex;
@@ -129,28 +159,39 @@ const navItems =
         gap: 1rem;
       }
       header nav.global-nav a {
-        font-weight: 500;
+        font-weight: 600;
         font-size: 0.95rem;
-        color: var(--muted);
+        color: rgba(255, 255, 255, 0.92);
         text-decoration: none;
       }
       header nav.global-nav a:hover {
-        color: var(--accent);
+        color: #fff;
+        text-decoration: underline;
       }
       header a.lang-switch {
         margin-left: auto;
-        font-weight: 500;
-        font-size: 0.9rem;
-        color: var(--muted);
-        text-decoration: underline;
+        background: #fff;
+        color: var(--accent);
+        font-weight: 700;
+        font-size: 0.85rem;
+        padding: 0.3rem 0.95rem;
+        border-radius: 999px;
+        text-decoration: none;
+        box-shadow: var(--shadow);
       }
       header a.lang-switch:hover {
-        color: var(--accent);
+        color: var(--coral);
       }
+      /* ===== レイアウト ===== */
       main {
-        max-width: 760px;
+        max-width: 960px;
         margin: 0 auto;
         padding: 1.5rem 1rem 4rem;
+      }
+      main h1 {
+        font-size: 1.7rem;
+        line-height: 1.45;
+        margin: 0.5rem 0 0.8rem;
       }
       footer {
         text-align: center;
@@ -165,6 +206,9 @@ const navItems =
         color: var(--muted);
         text-decoration: underline;
       }
+      footer nav a:hover {
+        color: var(--accent);
+      }
       footer nav span {
         margin: 0 0.5rem;
       }
@@ -173,16 +217,176 @@ const navItems =
         color: var(--muted);
         border: 1px solid var(--border);
         background: var(--card-bg);
-        border-radius: 8px;
+        border-radius: 16px;
+        box-shadow: var(--shadow);
         padding: 0.75rem 1rem;
         margin-bottom: 1.5rem;
+      }
+      /* ===== 記事カードグリッド（トップページ） ===== */
+      .card-grid {
+        list-style: none;
+        padding: 0;
+        margin: 1.5rem 0 0;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+        gap: 1.25rem;
+      }
+      .article-card {
+        background: var(--card-bg);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        box-shadow: var(--shadow);
+        overflow: hidden;
+      }
+      .article-card:hover {
+        box-shadow: var(--shadow-lg);
+      }
+      .article-card a {
+        display: block;
+        height: 100%;
+        color: inherit;
+        text-decoration: none;
+      }
+      .article-card img {
+        display: block;
+        width: 100%;
+        height: 160px;
+        object-fit: cover;
+        background: #fff0e8;
+      }
+      .article-card-body {
+        padding: 1rem 1.1rem 1.2rem;
+      }
+      .article-card-body h2 {
+        margin: 0 0 0.4rem;
+        font-size: 1.02rem;
+        line-height: 1.55;
+      }
+      .article-card-date {
+        margin: 0;
+        color: var(--muted);
+        font-size: 0.85rem;
+      }
+      /* ===== 記事ページ ===== */
+      .article {
+        background: var(--card-bg);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        box-shadow: var(--shadow);
+        padding: 2rem 1.75rem;
+        line-height: 1.95;
+      }
+      @media (max-width: 640px) {
+        .article {
+          padding: 1.4rem 1.1rem;
+        }
+      }
+      .article h1 {
+        font-size: 1.65rem;
+        line-height: 1.5;
+        margin: 0 0 0.5rem;
+      }
+      .article .article-date {
+        color: var(--muted);
+        font-size: 0.9rem;
+        margin: 0 0 1.5rem;
+      }
+      .article .article-hero {
+        display: block;
+        width: 100%;
+        height: auto;
+        border-radius: 16px;
+        margin-bottom: 1.25rem;
+      }
+      .article h2 {
+        font-size: 1.3rem;
+        line-height: 1.5;
+        margin: 2.2rem 0 0.9rem;
+        padding-left: 0.7rem;
+        border-left: 5px solid var(--coral);
+      }
+      .article p {
+        margin: 0 0 1.1rem;
+      }
+      /* ===== 商品カード（記事ページ） ===== */
+      .product-list {
+        list-style: none;
+        padding: 0;
+        margin: 1rem 0 0;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+      .product-card {
+        background: var(--card-tint);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        box-shadow: var(--shadow);
+        padding: 1rem 1.1rem;
+      }
+      .product-main {
+        display: flex;
+        align-items: flex-start;
+        gap: 1rem;
+        color: var(--fg);
+        text-decoration: none;
+      }
+      .product-main img {
+        flex: 0 0 auto;
+        width: 110px;
+        height: 110px;
+        object-fit: cover;
+        border-radius: 12px;
+        background: #fff;
+      }
+      .product-name {
+        font-weight: 700;
+        line-height: 1.55;
+      }
+      .product-main:hover .product-name {
+        color: var(--accent);
+      }
+      .product-meta {
+        color: var(--muted);
+        font-size: 0.9rem;
+        margin: 0.75rem 0 0.75rem;
+      }
+      .price {
+        color: var(--accent);
+        font-weight: 800;
+        font-size: 1.15rem;
+      }
+      .btn-buy {
+        display: inline-block;
+        background: linear-gradient(135deg, var(--coral), var(--orange));
+        color: #fff;
+        font-weight: 700;
+        font-size: 0.92rem;
+        line-height: 1.5;
+        padding: 0.5rem 1.4rem;
+        border-radius: 999px;
+        text-decoration: none;
+        box-shadow: 0 4px 12px rgba(255, 130, 60, 0.35);
+      }
+      .btn-buy:hover {
+        opacity: 0.92;
+        color: #fff;
+      }
+      @media (max-width: 560px) {
+        .product-main img {
+          width: 84px;
+          height: 84px;
+        }
       }
     </style>
   </head>
   <body>
     <header>
       <div class="site-header">
-        <a href={homeHref}>{t.siteName}</a>
+        <a class="brand" href={homeHref}>
+          <img class="brand-icon" src={`${base}/icon.png`} alt="" width="44" height="44" />
+          <span>{t.siteName}</span>
+        </a>
         <nav class="global-nav">
           {
             navItems.map((item) => (
