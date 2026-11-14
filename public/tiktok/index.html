@@ -69,6 +69,29 @@
   .name{font-size:15.5px;font-weight:600;line-height:1.4}
   .meta{font-size:12.5px;color:var(--sub);margin-top:2px}
   .arrow{color:#ffb59a;font-size:18px;flex:0 0 auto}
+
+  .bf{
+    display:block;text-decoration:none;text-align:center;color:#fff;
+    background:linear-gradient(135deg,#1a1a1a,#3a2b12);
+    border:2px solid #e8b64c;border-radius:18px;
+    padding:14px 16px 12px;margin:18px 0 4px;
+    box-shadow:0 8px 20px rgba(60,40,0,.25);
+  }
+  .bf-top{font-size:17px;font-weight:800;letter-spacing:.04em;color:#f5c95c}
+  .bf-count{font-size:15px;font-weight:700;margin-top:4px;font-variant-numeric:tabular-nums}
+  .bf-sub{font-size:12px;opacity:.85;margin-top:2px}
+  .pick{display:flex;gap:14px;align-items:center}
+  .pick-img{flex:0 0 auto}
+  .pick-img img{width:96px;height:96px;object-fit:cover;border-radius:12px;background:#fff}
+  .pick-body{flex:1 1 auto;min-width:0}
+  .thumb{flex:0 0 auto;width:56px;height:56px}
+  .thumb img{width:56px;height:56px;object-fit:cover;border-radius:12px;background:#fff;display:block}
+  .thumb.noimg{display:none}
+  .reveal{opacity:0;transform:translateY(10px);transition:opacity .45s ease,transform .45s ease}
+  .reveal.in{opacity:1;transform:none}
+  @media (prefers-reduced-motion: reduce){
+    .reveal{opacity:1;transform:none;transition:none}
+  }
   footer{
     margin-top:30px;font-size:11.5px;line-height:1.7;color:var(--sub);
     border-top:1px solid var(--line);padding-top:16px;text-align:center;
@@ -90,18 +113,25 @@
     <button type="button" class="lang-btn" data-set-lang="en">English</button>
   </div>
 
+  <!-- ブラックフライデー バナー（期間外はJSで自動非表示） -->
+  <a class="bf" id="bfBanner" href="https://event.rakuten.co.jp/campaign/point-up/blackfriday/" target="_blank" rel="noopener">
+    <div class="bf-top">🖤 Rakuten Black Friday</div>
+    <div class="bf-count" id="bfCount">—</div>
+    <div class="bf-sub" data-ja="エントリー受付中 · ポイントアップ" data-en="Entry open now · Point-up campaign">エントリー受付中 · ポイントアップ</div>
+  </a>
+
   <!-- 本日のおすすめ / Today's Pick（毎日差し替え） -->
   <a class="pick" href="https://a.r10.to/hgtHa0">
-    <div class="label" data-ja="⭐ 本日のおすすめ" data-en="⭐ TODAY'S PICK">⭐ 本日のおすすめ</div>
+    <span class="pick-img"><img src="pick.jpg" alt="" onerror="this.parentNode.remove()"></span><span class="pick-body"><div class="label" data-ja="⭐ 本日のおすすめ" data-en="⭐ TODAY'S PICK">⭐ 本日のおすすめ</div>
     <div class="name" data-ja="❤️ TIRTIR マスクフィット レッドクッション 18g" data-en="❤️ TIRTIR Mask Fit Red Cushion 18g">❤️ TIRTIR マスクフィット レッドクッション 18g</div>
     <div class="meta" data-ja="海外でバズってる人気クッションファンデ · ¥2,970 · 送料無料" data-en="The cushion foundation all over TikTok · ¥2,970 · Free shipping">海外でバズってる人気クッションファンデ · ¥2,970 · 送料無料</div>
-    <div class="go" data-ja="楽天で見る →" data-en="View on Rakuten →">楽天で見る →</div>
+    <div class="go" data-ja="楽天で見る →" data-en="View on Rakuten →">楽天で見る →</div></span>
   </a>
 
   <h2 data-ja="🛒 TikTok @aliceworld.japan（海外向け）" data-en="🛒 TikTok @aliceworld.japan (Overseas picks)">🛒 TikTok @aliceworld.japan（海外向け）</h2>
 
   <a class="btn" href="https://a.r10.to/hR9kZX">
-    <span class="emoji">🍜</span>
+    <span class="thumb"><img src="https://tshop.r10s.jp/tsutsu-uraura/cabinet/11567390/4562214822893-1.jpg?_ex=360x360&s=0&r=1" alt="" loading="lazy" onerror="this.parentNode.classList.add('noimg');this.remove()"></span>
     <span class="txt"><span class="name" data-ja="一蘭ラーメン 博多細麺ストレート 5食入" data-en="Ichiran Ramen – 5 servings">一蘭ラーメン 博多細麺ストレート 5食入</span><div class="meta" data-ja="博多とんこつラーメン · 楽天で2,672円" data-en="Hakata tonkotsu ramen · ¥2,672 on Rakuten">博多とんこつラーメン · 楽天で2,672円</div></span>
     <span class="arrow">›</span>
   </a>
@@ -143,103 +173,103 @@
   </a>
 
   <a class="btn" href="https://a.r10.to/hPsnWS">
-    <span class="emoji">🍬</span>
+    <span class="thumb"><img src="hPsnWS.jpg" alt="" loading="lazy" onerror="this.parentNode.classList.add('noimg');this.remove()"></span>
     <span class="txt"><span class="name" data-ja="駄菓子宝箱 お菓子詰め合わせ（約50個）" data-en="Japanese Dagashi Snack Box (50 pcs)">駄菓子宝箱 お菓子詰め合わせ（約50個）</span><div class="meta" data-ja="駄菓子 約50個入り · 楽天で2,106円" data-en="About 50 Japanese dagashi snacks · ¥2,106 on Rakuten">駄菓子 約50個入り · 楽天で2,106円</div></span>
     <span class="arrow">›</span>
   </a>
 
   <a class="btn" href="https://a.r10.to/h5UEvg">
-    <span class="emoji">🍪</span>
+    <span class="thumb"><img src="h5UEvg.jpg" alt="" loading="lazy" onerror="this.parentNode.classList.add('noimg');this.remove()"></span>
     <span class="txt"><span class="name" data-ja="白い恋人 24枚入" data-en="Shiroi Koibito Cookies (24 pcs)">白い恋人 24枚入</span><div class="meta" data-ja="北海道のラングドシャ · 楽天で3,000円" data-en="Hokkaido langue de chat · ¥3,000 on Rakuten">北海道のラングドシャ · 楽天で3,000円</div></span>
     <span class="arrow">›</span>
   </a>
 
   <a class="btn" href="https://a.r10.to/hP4RXG">
-    <span class="emoji">🔪</span>
+    <span class="thumb"><img src="hP4RXG.jpg" alt="" loading="lazy" onerror="this.parentNode.classList.add('noimg');this.remove()"></span>
     <span class="txt"><span class="name" data-ja="貝印 関孫六 匠創 三徳包丁 165mm" data-en="KAI Seki Magoroku Santoku Knife 165mm">貝印 関孫六 匠創 三徳包丁 165mm</span><div class="meta" data-ja="日本製のオールステンレス包丁 · 楽天で2,930円" data-en="Made in Japan, one-piece stainless steel · ¥2,930 on Rakuten">日本製のオールステンレス包丁 · 楽天で2,930円</div></span>
     <span class="arrow">›</span>
   </a>
 
   <a class="btn" href="https://a.r10.to/h5GMFg">
-    <span class="emoji">✂️</span>
+    <span class="thumb"><img src="h5GMFg.jpg" alt="" loading="lazy" onerror="this.parentNode.classList.add('noimg');this.remove()"></span>
     <span class="txt"><span class="name" data-ja="SUWADA つめ切り クラシック L" data-en="SUWADA Classic L Nail Clipper">SUWADA つめ切り クラシック L</span><div class="meta" data-ja="燕三条のニッパー式つめ切り · 楽天で9,130円" data-en="Nipper-style clipper from Tsubame-Sanjo · ¥9,130 on Rakuten">燕三条のニッパー式つめ切り · 楽天で9,130円</div></span>
     <span class="arrow">›</span>
   </a>
 
   <a class="btn" href="https://a.r10.to/hg74Y0">
-    <span class="emoji">🧺</span>
+    <span class="thumb"><img src="hg74Y0.jpg" alt="" loading="lazy" onerror="this.parentNode.classList.add('noimg');this.remove()"></span>
     <span class="txt"><span class="name" data-ja="今治タオル フェイスタオル 4枚セット" data-en="Imabari Face Towels – Set of 4">今治タオル フェイスタオル 4枚セット</span><div class="meta" data-ja="綿100%のフェイスタオル4枚 · 楽天で3,938円" data-en="100% cotton face towels, set of 4 · ¥3,938 on Rakuten">綿100%のフェイスタオル4枚 · 楽天で3,938円</div></span>
     <span class="arrow">›</span>
   </a>
 
   <a class="btn" href="https://a.r10.to/h8sJxi">
-    <span class="emoji">✨</span>
+    <span class="thumb"><img src="h8sJxi.jpg" alt="" loading="lazy" onerror="this.parentNode.classList.add('noimg');this.remove()"></span>
     <span class="txt"><span class="name" data-ja="Yunth 生ビタミンC美白美容液 28包" data-en="Yunth Raw Vitamin C Serum – 28 packets">Yunth 生ビタミンC美白美容液 28包</span><div class="meta" data-ja="1回分ずつの生ビタミンC美容液 · 楽天で3,960円" data-en="Fresh single-dose vitamin C serum · ¥3,960 on Rakuten">1回分ずつの生ビタミンC美容液 · 楽天で3,960円</div></span>
     <span class="arrow">›</span>
   </a>
 
   <a class="btn" href="https://a.r10.to/hgaXKp">
-    <span class="emoji">💇</span>
+    <span class="thumb"><img src="hgaXKp.jpg" alt="" loading="lazy" onerror="this.parentNode.classList.add('noimg');this.remove()"></span>
     <span class="txt"><span class="name" data-ja="フィーノ プレミアムタッチ ヘアマスク 230g" data-en="Fino Premium Touch Hair Mask 230g">フィーノ プレミアムタッチ ヘアマスク 230g</span><div class="meta" data-ja="週1〜2回のヘアマスク · 楽天で1,018円" data-en="Rinse-off hair mask, once or twice a week · ¥1,018 on Rakuten">週1〜2回のヘアマスク · 楽天で1,018円</div></span>
     <span class="arrow">›</span>
   </a>
 
   <a class="btn" href="https://a.r10.to/hPtU8X">
-    <span class="emoji">☕</span>
+    <span class="thumb"><img src="hPtU8X.jpg" alt="" loading="lazy" onerror="this.parentNode.classList.add('noimg');this.remove()"></span>
     <span class="txt"><span class="name" data-ja="HARIO 浸漬式ドリッパー スイッチ360" data-en="HARIO Switch 360 Immersion Dripper">HARIO 浸漬式ドリッパー スイッチ360</span><div class="meta" data-ja="日本製のコーヒードリッパー · 楽天で2,980円" data-en="Made in Japan coffee dripper · ¥2,980 on Rakuten">日本製のコーヒードリッパー · 楽天で2,980円</div></span>
     <span class="arrow">›</span>
   </a>
 
   <a class="btn" href="https://a.r10.to/hY9L9O">
-    <span class="emoji">🍵</span>
+    <span class="thumb"><img src="hY9L9O.jpg" alt="" loading="lazy" onerror="this.parentNode.classList.add('noimg');this.remove()"></span>
     <span class="txt"><span class="name" data-ja="ドレイン マグカップ 小（青）" data-en="Drain Mug – Small (Blue)">ドレイン マグカップ 小（青）</span><div class="meta" data-ja="日本製の陶器マグ · 楽天で1,980円" data-en="Made in Japan ceramic mug · ¥1,980 on Rakuten">日本製の陶器マグ · 楽天で1,980円</div></span>
     <span class="arrow">›</span>
   </a>
 
   <a class="btn" href="https://a.r10.to/hF3Zcu">
-    <span class="emoji">🥛</span>
+    <span class="thumb"><img src="hF3Zcu.jpg" alt="" loading="lazy" onerror="this.parentNode.classList.add('noimg');this.remove()"></span>
     <span class="txt"><span class="name" data-ja="津軽びいどろ「六の色」グラス（森）" data-en="Tsugaru Vidro Glass – Mori">津軽びいどろ「六の色」グラス（森）</span><div class="meta" data-ja="日本製の手作りガラス · 楽天で1,870円" data-en="Handmade glass, made in Japan · ¥1,870 on Rakuten">日本製の手作りガラス · 楽天で1,870円</div></span>
     <span class="arrow">›</span>
   </a>
 
   <a class="btn" href="https://a.r10.to/hP01KA">
-    <span class="emoji">🍲</span>
+    <span class="thumb"><img src="hP01KA.jpg" alt="" loading="lazy" onerror="this.parentNode.classList.add('noimg');this.remove()"></span>
     <span class="txt"><span class="name" data-ja="銀峯 菊花 土鍋 6号 浅型（瑠璃）" data-en="Ginpo Kikka Donabe Clay Pot 6 (Shallow)">銀峯 菊花 土鍋 6号 浅型（瑠璃）</span><div class="meta" data-ja="日本製の1人用土鍋 · 楽天で3,980円" data-en="Made in Japan donabe for one · ¥3,980 on Rakuten">日本製の1人用土鍋 · 楽天で3,980円</div></span>
     <span class="arrow">›</span>
   </a>
 
   <a class="btn" href="https://a.r10.to/hP1T7q">
-    <span class="emoji">👼</span>
+    <span class="thumb"><img src="hP1T7q.jpg" alt="" loading="lazy" onerror="this.parentNode.classList.add('noimg');this.remove()"></span>
     <span class="txt"><span class="name" data-ja="Sonny Angel HIPPERS（ヒッパーズ）" data-en="Sonny Angel HIPPERS">Sonny Angel HIPPERS（ヒッパーズ）</span><div class="meta" data-ja="スマホやPCに貼れるミニフィギュア · 楽天で1,430円" data-en="Mini figure that sticks to your laptop · ¥1,430 on Rakuten">スマホやPCに貼れるミニフィギュア · 楽天で1,430円</div></span>
     <span class="arrow">›</span>
   </a>
 
   <a class="btn" href="https://a.r10.to/hF3bGn">
-    <span class="emoji">🗻</span>
+    <span class="thumb"><img src="hF3bGn.jpg" alt="" loading="lazy" onerror="this.parentNode.classList.add('noimg');this.remove()"></span>
     <span class="txt"><span class="name" data-ja="田島硝子 富士山ロックグラス" data-en="Tajima Glass Mt. Fuji Rock Glass">田島硝子 富士山ロックグラス</span><div class="meta" data-ja="日本製の手作りロックグラス · 楽天で4,950円" data-en="Handmade rock glass, made in Japan · ¥4,950 on Rakuten">日本製の手作りロックグラス · 楽天で4,950円</div></span>
     <span class="arrow">›</span>
   </a>
 
   <a class="btn" href="https://a.r10.to/hPiigN">
-    <span class="emoji">🍵</span>
+    <span class="thumb"><img src="hPiigN.jpg" alt="" loading="lazy" onerror="this.parentNode.classList.add('noimg');this.remove()"></span>
     <span class="txt"><span class="name" data-ja="常滑焼 急須 茶が楽 380cc" data-en="Tokoname Kyusu Teapot 380cc">常滑焼 急須 茶が楽 380cc</span><div class="meta" data-ja="日本製の常滑焼急須 · 楽天で3,980円" data-en="Tokoname clay teapot, made in Japan · ¥3,980 on Rakuten">日本製の常滑焼急須 · 楽天で3,980円</div></span>
     <span class="arrow">›</span>
   </a>
 
   <a class="btn" href="https://a.r10.to/hPmfcT">
-    <span class="emoji">🏕️</span>
+    <span class="thumb"><img src="hPmfcT.jpg" alt="" loading="lazy" onerror="this.parentNode.classList.add('noimg');this.remove()"></span>
     <span class="txt"><span class="name" data-ja="スノーピーク チタンシングルマグ 300" data-en="Snow Peak Titanium Single Mug 300">スノーピーク チタンシングルマグ 300</span><div class="meta" data-ja="50gのチタンマグ · 楽天で3,341円" data-en="50g titanium mug · ¥3,341 on Rakuten">50gのチタンマグ · 楽天で3,341円</div></span>
     <span class="arrow">›</span>
   </a>
 
   <a class="btn" href="https://a.r10.to/hR6KKN">
-    <span class="emoji">🐯</span>
+    <span class="thumb"><img src="hR6KKN.jpg" alt="" loading="lazy" onerror="this.parentNode.classList.add('noimg');this.remove()"></span>
     <span class="txt"><span class="name" data-ja="タイガー魔法瓶 真空断熱ボトル 500ml" data-en="Tiger Vacuum Insulated Bottle 500ml">タイガー魔法瓶 真空断熱ボトル 500ml</span><div class="meta" data-ja="190gの軽量ボトル · 楽天で2,981円" data-en="Lightweight 190g thermos · ¥2,981 on Rakuten">190gの軽量ボトル · 楽天で2,981円</div></span>
     <span class="arrow">›</span>
   </a>
 
   <a class="btn" href="https://a.r10.to/hPTIAG">
-    <span class="emoji">🍫</span>
+    <span class="thumb"><img src="hPTIAG.jpg" alt="" loading="lazy" onerror="this.parentNode.classList.add('noimg');this.remove()"></span>
     <span class="txt"><span class="name" data-ja="ロイズ 生チョコレート[オーレ] 20粒" data-en="ROYCE' Nama Chocolate Au Lait (20 pcs)">ロイズ 生チョコレート[オーレ] 20粒</span><div class="meta" data-ja="北海道の生チョコレート · 楽天で1,215円" data-en="Hokkaido nama chocolate · ¥1,215 on Rakuten">北海道の生チョコレート · 楽天で1,215円</div></span>
     <span class="arrow">›</span>
   </a>
@@ -277,97 +307,97 @@
   </a>
 
   <a class="btn" href="https://a.r10.to/hPDkRR">
-    <span class="emoji">💋</span>
+    <span class="thumb"><img src="hPDkRR.jpg" alt="" loading="lazy" onerror="this.parentNode.classList.add('noimg');this.remove()"></span>
     <span class="txt"><span class="name" data-ja="DHC 薬用リップクリーム 1.5g" data-en="DHC Medicated Lip Cream">DHC 薬用リップクリーム 1.5g</span><div class="meta" data-ja="乾燥する季節の定番リップ · 楽天で578円" data-en="A dry-season staple lip cream · ¥578 on Rakuten">乾燥する季節の定番リップ · 楽天で578円</div></span>
     <span class="arrow">›</span>
   </a>
 
   <a class="btn" href="https://a.r10.to/hP3KkN">
-    <span class="emoji">🧴</span>
+    <span class="thumb"><img src="hP3KkN.jpg" alt="" loading="lazy" onerror="this.parentNode.classList.add('noimg');this.remove()"></span>
     <span class="txt"><span class="name" data-ja="ニベアクリーム 大缶 169g" data-en="Nivea Cream Large Tin 169g">ニベアクリーム 大缶 169g</span><div class="meta" data-ja="顔にも体にも使える全身用クリーム · 楽天で658円" data-en="All-over moisturizing cream · ¥658 on Rakuten">顔にも体にも使える全身用クリーム · 楽天で658円</div></span>
     <span class="arrow">›</span>
   </a>
 
   <a class="btn" href="https://a.r10.to/hgC4Eu">
-    <span class="emoji">🌙</span>
+    <span class="thumb"><img src="hgC4Eu.jpg" alt="" loading="lazy" onerror="this.parentNode.classList.add('noimg');this.remove()"></span>
     <span class="txt"><span class="name" data-ja="LANEIGE リップスリーピングマスク ベリー 20g" data-en="LANEIGE Lip Sleeping Mask – Berry 20g">LANEIGE リップスリーピングマスク ベリー 20g</span><div class="meta" data-ja="寝る前に塗る夜用リップマスク · 楽天で2,365円" data-en="Overnight lip mask · ¥2,365 on Rakuten">寝る前に塗る夜用リップマスク · 楽天で2,365円</div></span>
     <span class="arrow">›</span>
   </a>
 
   <a class="btn" href="https://a.r10.to/hPl70d">
-    <span class="emoji">💗</span>
+    <span class="thumb"><img src="hPl70d.jpg" alt="" loading="lazy" onerror="this.parentNode.classList.add('noimg');this.remove()"></span>
     <span class="txt"><span class="name" data-ja="メディキューブ PDRNピンクペプチドセラム" data-en="medicube PDRN Pink Peptide Serum">メディキューブ PDRNピンクペプチドセラム</span><div class="meta" data-ja="PDRN 10,000ppm配合のピンクセラム · 楽天で2,680円" data-en="Pink serum with PDRN 10,000ppm · ¥2,680 on Rakuten">PDRN 10,000ppm配合のピンクセラム · 楽天で2,680円</div></span>
     <span class="arrow">›</span>
   </a>
 
   <a class="btn" href="https://a.r10.to/h8HlX3">
-    <span class="emoji">💪</span>
+    <span class="thumb"><img src="h8HlX3.jpg" alt="" loading="lazy" onerror="this.parentNode.classList.add('noimg');this.remove()"></span>
     <span class="txt"><span class="name" data-ja="uFit RELEASER Portable" data-en="uFit RELEASER Portable">uFit RELEASER Portable</span><div class="meta" data-ja="約290gのミニマッサージガン · 楽天で14,800円" data-en="Mini massage gun, about 290g · ¥14,800 on Rakuten">約290gのミニマッサージガン · 楽天で14,800円</div></span>
     <span class="arrow">›</span>
   </a>
 
   <a class="btn" href="https://a.r10.to/hYsPSz">
-    <span class="emoji">🐟</span>
+    <span class="thumb"><img src="hYsPSz.jpg" alt="" loading="lazy" onerror="this.parentNode.classList.add('noimg');this.remove()"></span>
     <span class="txt"><span class="name" data-ja="PAVIKE ウロコ取り" data-en="PAVIKE Fish Scale Remover">PAVIKE ウロコ取り</span><div class="meta" data-ja="ステンレス製28.5cmのウロコ取り · 楽天で1,455円" data-en="Stainless steel fish scaler, 28.5cm · ¥1,455 on Rakuten">ステンレス製28.5cmのウロコ取り · 楽天で1,455円</div></span>
     <span class="arrow">›</span>
   </a>
 
   <a class="btn" href="https://a.r10.to/h5r9Lv">
-    <span class="emoji">☀️</span>
+    <span class="thumb"><img src="h5r9Lv.jpg" alt="" loading="lazy" onerror="this.parentNode.classList.add('noimg');this.remove()"></span>
     <span class="txt"><span class="name" data-ja="アネッサ パーフェクトUV スキンケアミルク NA 60mL" data-en="ANESSA Perfect UV Skincare Milk NA 60mL">アネッサ パーフェクトUV スキンケアミルク NA 60mL</span><div class="meta" data-ja="海外で話題の日焼け止めミルク · 楽天で2,399円" data-en="The sunscreen milk trending overseas · ¥2,399 on Rakuten">海外で話題の日焼け止めミルク · 楽天で2,399円</div></span>
     <span class="arrow">›</span>
   </a>
 
   <a class="btn" href="https://a.r10.to/hgCNJD">
-    <span class="emoji">🌿</span>
+    <span class="thumb"><img src="hgCNJD.jpg" alt="" loading="lazy" onerror="this.parentNode.classList.add('noimg');this.remove()"></span>
     <span class="txt"><span class="name" data-ja="VT リードルショット100 50mL" data-en="VT Reedle Shot 100 50mL">VT リードルショット100 50mL</span><div class="meta" data-ja="洗顔後に使う導入美容液 · 楽天で3,520円" data-en="Booster serum used right after cleansing · ¥3,520 on Rakuten">洗顔後に使う導入美容液 · 楽天で3,520円</div></span>
     <span class="arrow">›</span>
   </a>
 
   <a class="btn" href="https://a.r10.to/hgYK2K">
-    <span class="emoji">🌾</span>
+    <span class="thumb"><img src="hgYK2K.jpg" alt="" loading="lazy" onerror="this.parentNode.classList.add('noimg');this.remove()"></span>
     <span class="txt"><span class="name" data-ja="Beauty of Joseon Relief Sun 米サンクリーム 50mL" data-en="Beauty of Joseon Relief Sun Rice Sunscreen 50mL">Beauty of Joseon Relief Sun 米サンクリーム 50mL</span><div class="meta" data-ja="海外で話題の韓国コスメ日焼け止め · 楽天で1,850円" data-en="TikTok-viral Korean sunscreen · ¥1,850 on Rakuten">海外で話題の韓国コスメ日焼け止め · 楽天で1,850円</div></span>
     <span class="arrow">›</span>
   </a>
 
   <a class="btn" href="https://a.r10.to/hPELFv">
-    <span class="emoji">🧘</span>
+    <span class="thumb"><img src="hPELFv.jpg" alt="" loading="lazy" onerror="this.parentNode.classList.add('noimg');this.remove()"></span>
     <span class="txt"><span class="name" data-ja="Gruper 折りたたみ TPE ヨガマット 6mm" data-en="Gruper Folding TPE Yoga Mat 6mm">Gruper 折りたたみ TPE ヨガマット 6mm</span><div class="meta" data-ja="折りたためる6mmヨガマット · 楽天で3,180円" data-en="Foldable 6mm yoga mat · ¥3,180 on Rakuten">折りたためる6mmヨガマット · 楽天で3,180円</div></span>
     <span class="arrow">›</span>
   </a>
 
   <a class="btn" href="https://a.r10.to/hgjzEU">
-    <span class="emoji">💨</span>
+    <span class="thumb"><img src="hgjzEU.jpg" alt="" loading="lazy" onerror="this.parentNode.classList.add('noimg');this.remove()"></span>
     <span class="txt"><span class="name" data-ja="ハイブリッド加湿器 Aqua M1 5L" data-en="Aqua M1 Hybrid Humidifier 5L">ハイブリッド加湿器 Aqua M1 5L</span><div class="meta" data-ja="5L大容量・上部給水の加湿器 · 楽天で6,780円" data-en="5L top-fill hybrid humidifier · ¥6,780 on Rakuten">5L大容量・上部給水の加湿器 · 楽天で6,780円</div></span>
     <span class="arrow">›</span>
   </a>
 
   <a class="btn" href="https://a.r10.to/hgtHa0">
-    <span class="emoji">❤️</span>
+    <span class="thumb"><img src="hgtHa0.jpg" alt="" loading="lazy" onerror="this.parentNode.classList.add('noimg');this.remove()"></span>
     <span class="txt"><span class="name" data-ja="TIRTIR マスクフィット レッドクッション 18g" data-en="TIRTIR Mask Fit Red Cushion 18g">TIRTIR マスクフィット レッドクッション 18g</span><div class="meta" data-ja="海外で話題のクッションファンデ · 楽天で2,970円" data-en="TikTok-viral cushion foundation · ¥2,970 on Rakuten">海外で話題のクッションファンデ · 楽天で2,970円</div></span>
     <span class="arrow">›</span>
   </a>
 
   <a class="btn" href="https://a.r10.to/hPr0ID">
-    <span class="emoji">🐌</span>
+    <span class="thumb"><img src="hPr0ID.jpg" alt="" loading="lazy" onerror="this.parentNode.classList.add('noimg');this.remove()"></span>
     <span class="txt"><span class="name" data-ja="COSRX アドバンスド スネイル96 エッセンス 100ml" data-en="COSRX Advanced Snail 96 Essence 100ml">COSRX アドバンスド スネイル96 エッセンス 100ml</span><div class="meta" data-ja="海外で話題のカタツムリエッセンス · 楽天で2,480円" data-en="TikTok-viral snail essence · ¥2,480 on Rakuten">海外で話題のカタツムリエッセンス · 楽天で2,480円</div></span>
     <span class="arrow">›</span>
   </a>
 
   <a class="btn" href="https://a.r10.to/hgXL0x">
-    <span class="emoji">🌿</span>
+    <span class="thumb"><img src="hgXL0x.jpg" alt="" loading="lazy" onerror="this.parentNode.classList.add('noimg');this.remove()"></span>
     <span class="txt"><span class="name" data-ja="ANUA ドクダミ77 スージングトナー 250ml" data-en="ANUA Heartleaf 77 Soothing Toner 250ml">ANUA ドクダミ77 スージングトナー 250ml</span><div class="meta" data-ja="海外で話題のドクダミ化粧水 · 楽天で2,950円" data-en="TikTok-viral heartleaf toner · ¥2,950 on Rakuten">海外で話題のドクダミ化粧水 · 楽天で2,950円</div></span>
     <span class="arrow">›</span>
   </a>
 
   <a class="btn" href="https://a.r10.to/hF6enp">
-    <span class="emoji">🌀</span>
+    <span class="thumb"><img src="hF6enp.jpg" alt="" loading="lazy" onerror="this.parentNode.classList.add('noimg');this.remove()"></span>
     <span class="txt"><span class="name" data-ja="トリガーポイント コアフォームローラー 45cm" data-en="TriggerPoint Core Foam Roller 45cm">トリガーポイント コアフォームローラー 45cm</span><div class="meta" data-ja="ソフトタイプのフォームローラー · 楽天で4,730円" data-en="Soft foam roller · ¥4,730 on Rakuten">ソフトタイプのフォームローラー · 楽天で4,730円</div></span>
     <span class="arrow">›</span>
   </a>
 
   <a class="btn" href="https://a.r10.to/hgSUoB">
-    <span class="emoji">🔥</span>
+    <span class="thumb"><img src="hgSUoB.jpg" alt="" loading="lazy" onerror="this.parentNode.classList.add('noimg');this.remove()"></span>
     <span class="txt"><span class="name" data-ja="アイリスオーヤマ セラミックファンヒーター KCH-SM121" data-en="IRIS OHYAMA Ceramic Fan Heater KCH-SM121">アイリスオーヤマ セラミックファンヒーター KCH-SM121</span><div class="meta" data-ja="人感センサー付きヒーター · 楽天で7,980円" data-en="Fan heater with motion sensor · ¥7,980 on Rakuten">人感センサー付きヒーター · 楽天で7,980円</div></span>
     <span class="arrow">›</span>
   </a>
@@ -403,6 +433,50 @@
     });
   });
 })();
+
+  // Black Friday countdown (JST): entry from Nov 12, sale Nov 19 20:00 - Nov 25 01:59
+  (function(){
+    var banner = document.getElementById('bfBanner');
+    var count = document.getElementById('bfCount');
+    if (!banner || !count) return;
+    var start = new Date('2026-11-19T20:00:00+09:00').getTime();
+    var end = new Date('2026-11-25T01:59:00+09:00').getTime();
+    function pad(n){ return (n < 10 ? '0' : '') + n; }
+    function tick(){
+      var now = Date.now();
+      var en = document.documentElement.lang === 'en';
+      if (now >= end) { banner.style.display = 'none'; return; }
+      if (now >= start) {
+        count.textContent = en ? 'SALE ON NOW — ends Nov 25, 1:59am JST' : '開催中！ 11/25 01:59まで';
+        return;
+      }
+      var s = Math.floor((start - now) / 1000);
+      var d = Math.floor(s / 86400); s -= d * 86400;
+      var h = Math.floor(s / 3600); s -= h * 3600;
+      var m = Math.floor(s / 60); var sec = s - m * 60;
+      count.textContent = en
+        ? 'Starts in ' + d + 'd ' + pad(h) + ':' + pad(m) + ':' + pad(sec)
+        : 'スタートまで あと' + d + '日 ' + pad(h) + ':' + pad(m) + ':' + pad(sec);
+    }
+    tick();
+    setInterval(tick, 1000);
+  })();
+
+  // Reveal on scroll
+  (function(){
+    var els = document.querySelectorAll('a.btn, .pick, .bf');
+    if (!('IntersectionObserver' in window)) {
+      els.forEach(function(el){ el.classList.add('in'); });
+      return;
+    }
+    els.forEach(function(el){ el.classList.add('reveal'); });
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.08 });
+    els.forEach(function(el){ io.observe(el); });
+  })();
 </script>
 </body>
 </html>
