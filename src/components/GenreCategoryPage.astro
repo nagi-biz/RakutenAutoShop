@@ -1,0 +1,78 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import {
+  collectProductsByGenre,
+  formatYen,
+  genreMeta,
+  type GenreKey,
+} from '../lib/genres';
+import type { Lang } from '../i18n/ui';
+
+interface Props {
+  lang: Lang;
+  category: GenreKey;
+}
+const { lang, category } = Astro.props;
+const meta = genreMeta(category);
+if (!meta) throw new Error(`Unknown genre: ${category}`);
+
+const articles = await getCollection('articles');
+const products = collectProductsByGenre(articles).get(category) ?? [];
+
+const base = import.meta.env.BASE_URL;
+const name = lang === 'en' ? meta.en : meta.ja;
+const siteName = lang === 'en' ? 'Rakuten Shopping Lab' : '楽天お買い物ラボ';
+const title =
+  lang === 'en'
+    ? `${name} picks — ${siteName}`
+    : `${name}の商品まとめ — ${siteName}`;
+const altPath =
+  lang === 'en' ? `/genre/${category}/` : `/en/genre/${category}/`;
+const countLabel =
+  lang === 'en'
+    ? `${products.length} items`
+    : `全${products.length}件`;
+const intro =
+  lang === 'en'
+    ? `Products in the ${name} genre, collected from our daily Rakuten ranking articles (newest first).`
+    : `毎日の楽天ランキング記事から集めた「${name}」ジャンルの商品を、新しい順にまとめています。`;
+const buyLabel = lang === 'en' ? 'View on Rakuten' : '楽天で見る';
+---
+
+<BaseLayout title={title} lang={lang} altPath={altPath}>
+  <h1>{meta.icon} {name}</h1>
+  <p class="genre-count">{countLabel}</p>
+  <p>{intro}</p>
+  {
+    products.length > 0 ? (
+      <ul class="product-grid">
+        {products.map((product) => (
+          <li class="genre-product-card">
+            <img src={product.imageUrl} alt="" loading="lazy" />
+            <div class="genre-product-body">
+              <p class="genre-product-name">{product.name}</p>
+              <p class="genre-product-price">{formatYen(product.price, lang)}</p>
+              <p class="genre-product-shop">{product.shopName}</p>
+              <a
+                class="btn-buy"
+                href={product.affiliateUrl}
+                target="_blank"
+                rel="sponsored noopener"
+              >
+                {buyLabel}
+              </a>
+            </div>
+          </li>
+        ))}
+      </ul>
+    ) : (
+      <p>{lang === 'en' ? 'No items yet.' : 'まだ商品がありません。'}</p>
+    )
+  }
+  <p class="genre-back">
+    <a href={lang === 'en' ? `${base}/en/` : `${base}`}>
+      {lang === 'en' ? '← Back to top' : '← トップへ戻る'}
+    </a>
+  </p>
+</BaseLayout>
