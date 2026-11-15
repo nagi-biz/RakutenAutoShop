@@ -1,0 +1,85 @@
+---
+import { genreMeta } from '../lib/genres';
+
+interface Props {
+  /** バッジに表示する順位（記事ページ＝商品の rank、今週ランキング＝TOP10内の位置） */
+  rank: number;
+  /** 順位の後ろに付ける文字（日本語は「位」、英語は ''） */
+  rankSuffix?: string;
+  /** 元の楽天ランキングでの順位。バッジの順位と異なる場合だけメタに小さく表示する */
+  sourceRank?: number;
+  name: string;
+  /** 生の画像URL（内部で _ex=400x400 に置換する） */
+  imageUrl: string;
+  price: number;
+  shopName: string;
+  affiliateUrl: string;
+  /** 商品ジャンル（未分類の場合はチップを出さない） */
+  category?: string;
+  lang?: 'ja' | 'en';
+  /** 今週の売れ筋ランキング用：順位バッジを大きく表示する */
+  big?: boolean;
+  /** 掲載記事リンク（今週の売れ筋ランキング用） */
+  articleHref?: string;
+  articleTitle?: string;
+  articleLabel?: string;
+}
+
+const {
+  rank,
+  rankSuffix = '',
+  sourceRank,
+  name,
+  imageUrl,
+  price,
+  shopName,
+  affiliateUrl,
+  category,
+  lang = 'ja',
+  big = false,
+  articleHref,
+  articleTitle,
+  articleLabel,
+} = Astro.props;
+
+const genre = category ? genreMeta(category) : undefined;
+const genreLabel = genre ? (lang === 'en' ? genre.en : genre.ja) : undefined;
+const img400 = imageUrl.replace(/_ex=\d+x\d+/, '_ex=400x400');
+const medal =
+  rank === 1 ? 'gold' : rank === 2 ? 'silver' : rank === 3 ? 'bronze' : 'other';
+const priceText = `¥${price.toLocaleString(lang === 'en' ? 'en-US' : 'ja-JP')}`;
+const buyLabel = lang === 'en' ? 'View on Rakuten' : '楽天市場で見る';
+---
+
+<li class:list={['rank-card', { 'rank-card-big': big }]}>
+  <span class:list={['rank-badge', `rank-badge-${medal}`]}>{rank}{rankSuffix}</span>
+  <div class="rank-card-body">
+    <a class="product-main" href={affiliateUrl} rel="nofollow sponsored" target="_blank">
+      <img src={img400} alt={name} loading="lazy" />
+      <span class="rank-card-text">
+        {genre && <span class="genre-chip">{genre.icon} {genreLabel}</span>}
+        <strong class="product-name">{name}</strong>
+      </span>
+    </a>
+    <div class="product-meta">
+      {shopName} / <span class="price">{priceText}</span>
+      {
+        sourceRank !== undefined && sourceRank !== rank && (
+          <span class="source-rank">
+            {lang === 'en' ? `Rakuten ranking No.${sourceRank}` : `楽天ランキング${sourceRank}位`}
+          </span>
+        )
+      }
+    </div>
+    <a class="btn-buy" href={affiliateUrl} rel="nofollow sponsored" target="_blank">
+      {buyLabel}
+    </a>
+    {
+      articleHref && articleTitle && (
+        <p class="rank-card-article">
+          {articleLabel}：<a href={articleHref}>{articleTitle}</a>
+        </p>
+      )
+    }
+  </div>
+</li>
