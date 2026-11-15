@@ -9,7 +9,7 @@ const ja = {
   siteName: '楽天お買い物ラボ',
   defaultDescription: '楽天ランキングで話題の商品を毎日紹介します。',
   navNew: '新着ランキング',
-  navPopular: '人気ランキング',
+  navPopular: '今週の売れ筋',
   navGuide: '買い方ガイド',
   disclosure:
     '本サイトの商品リンクには楽天アフィリエイトプログラムによるアフィリエイトリンクが含まれます。',
@@ -35,7 +35,7 @@ const en: UIDict = {
   siteName: 'Rakuten Shopping Lab',
   defaultDescription: 'Daily picks of trending products from the Rakuten rankings.',
   navNew: 'New Ranking',
-  navPopular: 'Popular Ranking',
+  navPopular: 'Weekly Best Sellers',
   navGuide: 'How to Buy',
   disclosure:
     'Product links on this site include affiliate links from the Rakuten Affiliate Program.',
