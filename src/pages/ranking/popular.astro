@@ -1,82 +1,110 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import RankCard from '../../components/RankCard.astro';
 
-// 人気ランキング：
-// 現状サイトにはPV・クリックなどの実アクセスデータがないため、
-// 「人気」の代理指標として、各商品が元の楽天ランキングで獲得していた rank 番号
-// （1に近いほど楽天ランキング上位＝人気が高い）を使い、rank 昇順に並べる。
-// 同じ rank の場合は、掲載記事の pubDate が新しい方を優先する。
+// 今週の売れ筋ランキング：
+// サイトにはPV・クリックなどの実アクセスデータがないため、「売れ筋」の代理指標として
+// 直近1週間のランキング記事への登場回数を使う（この集計方法はページ本文にも明記する）。
+// - 「今週」= 全記事の最新 pubDate を末日とする過去7日間（末日含む7日）
+// - 期間内の記事に登場した商品を itemCode で重複排除
+// - 並び順：期間内の登場回数が多い順 → 最も良かった（小さい）rank → 最新の pubDate
+// - 「掲載記事」リンクは、その商品が最も良い順位で登場した記事へ張る
 //
 // 将来、GA等のアクセス解析やアフィリエイトのクリック・成果データが蓄積したら、
-// この代理指標から実際のクリック数・成果件数ベースの集計に切り替える想定
-// （販売戦略担当 shop-strategy の施策案 2026-10-20_楽天買い物ラボ_カテゴリ構成案.md より）。
+// この代理指標から実際のクリック数・成果件数ベースの集計に切り替える想定。
 const allArticles = await getCollection('articles');
 
-const products = allArticles.flatMap((article) =>
-  article.data.products.map((product) => ({
-    ...product,
-    articleId: article.id,
-    articleTitle: article.data.title,
-    pubDate: article.data.pubDate,
-  })),
-);
-
-const ranked = products.sort((a, b) => {
-  if (a.rank !== b.rank) return a.rank - b.rank;
-  return b.pubDate.valueOf() - a.pubDate.valueOf();
+const DAY = 24 * 60 * 60 * 1000;
+const latestTime = Math.max(...allArticles.map((a) => a.data.pubDate.valueOf()));
+const weekStartTime = latestTime - 6 * DAY;
+const inWeek = allArticles.filter((a) => {
+  const t = a.data.pubDate.valueOf();
+  return t >= weekStartTime && t <= latestTime;
 });
+
+type Product = (typeof inWeek)[number]['data']['products'][number];
+interface Occurrence {
+  product: Product;
+  articleId: string;
+  articleTitle: string;
+  pubDate: Date;
+}
+
+const occurrencesByItem = new Map<string, Occurrence[]>();
+for (const article of inWeek) {
+  for (const product of article.data.products) {
+    const occurrence: Occurrence = {
+      product,
+      articleId: article.id,
+      articleTitle: article.data.title,
+      pubDate: article.data.pubDate,
+    };
+    const list = occurrencesByItem.get(product.itemCode);
+    if (list) list.push(occurrence);
+    else occurrencesByItem.set(product.itemCode, [occurrence]);
+  }
+}
+
+const weeklyTop = [...occurrencesByItem.values()]
+  .map((occurrences) => {
+    // 最も良い順位で登場した掲載（同順位なら新しい記事）を代表掲載とする
+    const best = [...occurrences].sort(
+      (a, b) =>
+        a.product.rank - b.product.rank ||
+        b.pubDate.valueOf() - a.pubDate.valueOf(),
+    )[0];
+    const latestPubDate = new Date(
+      Math.max(...occurrences.map((o) => o.pubDate.valueOf())),
+    );
+    return { best, count: occurrences.length, latestPubDate };
+  })
+  .sort(
+    (a, b) =>
+      b.count - a.count ||
+      a.best.product.rank - b.best.product.rank ||
+      b.latestPubDate.valueOf() - a.latestPubDate.valueOf(),
+  )
+  .slice(0, 10);
+
+const base = import.meta.env.BASE_URL;
+const dateFormat: Intl.DateTimeFormatOptions = {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+};
+const periodText = `${new Date(weekStartTime).toLocaleDateString('ja-JP', dateFormat)}〜${new Date(latestTime).toLocaleDateString('ja-JP', dateFormat)}`;
 ---
 
 <BaseLayout
-  title="人気ランキング — 楽天お買い物ラボ"
-  description="楽天ランキングの順位を参考指標として並べた、商品の人気ランキングです。"
+  title="今週の売れ筋ランキング — 楽天お買い物ラボ"
+  description="直近1週間のランキング記事に繰り返し登場した商品を集計した、今週の売れ筋ランキングTOP10です。"
 >
-  <h1>人気ランキング</h1>
+  <h1>今週の売れ筋ランキング</h1>
+  <p class="weekly-period">対象期間：{periodText}</p>
   <p>
-    楽天ランキングでの元の順位（1位に近いほど上位）を人気の目安として、商品を並べています。
+    この1週間のランキング記事に繰り返し登場した商品を集計し、登場回数が多い順にTOP10を並べています。同じ商品が複数の記事に登場した場合は1つにまとめ、代表として最も良い順位で登場した記事へのリンクを付けています。
   </p>
-  <ol style="list-style:none; padding:0;">
+  <ol class="rank-list">
     {
-      ranked.map((product) => (
-        <li style="margin-bottom:1.5rem; padding-bottom:1.5rem; border-bottom:1px solid #e5e2da; display:flex; gap:1rem; align-items:flex-start;">
-          <span style="flex:0 0 auto; min-width:2.5rem; font-weight:700; color:#bf0000; font-size:1.1rem;">
-            {product.rank}位
-          </span>
-          <a
-            href={product.affiliateUrl}
-            rel="nofollow sponsored"
-            target="_blank"
-            style="flex:0 0 auto; text-decoration:none; color:inherit;"
-          >
-            <img
-              src={product.imageUrl}
-              alt={product.name}
-              style="width:96px; height:96px; object-fit:cover; display:block; border-radius:4px;"
-            />
-          </a>
-          <div style="flex:1 1 auto; min-width:0;">
-            <a
-              href={product.affiliateUrl}
-              rel="nofollow sponsored"
-              target="_blank"
-              style="text-decoration:none; color:inherit;"
-            >
-              <strong style="display:block; margin:0 0 0.3rem;">{product.name}</strong>
-            </a>
-            <p style="margin:0 0 0.3rem; color:#666; font-size:0.9rem;">
-              {product.shopName} / ¥{product.price.toLocaleString('ja-JP')}
-            </p>
-            <a
-              href={`${import.meta.env.BASE_URL}/articles/${product.articleId}/`}
-              style="font-size:0.85rem;"
-            >
-              掲載記事「{product.articleTitle}」を見る
-            </a>
-          </div>
-        </li>
+      weeklyTop.map((item, index) => (
+        <RankCard
+          rank={index + 1}
+          rankSuffix="位"
+          big
+          name={item.best.product.name}
+          imageUrl={item.best.product.imageUrl}
+          price={item.best.product.price}
+          shopName={item.best.product.shopName}
+          affiliateUrl={item.best.product.affiliateUrl}
+          category={item.best.product.category}
+          lang="ja"
+          articleHref={`${base}/articles/${item.best.articleId}/`}
+          articleTitle={item.best.articleTitle}
+          articleLabel="掲載記事"
+        />
       ))
     }
   </ol>
-  {ranked.length === 0 && <p>まだ商品がありません。</p>}
+  {weeklyTop.length === 0 && <p>対象期間の商品がありません。</p>}
 </BaseLayout>
