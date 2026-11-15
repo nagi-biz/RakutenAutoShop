@@ -1,0 +1,12 @@
+---
+import GenreCategoryPage from '../../../components/GenreCategoryPage.astro';
+import { GENRE_KEYS, type GenreKey } from '../../../lib/genres';
+
+export function getStaticPaths() {
+  return GENRE_KEYS.map((category) => ({ params: { category } }));
+}
+
+const category = Astro.params.category as GenreKey;
+---
+
+<GenreCategoryPage lang="en" category={category} />
