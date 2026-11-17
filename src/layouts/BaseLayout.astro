@@ -648,6 +648,135 @@ const navItems =
           min-width: 3rem;
         }
       }
+      /* ===== TikTok紹介商品ページ（/products/） ===== */
+      .tp-lead {
+        color: var(--muted);
+        line-height: 1.9;
+        margin: 0 0 1.4rem;
+      }
+      .tp-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+        gap: 1rem;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+      .tp-card {
+        background: var(--card-bg);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        box-shadow: var(--shadow);
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+      }
+      .tp-card a.tp-card-main {
+        text-decoration: none;
+        color: inherit;
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+      }
+      .tp-card img {
+        width: 100%;
+        aspect-ratio: 1 / 1;
+        object-fit: cover;
+        display: block;
+        background: #fff;
+      }
+      .tp-card-body {
+        padding: 0.9rem 1rem 1rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.35rem;
+        flex: 1;
+      }
+      .tp-card-name {
+        font-weight: 700;
+        line-height: 1.5;
+        font-size: 0.95rem;
+      }
+      .tp-card-meta {
+        color: var(--muted);
+        font-size: 0.82rem;
+      }
+      .tp-price {
+        color: var(--accent);
+        font-weight: 800;
+        font-size: 1.15rem;
+      }
+      .tp-detail {
+        background: var(--card-bg);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        box-shadow: var(--shadow);
+        padding: 1.6rem 1.5rem;
+        line-height: 1.95;
+      }
+      .tp-detail h1 {
+        font-size: 1.45rem;
+        line-height: 1.55;
+        margin: 0.6rem 0 0.8rem;
+      }
+      .tp-detail-img {
+        display: block;
+        width: min(480px, 100%);
+        height: auto;
+        border-radius: 16px;
+        margin: 0 auto 1.2rem;
+        background: #fff;
+      }
+      .tp-facts {
+        margin: 1rem 0;
+        border-top: 1px solid var(--border);
+      }
+      .tp-facts div {
+        display: flex;
+        gap: 1rem;
+        padding: 0.55rem 0;
+        border-bottom: 1px solid var(--border);
+      }
+      .tp-facts dt {
+        flex: 0 0 6.5rem;
+        color: var(--muted);
+        font-size: 0.88rem;
+      }
+      .tp-facts dd {
+        margin: 0;
+        font-weight: 600;
+      }
+      .tp-buy {
+        display: block;
+        text-align: center;
+        margin: 1.3rem 0 0.6rem;
+        padding: 0.95rem 1rem;
+        border-radius: 999px;
+        background: linear-gradient(135deg, #ff7a45, #ff5a36);
+        color: #fff;
+        font-weight: 800;
+        font-size: 1.05rem;
+        text-decoration: none;
+        box-shadow: var(--shadow-lg);
+      }
+      .tp-note {
+        color: var(--muted);
+        font-size: 0.82rem;
+        line-height: 1.8;
+      }
+      .tp-video-link {
+        display: inline-block;
+        margin-top: 0.8rem;
+        font-weight: 700;
+        color: var(--accent);
+      }
+      .tp-back {
+        display: inline-block;
+        margin-bottom: 1rem;
+        color: var(--muted);
+        text-decoration: none;
+        font-size: 0.9rem;
+      }
     </style>
   </head>
   <body>
