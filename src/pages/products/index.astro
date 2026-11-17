@@ -1,0 +1,40 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { TIKTOK_PRODUCTS } from '../../data/tiktok-products';
+import { formatYen } from '../../lib/genres';
+
+const base = import.meta.env.BASE_URL;
+const products = [...TIKTOK_PRODUCTS].sort((a, b) =>
+  b.featuredDate.localeCompare(a.featuredDate),
+);
+const title = 'TikTokで紹介した商品まとめ｜楽天お買い物ラボ';
+const description =
+  'TikTok「ALICE World」（@aliceworld.japan / @alice.world26）で紹介した楽天市場の商品をまとめました。各商品ページから楽天市場で直接購入できます。';
+---
+
+<BaseLayout title={title} description={description}>
+  <h1 class="section-heading">TikTokで紹介した商品</h1>
+  <p class="tp-lead">
+    TikTok「ALICE World」の動画で紹介した商品の一覧です（新しい順・全{products.length}件）。
+    気になる商品は、各ページのボタンから楽天市場で直接購入できます。
+  </p>
+  <ul class="tp-grid">
+    {
+      products.map((p) => (
+        <li class="tp-card">
+          <a class="tp-card-main" href={`${base}/products/${p.slug}/`}>
+            <img src={`${base}/products/${p.slug}.jpg`} alt={p.name} loading="lazy" />
+            <span class="tp-card-body">
+              <span class="genre-chip">{p.genre}</span>
+              <span class="tp-card-name">{p.name}</span>
+              <span class="tp-price">{formatYen(p.price)}</span>
+              <span class="tp-card-meta">
+                {p.shipping} ／ {p.featuredDate.replaceAll('-', '/')}紹介（{p.account}）
+              </span>
+            </span>
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</BaseLayout>
