@@ -1729,7 +1729,7 @@ export const TIKTOK_PRODUCTS: TiktokProduct[] = [
     shipping: '送料無料',
     genre: '文房具',
     description:
-      'TRAVELER'S COMPANYのパスポートサイズ手帳スターターキット（キャメル）。牛革カバー（タイ製）とMD用紙のノートリフィル（日本製・64ページ）のセットです。',
+      'TRAVELER\'S COMPANYのパスポートサイズ手帳スターターキット（キャメル）。牛革カバー（タイ製）とMD用紙のノートリフィル（日本製・64ページ）のセットです。',
     affiliateUrl: 'https://a.r10.to/hYTtJG',
     account: '@aliceworld.japan',
     featuredDate: '2026-11-21',
