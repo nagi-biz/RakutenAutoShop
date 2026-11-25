@@ -131,6 +131,44 @@
   .bloglink{margin-top:6px;display:block;text-align:center;font-size:12px;font-weight:700;
     padding:7px 4px;color:#d9482f;background:#fff7f2;border:1px solid var(--line);
     border-radius:999px;text-decoration:none}
+
+  /* ===== 季節イベントバナー（設定ドリブン・期間内のみJSで表示） ===== */
+  .season{
+    display:block;text-decoration:none;text-align:center;color:#fdf6e3;
+    background:linear-gradient(135deg,#0b3d24,#14663c 55%,#0b3d24);
+    border:2px solid #d4af37;border-radius:18px;
+    padding:18px 16px 14px;margin:18px 0 4px;
+    box-shadow:0 8px 20px rgba(20,60,35,.28);
+  }
+  .season-top{font-size:20px;font-weight:800;letter-spacing:.03em;color:#f6d97b}
+  .season-sub{font-size:12.5px;opacity:.92;margin-top:3px}
+  /* 期間中だけヘッダーに深緑のアクセントを混ぜる */
+  header{position:relative;overflow:hidden}
+  header.seasonal-xmas{
+    background:linear-gradient(135deg,#0b4f30 0%,#a93226 58%,#e0653a 100%);
+  }
+  /* 雪アニメーション（軽量・装飾のみ） */
+  .snow-layer{position:absolute;inset:0;overflow:hidden;pointer-events:none}
+  .snowflake{
+    position:absolute;top:0;color:#fff;line-height:1;
+    text-shadow:0 1px 4px rgba(0,0,0,.25);
+    animation-name:snow-fall;animation-timing-function:linear;animation-iteration-count:infinite;
+    will-change:transform;
+  }
+  @keyframes snow-fall{
+    0%{transform:translate3d(0,-30px,0) rotate(0deg)}
+    100%{transform:translate3d(var(--sway,12px),var(--fall,320px),0) rotate(320deg)}
+  }
+  @media (prefers-reduced-motion: reduce){
+    .snowflake{animation:none;display:none}
+  }
+  /* ===== 公式キャンペーンバナー枠（設定ドリブン・設定が空なら非表示） ===== */
+  .campaign{
+    display:block;margin:14px 0 4px;border-radius:16px;overflow:hidden;
+    border:1px solid var(--line);background:var(--card);
+    box-shadow:0 3px 10px rgba(200,110,60,.07);
+  }
+  .campaign img{width:100%;height:auto;display:block}
 </style>
 </head>
 <body>
@@ -153,6 +191,17 @@
     <div class="bf-top">🖤 Rakuten Black Friday</div>
     <div class="bf-count" id="bfCount">—</div>
     <div class="bf-sub" data-ja="エントリー受付中 · ポイントアップ" data-en="Entry open now · Point-up campaign">エントリー受付中 · ポイントアップ</div>
+  </a>
+
+  <!-- 季節イベントバナー（設定ドリブン・期間内のみ下部スクリプトが表示する） -->
+  <a class="season" id="seasonBanner" href="#g-ov-food" style="display:none">
+    <div class="season-top" id="seasonTitle"></div>
+    <div class="season-sub" id="seasonSub"></div>
+  </a>
+
+  <!-- 公式キャンペーンバナー枠（設定ドリブン・設定が空なら非表示。下部スクリプトの CAMPAIGN 設定で制御） -->
+  <a class="campaign" id="campaignBanner" href="#" target="_blank" rel="noopener sponsored" style="display:none">
+    <img id="campaignImg" src="" alt="">
   </a>
 
   <!-- 本日のおすすめ / Today's Pick（毎日差し替え） -->
@@ -1308,9 +1357,111 @@
     setInterval(tick, 1000);
   })();
 
+  // Seasonal event banner + campaign banner slot (config-driven).
+  // Shown only during each config's period (JST). To switch events
+  // (e.g. New Year), edit SEASONAL below — name/theme, period, texts, href.
+  (function(){
+    var SEASONAL = {
+      id: 'christmas-2026',
+      theme: 'xmas', // 'xmas' adds the header accent + snow. Other themes: banner only.
+      start: '2026-11-25T00:00:00+09:00',
+      end:   '2026-12-25T23:59:59+09:00',
+      href: '#g-ov-food',
+      title: { ja: '🎄 クリスマスギフト特集', en: '🎄 Christmas Gift Picks' },
+      sub:   { ja: '贈り物に人気の商品を集めました', en: 'A collection of popular gift ideas' }
+    };
+    // Official campaign banner slot (Rakuten Affiliate).
+    // Fill this in ONLY for an officially announced campaign, using the
+    // official banner image URL and link URL created in Rakuten Affiliate.
+    // While image/href are empty, nothing is displayed.
+    // Example — once Rakuten Super SALE is officially announced:
+    //   image: 'https://... (official banner image URL)',
+    //   href:  'https://... (official banner link URL)',
+    //   alt:   { ja: '楽天スーパーSALE', en: 'Rakuten Super SALE' },
+    //   start: '2026-12-04T20:00:00+09:00',
+    //   end:   '2026-12-11T01:59:00+09:00'
+    var CAMPAIGN = {
+      image: '',
+      href: '',
+      alt:   { ja: '', en: '' },
+      start: '',
+      end:   ''
+    };
+    var now = Date.now();
+    function inPeriod(start, end){
+      if (start && now < new Date(start).getTime()) return false;
+      if (end && now > new Date(end).getTime()) return false;
+      return true;
+    }
+    function langIsEn(){ return document.documentElement.lang === 'en'; }
+
+    // --- Seasonal banner ---
+    if (inPeriod(SEASONAL.start, SEASONAL.end)) {
+      var banner = document.getElementById('seasonBanner');
+      var title = document.getElementById('seasonTitle');
+      var sub = document.getElementById('seasonSub');
+      if (banner && title && sub) {
+        banner.setAttribute('href', SEASONAL.href);
+        var renderSeason = function(){
+          var en = langIsEn();
+          title.textContent = en ? SEASONAL.title.en : SEASONAL.title.ja;
+          sub.textContent = en ? SEASONAL.sub.en : SEASONAL.sub.ja;
+        };
+        renderSeason();
+        banner.style.display = 'block';
+        // Re-render texts when the language toggle switches <html lang>
+        new MutationObserver(renderSeason).observe(document.documentElement, { attributes: true, attributeFilter: ['lang'] });
+        if (SEASONAL.theme === 'xmas') {
+          var header = document.querySelector('header');
+          if (header) {
+            header.classList.add('seasonal-xmas');
+            var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            if (!reduce) {
+              var layer = document.createElement('div');
+              layer.className = 'snow-layer';
+              layer.setAttribute('aria-hidden', 'true');
+              var fall = header.clientHeight + 48;
+              var glyphs = ['❄', '❅', '❆'];
+              for (var i = 0; i < 14; i++) {
+                var f = document.createElement('span');
+                f.className = 'snowflake';
+                f.textContent = glyphs[i % glyphs.length];
+                f.style.left = (Math.random() * 100) + '%';
+                f.style.fontSize = (9 + Math.random() * 10).toFixed(0) + 'px';
+                f.style.opacity = (0.35 + Math.random() * 0.55).toFixed(2);
+                f.style.setProperty('--fall', fall + 'px');
+                f.style.setProperty('--sway', ((Math.random() * 36) - 18).toFixed(0) + 'px');
+                f.style.animationDuration = (6 + Math.random() * 6).toFixed(1) + 's';
+                f.style.animationDelay = (-Math.random() * 10).toFixed(1) + 's';
+                layer.appendChild(f);
+              }
+              header.appendChild(layer);
+            }
+          }
+        }
+      }
+    }
+
+    // --- Official campaign banner slot ---
+    if (CAMPAIGN.image && CAMPAIGN.href && inPeriod(CAMPAIGN.start, CAMPAIGN.end)) {
+      var cBanner = document.getElementById('campaignBanner');
+      var cImg = document.getElementById('campaignImg');
+      if (cBanner && cImg) {
+        cBanner.setAttribute('href', CAMPAIGN.href);
+        cImg.setAttribute('src', CAMPAIGN.image);
+        var renderCampaign = function(){
+          cImg.setAttribute('alt', langIsEn() ? CAMPAIGN.alt.en : CAMPAIGN.alt.ja);
+        };
+        renderCampaign();
+        cBanner.style.display = 'block';
+        new MutationObserver(renderCampaign).observe(document.documentElement, { attributes: true, attributeFilter: ['lang'] });
+      }
+    }
+  })();
+
   // Reveal on scroll
   (function(){
-    var els = document.querySelectorAll('a.card, .pick, .bf');
+    var els = document.querySelectorAll('a.card, .pick, .bf, .season');
     if (!('IntersectionObserver' in window)) {
       els.forEach(function(el){ el.classList.add('in'); });
       return;
