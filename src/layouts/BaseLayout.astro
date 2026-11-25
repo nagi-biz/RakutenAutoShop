@@ -62,6 +62,12 @@ const navItems =
 <html lang={lang}>
   <head>
     <meta charset="utf-8" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@700;800&display=swap"
+      rel="stylesheet"
+    />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link
       rel="alternate"
@@ -102,6 +108,9 @@ const navItems =
         --border: #ffe3d6;
         --shadow: 0 3px 10px rgba(200, 110, 60, 0.08);
         --shadow-lg: 0 8px 24px rgba(255, 150, 60, 0.18);
+        --font-display:
+          'M PLUS Rounded 1c', 'Hiragino Maru Gothic ProN', 'Hiragino Sans',
+          'Noto Sans JP', 'Yu Gothic', sans-serif;
       }
       * {
         box-sizing: border-box;
@@ -141,9 +150,14 @@ const navItems =
         gap: 0.6rem;
         color: #fff;
         text-decoration: none;
-        font-weight: 700;
-        font-size: 1.25rem;
-        letter-spacing: 0.02em;
+        font-family: var(--font-display);
+        font-weight: 800;
+        font-size: clamp(1.45rem, 6vw, 1.7rem);
+        letter-spacing: 0.03em;
+        line-height: 1.25;
+        text-shadow:
+          0 2px 0 rgba(176, 58, 18, 0.25),
+          0 6px 16px rgba(176, 58, 18, 0.3);
       }
       header img.brand-icon {
         width: 44px;
@@ -189,8 +203,11 @@ const navItems =
         padding: 1.5rem 1rem 4rem;
       }
       main h1 {
-        font-size: 1.7rem;
-        line-height: 1.45;
+        font-family: var(--font-display);
+        font-size: clamp(1.95rem, 7.5vw, 2.55rem);
+        font-weight: 800;
+        line-height: 1.4;
+        letter-spacing: 0.02em;
         margin: 0.5rem 0 0.8rem;
       }
       footer {
@@ -269,7 +286,9 @@ const navItems =
       }
       /* ===== セクション見出し（トップページ） ===== */
       .section-heading {
-        font-size: 1.35rem;
+        font-family: var(--font-display);
+        font-size: 1.5rem;
+        font-weight: 800;
         line-height: 1.5;
         margin: 2.2rem 0 0.4rem;
         padding-left: 0.7rem;
@@ -295,6 +314,7 @@ const navItems =
       }
       .event-banner-title {
         margin: 0 0 0.6rem;
+        font-family: var(--font-display);
         font-size: clamp(1.7rem, 5.5vw, 2.6rem);
         line-height: 1.3;
         font-weight: 800;
@@ -324,6 +344,47 @@ const navItems =
       .event-banner-btn:hover {
         opacity: 0.92;
         color: #241a02;
+      }
+      /* 季節バナー: クリスマステーマ（深緑×赤×ゴールド） */
+      .event-banner--xmas {
+        background: linear-gradient(135deg, #0b3d24 0%, #14663c 55%, #7a1f1f 135%);
+        border-color: #d4af37;
+        color: #fdf3d8;
+        box-shadow: 0 10px 28px rgba(11, 61, 36, 0.35);
+      }
+      .event-banner--xmas .event-banner-label {
+        color: #f0b429;
+      }
+      .event-banner--xmas .event-banner-title {
+        background: linear-gradient(120deg, #fbe9b7, #e9c766 45%, #fbe9b7);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
+      .event-banner--xmas .event-banner-meta {
+        color: #f7ecd0;
+      }
+      .event-banner--xmas .event-banner-btn {
+        background: linear-gradient(135deg, #d64541, #a93226);
+        color: #fff;
+        box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+      }
+      .event-banner--xmas .event-banner-btn:hover {
+        opacity: 0.92;
+        color: #fff;
+      }
+      /* ===== 公式キャンペーンバナー枠（設定が空なら非表示） ===== */
+      .campaign-banner {
+        display: block;
+        margin: 0 0 1.8rem;
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: var(--shadow);
+      }
+      .campaign-banner img {
+        width: 100%;
+        height: auto;
+        display: block;
       }
       /* ===== ジャンルカード（トップページ） ===== */
       .genre-grid {
@@ -454,7 +515,9 @@ const navItems =
         }
       }
       .article h1 {
-        font-size: 1.65rem;
+        font-family: var(--font-display);
+        font-size: 1.75rem;
+        font-weight: 800;
         line-height: 1.5;
         margin: 0 0 0.5rem;
       }
