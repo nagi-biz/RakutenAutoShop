@@ -8,6 +8,19 @@ interface Props {
 const { lang } = Astro.props;
 const base = import.meta.env.BASE_URL;
 const ev = SEASONAL_EVENT;
+
+// 補足文を文節単位の段に分ける（文節の途中で改行させないため）。
+// 日本語は「。」区切り、英語は「 — 」区切りで分割する。
+const metaPhrases = (text: string): string[] => {
+  if (text.includes('。')) {
+    return text.split(/(?<=。)/).filter((s) => s.length > 0);
+  }
+  if (text.includes(' — ')) {
+    const parts = text.split(' — ');
+    return [parts[0] + ' —', ...parts.slice(1)];
+  }
+  return [text];
+};
 ---
 
 {
@@ -20,7 +33,11 @@ const ev = SEASONAL_EVENT;
       >
         <p class="event-banner-label">{ev.label[lang]}</p>
         <h2 class="event-banner-title">{ev.title[lang]}</h2>
-        <p class="event-banner-meta">{ev.meta[lang]}</p>
+        <p class="event-banner-meta">
+          {metaPhrases(ev.meta[lang]).map((phrase) => (
+            <span class="event-banner-phrase">{phrase}</span>
+          ))}
+        </p>
         <a class="event-banner-btn" href={`${base}${ev.path}`}>
           {ev.button[lang]}
         </a>

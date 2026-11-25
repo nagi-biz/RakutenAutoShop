@@ -1,0 +1,109 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { TIKTOK_PRODUCTS } from '../data/tiktok-products';
+import { FEATURES, type FeatureDef } from '../data/features';
+import { formatYen } from '../lib/genres';
+
+interface Props {
+  feature: FeatureDef;
+  lang: 'ja' | 'en';
+}
+
+const { feature, lang } = Astro.props;
+const base = import.meta.env.BASE_URL;
+const isEn = lang === 'en';
+const langPrefix = isEn ? '/en' : '';
+
+const products = TIKTOK_PRODUCTS.filter((p) => p.featureSlug === feature.slug);
+const others = FEATURES.filter((f) => f.slug !== feature.slug);
+
+const title = isEn
+  ? `${feature.title.en}｜Rakuten Shopping Lab`
+  : `${feature.title.ja}｜楽天お買い物ラボ`;
+const description = feature.intro[lang];
+const firstImage =
+  products.length > 0 ? `${base}/products/${products[0].slug}.jpg` : undefined;
+
+const ui = isEn
+  ? {
+      picks: (n: number) => `${n} picks`,
+      buy: 'View on Rakuten',
+      detail: 'Details',
+      otherFeatures: 'More features',
+      note: 'Prices and shipping were checked on Nov 25, 2026. Please check the Rakuten product page for the latest price.',
+    }
+  : {
+      picks: (n: number) => `全${n}点`,
+      buy: '楽天市場で見る',
+      detail: '商品ページ',
+      otherFeatures: 'ほかの特集',
+      note: '価格・送料は2026年11月25日に確認した時点の情報です。最新の価格は楽天市場の商品ページでご確認ください。',
+    };
+---
+
+<BaseLayout title={title} description={description} lang={lang} image={firstImage}>
+  <p class="feature-emoji" aria-hidden="true">{feature.emoji}</p>
+  <h1 class="feature-title">{feature.title[lang]}</h1>
+  <p class="tp-lead">{feature.intro[lang]}</p>
+  <p class="feature-count">{ui.picks(products.length)}</p>
+  <ul class="tp-grid">
+    {
+      products.map((p) => (
+        <li class="tp-card">
+          <a class="tp-card-main" href={`${base}/products/${p.slug}/`}>
+            <img src={`${base}/products/${p.slug}.jpg`} alt={p.name} loading="lazy" />
+            <span class="tp-card-body">
+              <span class="genre-chip">{p.genre}</span>
+              <span class="tp-card-name">{p.name}</span>
+              <span class="tp-price">{formatYen(p.price, lang)}</span>
+              <span class="tp-card-meta">
+                {p.shipping} ／ {p.shopName}
+              </span>
+            </span>
+          </a>
+          <span class="feature-card-actions">
+            <a class="feature-detail-link" href={`${base}/products/${p.slug}/`}>
+              {ui.detail} →
+            </a>
+            <a
+              class="feature-buy-link"
+              href={p.affiliateUrl}
+              rel="nofollow sponsored"
+              target="_blank"
+            >
+              {ui.buy}
+            </a>
+          </span>
+        </li>
+      ))
+    }
+  </ul>
+  <p class="tp-note">{ui.note}</p>
+  {
+    others.length > 0 && (
+      <>
+        <h2 class="section-heading">{ui.otherFeatures}</h2>
+        <ul class="feature-grid">
+          {others.map((f) => {
+            const fp = TIKTOK_PRODUCTS.find((p) => p.featureSlug === f.slug);
+            return (
+              <li class="feature-card">
+                <a href={`${base}${langPrefix}/features/${f.slug}/`}>
+                  {fp && (
+                    <img src={`${base}/products/${fp.slug}.jpg`} alt="" loading="lazy" />
+                  )}
+                  <span class="feature-card-body">
+                    <span class="feature-card-title">
+                      {f.emoji} {f.title[lang]}
+                    </span>
+                    <span class="feature-card-intro">{f.intro[lang]}</span>
+                  </span>
+                </a>
+              </li>
+            );
+          })}
+        </ul>
+      </>
+    )
+  }
+</BaseLayout>
