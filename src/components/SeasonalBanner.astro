@@ -1,0 +1,57 @@
+---
+import { SEASONAL_EVENT } from '../data/seasonal';
+
+interface Props {
+  lang: 'ja' | 'en';
+}
+
+const { lang } = Astro.props;
+const base = import.meta.env.BASE_URL;
+const ev = SEASONAL_EVENT;
+---
+
+{
+  ev && (
+    <>
+      <section
+        class:list={['event-banner', `event-banner--${ev.theme}`]}
+        id="seasonal-banner"
+        style="display:none"
+      >
+        <p class="event-banner-label">{ev.label[lang]}</p>
+        <h2 class="event-banner-title">{ev.title[lang]}</h2>
+        <p class="event-banner-meta">{ev.meta[lang]}</p>
+        <a class="event-banner-btn" href={`${base}${ev.path}`}>
+          {ev.button[lang]}
+        </a>
+      </section>
+      <script is:inline define:vars={{ start: ev.start, end: ev.end }}>
+        (function () {
+          var now = Date.now();
+          if (
+            now < new Date(start).getTime() ||
+            now > new Date(end).getTime()
+          ) {
+            return;
+          }
+          var el = document.getElementById('seasonal-banner');
+          if (el) el.style.display = '';
+          // 見出しアクセントはこのスクリプトより後ろのDOMにあるため、
+          // DOM構築完了を待ってから表示する。
+          var showAccents = function () {
+            document
+              .querySelectorAll('[data-seasonal-accent]')
+              .forEach(function (a) {
+                a.removeAttribute('hidden');
+              });
+          };
+          if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', showAccents);
+          } else {
+            showAccents();
+          }
+        })();
+      </script>
+    </>
+  )
+}
