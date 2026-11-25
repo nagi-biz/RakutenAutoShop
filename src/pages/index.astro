@@ -2,6 +2,8 @@
 import { getCollection } from 'astro:content';
 import fs from 'node:fs';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import SeasonalBanner from '../components/SeasonalBanner.astro';
+import CampaignBanner from '../components/CampaignBanner.astro';
 import { GENRES, genreCounts } from '../lib/genres';
 
 const allArticles = await getCollection('articles');
@@ -20,30 +22,10 @@ const thumbOf = (article: (typeof articles)[number]) =>
 ---
 
 <BaseLayout title="楽天お買い物ラボ — 今売れているものまとめ" lang="ja" altPath="/en/">
-  <section class="event-banner" id="bf-banner">
-    <p class="event-banner-label">🖤 BLACK FRIDAY 🖤</p>
-    <h2 class="event-banner-title">楽天ブラックフライデー<br />11/19(木) 20:00スタート</h2>
-    <p class="event-banner-meta">
-      エントリー受付中！セールは11/25(水) 01:59まで。<br />
-      買いまわりでポイントアップ＆開始2時間は最大50%OFFクーポンも。
-    </p>
-    <a
-      class="event-banner-btn"
-      href="https://event.rakuten.co.jp/campaign/point-up/blackfriday/"
-      target="_blank"
-      rel="sponsored noopener">公式イベントページでエントリーする</a
-    >
-  </section>
-  <script is:inline>
-    (function () {
-      if (Date.now() > new Date('2026-11-25T01:59:00+09:00').getTime()) {
-        var el = document.getElementById('bf-banner');
-        if (el) el.style.display = 'none';
-      }
-    })();
-  </script>
+  <SeasonalBanner lang="ja" />
+  <CampaignBanner lang="ja" />
 
-  <h1>今売れているものまとめ</h1>
+  <h1><span data-seasonal-accent hidden>🎄 </span>今売れているものまとめ</h1>
   <p>楽天ランキングをもとに、話題の商品を毎日ピックアップして紹介しています。</p>
 
   <h2 class="section-heading">ジャンルから探す</h2>
