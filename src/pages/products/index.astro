@@ -29,7 +29,10 @@ const description =
               <span class="tp-card-name">{p.name}</span>
               <span class="tp-price">{formatYen(p.price)}</span>
               <span class="tp-card-meta">
-                {p.shipping} ／ {p.featuredDate.replaceAll('-', '/')}紹介（{p.account}）
+                {p.shipping} ／{' '}
+                {p.account
+                  ? `${p.featuredDate.replaceAll('-', '/')}紹介（${p.account}）`
+                  : `${p.featuredDate.replaceAll('-', '/')} 特集ページで紹介`}
               </span>
             </span>
           </a>

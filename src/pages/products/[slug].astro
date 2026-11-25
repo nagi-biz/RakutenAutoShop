@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { TIKTOK_PRODUCTS, type TiktokProduct } from '../../data/tiktok-products';
+import { featureBySlug } from '../../data/features';
 import { formatYen } from '../../lib/genres';
 
 export function getStaticPaths() {
@@ -15,14 +16,31 @@ interface Props {
 }
 const { product } = Astro.props;
 const base = import.meta.env.BASE_URL;
-const title = `${product.name} — TikTokで紹介した商品｜楽天お買い物ラボ`;
+const feature = product.featureSlug ? featureBySlug(product.featureSlug) : undefined;
+// 特集リサーチ商品は、公開時に affiliateUrl をアフィリエイトリンクへ差し替える。
+// 差し替え前（affiliateUrl === itemUrl）はアフィリエイトリンクではない旨を表示する。
+const affiliatePending =
+  !!product.itemUrl && product.affiliateUrl === product.itemUrl;
+const title = feature
+  ? `${product.name}｜楽天お買い物ラボ`
+  : `${product.name} — TikTokで紹介した商品｜楽天お買い物ラボ`;
 const description = `${product.description} 価格は${formatYen(product.price)}（${product.featuredDate}確認）。`;
 const image = `${base}/products/${product.slug}.jpg`;
 const dateLabel = product.featuredDate.replaceAll('-', '/');
 ---
 
 <BaseLayout title={title} description={description} image={image}>
-  <a class="tp-back" href={`${base}/products/`}>← TikTokで紹介した商品一覧へ</a>
+  {
+    feature ? (
+      <a class="tp-back" href={`${base}/features/${feature.slug}/`}>
+        ← {feature.title.ja}へ
+      </a>
+    ) : (
+      <a class="tp-back" href={`${base}/products/`}>
+        ← TikTokで紹介した商品一覧へ
+      </a>
+    )
+  }
   <article class="tp-detail">
     <img class="tp-detail-img" src={image} alt={product.name} />
     <span class="genre-chip">{product.genre}</span>
@@ -44,16 +62,33 @@ const dateLabel = product.featuredDate.replaceAll('-', '/');
         <dt>ショップ</dt>
         <dd>{product.shopName}</dd>
       </div>
-      <div>
-        <dt>TikTok紹介</dt>
-        <dd>{dateLabel}・{product.account}</dd>
-      </div>
+      {
+        feature ? (
+          <div>
+            <dt>特集</dt>
+            <dd>
+              <a href={`${base}/features/${feature.slug}/`}>{feature.title.ja}</a>
+              （{dateLabel}確認）
+            </dd>
+          </div>
+        ) : (
+          <div>
+            <dt>TikTok紹介</dt>
+            <dd>
+              {dateLabel}・{product.account}
+            </dd>
+          </div>
+        )
+      }
     </dl>
     <a class="tp-buy" href={product.affiliateUrl} rel="nofollow sponsored" target="_blank">
       楽天市場で見る・買う
     </a>
     <p class="tp-note">
-      ※ 価格・送料は{dateLabel}に確認した時点の情報です。最新の価格は楽天市場の商品ページでご確認ください。リンク先は楽天アフィリエイトリンクです。
+      ※ 価格・送料は{dateLabel}に確認した時点の情報です。最新の価格は楽天市場の商品ページでご確認ください。
+      {affiliatePending
+        ? 'リンク先は楽天市場の商品ページです。'
+        : 'リンク先は楽天アフィリエイトリンクです。'}
     </p>
     {
       product.tiktokUrl && (
