@@ -4211,6 +4211,122 @@ export const TIKTOK_PRODUCTS: TiktokProduct[] = [
     featureSlug: 'christmas-gifts',
     featuredDate: '2026-11-25',
   },
+  // ---- 2026-11-24 日本向け @alice.world26（2026-11-25承認・投稿分） ----
+  // affiliateUrl は 2026-11-25 にアフィリエイト短縮リンクへ差し替え済み（itemUrl は控え）。
+  {
+    slug: 'cetaphil',
+    name: 'セタフィル モイスチャライジングローション 591mL 2本組',
+    shopName: 'セタフィル公式楽天市場店',
+    price: 3398,
+    shipping: '送料込み',
+    genre: 'ボディケア',
+    description:
+      '無香料・パラベンフリーの保湿ローション（591mL×2本組）。ナイアシンアミド・パンテノール・ビタミンE誘導体・アボカドオイルを配合し、顔にも身体にも使えます。カナダ製。楽天ベストコスメ2025上半期でボディケア1位を受賞しました。',
+    affiliateUrl: 'https://a.r10.to/hYr5YU',
+    itemUrl: 'https://item.rakuten.co.jp/cetaphil-official-gkk/10000005/',
+    account: '@alice.world26',
+    featuredDate: '2026-11-24',
+  },
+  {
+    slug: 'banilaco',
+    name: 'BANILA CO クリーンイットゼロ クレンジングバーム オリジナル 100ml',
+    shopName: 'CLOUDSHOP',
+    price: 2080,
+    shipping: '送料は商品ページでご確認ください',
+    genre: 'スキンケア',
+    description:
+      'シャーベット状のバームが体温でとろけてオイル状に変わるクレンジングバーム（100ml）。W洗顔不要のオールインワンタイプで、付属のスパチュラですくって使います。',
+    affiliateUrl: 'https://a.r10.to/h5bOwD',
+    itemUrl: 'https://item.rakuten.co.jp/clushop/banilaco_cleanitzero_6/',
+    account: '@alice.world26',
+    featuredDate: '2026-11-24',
+  },
+  {
+    slug: 'toraya',
+    name: 'とらや 小形羊羹10本入 K10',
+    shopName: 'まるひろオンラインショップ',
+    price: 3456,
+    shipping: '送料は商品ページでご確認ください',
+    genre: '食品・スイーツ',
+    description:
+      '夜の梅（小倉）・おもかげ（黒砂糖）・新緑（抹茶）・はちみつ・和紅茶の5種×各2本の小形羊羹の詰め合わせ。切らずに食べられる食べきりサイズ（各50g）です。',
+    affiliateUrl: 'https://a.r10.to/hYCcxS',
+    itemUrl: 'https://item.rakuten.co.jp/maruhiro-dep/428604g/',
+    account: '@alice.world26',
+    featuredDate: '2026-11-24',
+  },
+  {
+    slug: 'olaplex-no7',
+    name: 'OLAPLEX No.7 ボンディングオイル 30ml',
+    shopName: 'ALBUM ONLINE STORE',
+    price: 3740,
+    shipping: '送料無料',
+    genre: 'ヘアケア',
+    description:
+      'アメリカのAmazonで★4.7・6万件超のレビューを集めたベストセラーの洗い流さないヘアオイル（30ml）。2〜3滴を手に取り毛先になじませて使います。濡れた髪にも乾いた髪にも使え、232℃までの熱から髪を守ります。メーカー認定オンラインストアの正規販売品です。',
+    affiliateUrl: 'https://a.r10.to/h8ZfYr',
+    itemUrl: 'https://item.rakuten.co.jp/albumec/896364002671/',
+    account: '@alice.world26',
+    featuredDate: '2026-11-24',
+  },
+  // ---- 2026-11-24 海外向け @aliceworld.japan（2026-11-25承認・投稿分） ----
+  // affiliateUrl は 2026-11-25 にアフィリエイト短縮リンクへ差し替え済み（itemUrl は控え）。
+  {
+    slug: 'shuro-houki',
+    name: '山本勝之助商店 棕櫚ほうき 5玉手箒 皮巻き',
+    shopName: '暮らしと眠りを楽しむ店 和っふる',
+    price: 5280,
+    shipping: '送料は商品ページでご確認ください',
+    genre: '日用品・生活雑貨',
+    description:
+      '和歌山県海南市の山本勝之助商店（1880年創業）が作る、棕櫚5束の手箒（皮巻きタイプ）。長さ約75cm・重さ約300gで、柄は竹、巻線は銅。一つ一つ手作りの日本製です。',
+    affiliateUrl: 'https://a.r10.to/hgKWt6',
+    itemUrl: 'https://item.rakuten.co.jp/wa-full/wshuro-houki5/',
+    account: '@aliceworld.japan',
+    featuredDate: '2026-11-24',
+  },
+  {
+    slug: 'rosette',
+    name: 'ロゼット洗顔パスタ 海泥スムース 180g×5本',
+    shopName: 'ロゼット 公式ショップ楽天市場店',
+    price: 4535,
+    shipping: '送料無料',
+    genre: 'スキンケア',
+    description:
+      'ミネラルを豊富に含む海泥（清浄成分）とローズフルーツエキス（保湿成分）を配合した洗顔料の大容量180g×5本セット。無香料・無着色料・無鉱物油。シリーズ累計1億本を販売したロングセラーで、濃密泡の1分間泡パックもできます。日本製です。',
+    affiliateUrl: 'https://a.r10.to/h5uuRa',
+    itemUrl: 'https://item.rakuten.co.jp/rosette-shop/pasta_ks180_5ps/',
+    account: '@aliceworld.japan',
+    featuredDate: '2026-11-24',
+  },
+  {
+    slug: 'nodahoro-msh12k',
+    name: '野田琺瑯 持ち手付ストッカー角型L 琺瑯蓋付 MSH-12K',
+    shopName: '鍋屋',
+    price: 2849,
+    shipping: '送料¥935',
+    genre: 'キッチン調理器具',
+    description:
+      '栃木県栃木市で全工程を自社一貫生産する日本製の琺瑯保存容器（満水容量1.2L・持ち手付き・琺瑯蓋付）。味噌1kgや調味料の保存に使え、直火・オーブン・冷凍にも対応します（電子レンジ不可）。',
+    affiliateUrl: 'https://a.r10.to/hP9Xlh',
+    itemUrl: 'https://item.rakuten.co.jp/nabe1559/nod-143/',
+    account: '@aliceworld.japan',
+    featuredDate: '2026-11-24',
+  },
+  {
+    slug: 'hagi-no-tsuki',
+    name: '菓匠三全 萩の月 10個入',
+    shopName: '東京みやげKIOSKモール HANAGATAYA',
+    price: 2650,
+    shipping: '送料は商品ページでご確認ください',
+    genre: '食品・スイーツ',
+    description:
+      'まろやかなカスタードクリームをふんわりしたカステラ生地で包んだ、仙台を代表する銘菓（1979年発売）。萩の咲く宮城野に浮かぶ名月をかたどった菓子で、1日あたり約10万個が製造・販売されるロングセラーです。個包装の10個入り。',
+    affiliateUrl: 'https://a.r10.to/hgvFei',
+    itemUrl: 'https://item.rakuten.co.jp/kioskgift/610-02-2/',
+    account: '@aliceworld.japan',
+    featuredDate: '2026-11-24',
+  },
 
 ];
 
