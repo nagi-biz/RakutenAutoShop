@@ -65,7 +65,7 @@ const navItems =
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@700;800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Mochiy+Pop+One&family=M+PLUS+Rounded+1c:wght@700;800&display=swap"
       rel="stylesheet"
     />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -109,8 +109,8 @@ const navItems =
         --shadow: 0 3px 10px rgba(200, 110, 60, 0.08);
         --shadow-lg: 0 8px 24px rgba(255, 150, 60, 0.18);
         --font-display:
-          'M PLUS Rounded 1c', 'Hiragino Maru Gothic ProN', 'Hiragino Sans',
-          'Noto Sans JP', 'Yu Gothic', sans-serif;
+          'Mochiy Pop One', 'M PLUS Rounded 1c', 'Hiragino Maru Gothic ProN',
+          'Hiragino Sans', 'Noto Sans JP', 'Yu Gothic', sans-serif;
       }
       * {
         box-sizing: border-box;
@@ -151,13 +151,14 @@ const navItems =
         color: #fff;
         text-decoration: none;
         font-family: var(--font-display);
-        font-weight: 800;
-        font-size: clamp(1.45rem, 6vw, 1.7rem);
-        letter-spacing: 0.03em;
+        font-weight: 400;
+        font-size: clamp(1.3rem, 5.6vw, 1.6rem);
+        letter-spacing: 0.02em;
         line-height: 1.25;
+        white-space: nowrap;
         text-shadow:
-          0 2px 0 rgba(176, 58, 18, 0.25),
-          0 6px 16px rgba(176, 58, 18, 0.3);
+          0 3px 0 rgba(176, 58, 18, 0.45),
+          0 8px 18px rgba(176, 58, 18, 0.35);
       }
       header img.brand-icon {
         width: 44px;
@@ -204,11 +205,13 @@ const navItems =
       }
       main h1 {
         font-family: var(--font-display);
-        font-size: clamp(1.95rem, 7.5vw, 2.55rem);
-        font-weight: 800;
-        line-height: 1.4;
-        letter-spacing: 0.02em;
+        font-size: clamp(1.5rem, 6.8vw, 2.4rem);
+        font-weight: 400;
+        line-height: 1.35;
+        letter-spacing: 0.01em;
         margin: 0.5rem 0 0.8rem;
+        word-break: keep-all;
+        text-shadow: 0 3px 0 rgba(255, 158, 74, 0.35);
       }
       footer {
         text-align: center;
@@ -288,7 +291,7 @@ const navItems =
       .section-heading {
         font-family: var(--font-display);
         font-size: 1.5rem;
-        font-weight: 800;
+        font-weight: 400;
         line-height: 1.5;
         margin: 2.2rem 0 0.4rem;
         padding-left: 0.7rem;
@@ -301,7 +304,7 @@ const navItems =
         border-radius: 16px;
         box-shadow: 0 10px 28px rgba(60, 40, 0, 0.35);
         color: #f7e7bd;
-        padding: 1.8rem 1.6rem;
+        padding: 1.8rem 1.1rem;
         margin: 0.5rem 0 1.8rem;
         text-align: center;
       }
@@ -315,19 +318,33 @@ const navItems =
       .event-banner-title {
         margin: 0 0 0.6rem;
         font-family: var(--font-display);
-        font-size: clamp(1.7rem, 5.5vw, 2.6rem);
+        font-size: clamp(1.55rem, 6.4vw, 2.6rem);
         line-height: 1.3;
-        font-weight: 800;
+        font-weight: 400;
+        white-space: nowrap;
+        filter: drop-shadow(0 3px 0 rgba(0, 0, 0, 0.3));
         background: linear-gradient(120deg, #f9e29c, #d4af37 45%, #f9e29c);
         -webkit-background-clip: text;
         background-clip: text;
         color: transparent;
       }
+      /* 英語タイトルは文字数が多いため、モバイルでは少し小さくして1行に収める */
+      html[lang='en'] .event-banner-title {
+        font-size: clamp(1.3rem, 5.6vw, 2.6rem);
+      }
       .event-banner-meta {
         margin: 0 0 1.2rem;
-        font-size: 1rem;
+        font-size: 0.95rem;
         line-height: 1.7;
         color: #f3e3b3;
+        text-wrap: balance;
+      }
+      /* 補足文は文節ごとに1段ずつ表示し、文節の途中で折らない */
+      .event-banner-phrase {
+        display: block;
+      }
+      html[lang='ja'] .event-banner-phrase {
+        white-space: nowrap;
       }
       .event-banner-btn {
         display: inline-block;
@@ -517,9 +534,10 @@ const navItems =
       .article h1 {
         font-family: var(--font-display);
         font-size: 1.75rem;
-        font-weight: 800;
+        font-weight: 400;
         line-height: 1.5;
         margin: 0 0 0.5rem;
+        word-break: normal;
       }
       .article .article-date {
         color: var(--muted);
@@ -781,6 +799,7 @@ const navItems =
         font-size: 1.45rem;
         line-height: 1.55;
         margin: 0.6rem 0 0.8rem;
+        word-break: normal;
       }
       .tp-detail-img {
         display: block;
@@ -839,6 +858,88 @@ const navItems =
         color: var(--muted);
         text-decoration: none;
         font-size: 0.9rem;
+      }
+      /* ===== 特集ページ（/features/）・トップの特集入口 ===== */
+      .feature-emoji {
+        font-size: 2.6rem;
+        margin: 0.4rem 0 0;
+        line-height: 1.2;
+      }
+      .feature-title {
+        margin-top: 0.2rem;
+      }
+      .feature-count {
+        color: var(--muted);
+        font-weight: 700;
+        margin: 0 0 0.8rem;
+      }
+      .feature-card-actions {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.6rem;
+        padding: 0.7rem 1rem 0.95rem;
+        border-top: 1px solid var(--border);
+      }
+      .feature-detail-link {
+        color: var(--accent);
+        font-weight: 700;
+        font-size: 0.9rem;
+        text-decoration: none;
+      }
+      .feature-buy-link {
+        background: linear-gradient(135deg, #ff7a45, #ff5a36);
+        color: #fff;
+        font-weight: 800;
+        font-size: 0.88rem;
+        text-decoration: none;
+        padding: 0.5rem 0.95rem;
+        border-radius: 999px;
+        white-space: nowrap;
+      }
+      .feature-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+        gap: 1rem;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+      .feature-card {
+        background: var(--card-bg);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        box-shadow: var(--shadow);
+        overflow: hidden;
+      }
+      .feature-card a {
+        text-decoration: none;
+        color: inherit;
+        display: flex;
+        flex-direction: column;
+      }
+      .feature-card img {
+        width: 100%;
+        aspect-ratio: 16 / 9;
+        object-fit: cover;
+        display: block;
+        background: #fff;
+      }
+      .feature-card-body {
+        padding: 0.9rem 1rem 1rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.35rem;
+      }
+      .feature-card-title {
+        font-family: var(--font-display);
+        font-size: 1.15rem;
+        line-height: 1.5;
+      }
+      .feature-card-intro {
+        color: var(--muted);
+        font-size: 0.88rem;
+        line-height: 1.7;
       }
     </style>
   </head>
