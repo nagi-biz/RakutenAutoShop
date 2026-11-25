@@ -4036,6 +4036,182 @@ export const TIKTOK_PRODUCTS: TiktokProduct[] = [
     featuredDate: '2026-11-25',
   },
 
+  // ---- 2026-11-25 第3弾：冬の鍋特集に市販の鍋つゆ・出汁シリーズ追加 ----
+  // 出典: ~/workspace/rakuten_tiktok_pr/feature_products_20261125.md（第3弾）
+  // affiliateUrl は当面 itemUrl と同じ楽天商品ページURL（公開時に差し替え）。
+  {
+    slug: 'haidilao-mala-2set',
+    name: '海底撈 麻辣味鍋の素 選べる2袋セット',
+    shopName: 'オールネショップ',
+    price: 1198,
+    shipping: '送料無料',
+    genre: '食品・スイーツ',
+    description:
+      '中国の火鍋チェーン「海底撈」の鍋の素。麻辣味・清油味・トマト味・きのこ味など6種類から2袋選べるセットです（1袋150〜220g）。日本公式販売店の出品で、評価4.38（32件）です。',
+    affiliateUrl: 'https://item.rakuten.co.jp/kshouhin/chi-nabe-set-2/',
+    itemUrl: 'https://item.rakuten.co.jp/kshouhin/chi-nabe-set-2/',
+    featureSlug: 'winter-nabe',
+    featuredDate: '2026-11-25',
+  },
+  {
+    slug: 'mizkan-nabe-tsuyu-10',
+    name: 'ミツカン 〆まで美味しい鍋つゆ 750g 10種各1袋セット',
+    shopName: 'イーコンビニ',
+    price: 3980,
+    shipping: '送料無料',
+    genre: '食品・スイーツ',
+    description:
+      'ミツカンのストレートタイプ鍋つゆ「〆まで美味しい」シリーズ10種（ごま豆乳・キムチ・寄せ鍋・焼あごだし・とんこつしょうゆ・濃厚みそ・地鶏昆布だし・鶏うま塩・ゆず塩・貝だし）各1袋（750g、3〜4人前）の詰め合わせです。',
+    affiliateUrl: 'https://item.rakuten.co.jp/e-convini/0420101003654-ha001/',
+    itemUrl: 'https://item.rakuten.co.jp/e-convini/0420101003654-ha001/',
+    featureSlug: 'winter-nabe',
+    featuredDate: '2026-11-25',
+  },
+  {
+    slug: 'ebara-puchitto-yose-3',
+    name: 'エバラ プチッと鍋 寄せ鍋（23g×6個入）×3袋',
+    shopName: 'EasyLifeShop',
+    price: 1389,
+    shipping: '送料無料',
+    genre: '食品・スイーツ',
+    description:
+      '1個で1人分のポーションタイプ鍋の素「プチッと鍋」の寄せ鍋（23g×6個入）×3袋。うすくち醤油をベースに、鰹と昆布の旨みとほんのり生姜を効かせた味わいです。',
+    affiliateUrl: 'https://item.rakuten.co.jp/easylifeshop/mu0b0897a648/',
+    itemUrl: 'https://item.rakuten.co.jp/easylifeshop/mu0b0897a648/',
+    featureSlug: 'winter-nabe',
+    featuredDate: '2026-11-25',
+  },
+  {
+    slug: 'daisho-moyashi-nabe-2',
+    name: 'ダイショー 野菜をいっぱい食べる鍋 もやし鍋スープ 2袋セット',
+    shopName: 'おいしいダイショー',
+    price: 827,
+    shipping: '送料¥550',
+    genre: '食品・スイーツ',
+    description:
+      'もやしが主役の鍋スープ（750g×2袋）。醤油に阿波尾鶏・とんこつのだしの旨みと、ローストオニオン・ローストガーリックの香ばしさ、ごま油のコクを加えた、とろみ仕立てのスープです。ダイショー公式ショップの出品です。',
+    affiliateUrl: 'https://item.rakuten.co.jp/oec-daisho/31168-2/',
+    itemUrl: 'https://item.rakuten.co.jp/oec-daisho/31168-2/',
+    featureSlug: 'winter-nabe',
+    featuredDate: '2026-11-25',
+  },
+  {
+    slug: 'kubara-agodashi-1000',
+    name: '久原醤油 あごだしつゆ 1000ml',
+    shopName: 'ライフスタイル&生活雑貨のMoFu',
+    price: 1498,
+    shipping: '送料無料',
+    genre: '食品・スイーツ',
+    description:
+      '九州発の焼きあご（飛び魚）だしを使った4倍濃縮のつゆ（1000ml紙パック）。鍋物や湯豆腐、うどん、おでんなどに使える万能つゆです。評価4.63（8件）です。',
+    affiliateUrl: 'https://item.rakuten.co.jp/cheeky/u517538/',
+    itemUrl: 'https://item.rakuten.co.jp/cheeky/u517538/',
+    featureSlug: 'winter-nabe',
+    featuredDate: '2026-11-25',
+  },
+
+  // ---- 2026-11-25 第3弾：クリスマスギフト特集に限定品・クリスマスグッズ追加 ----
+  // 出典: ~/workspace/rakuten_tiktok_pr/feature_products_20261125.md（第3弾・クリスマス）
+  // affiliateUrl は当面 itemUrl と同じ楽天商品ページURL（公開時に差し替え）。
+  {
+    slug: 'lindt-advent-calendar',
+    name: 'リンツ リンドール アドベントカレンダー 15種24個入',
+    shopName: 'リンツ チョコレート 楽天市場店',
+    price: 4800,
+    shipping: '送料無料',
+    genre: '食品・スイーツ',
+    description:
+      'リンツ公式ショップのアドベントカレンダー。リンドールなど15種・24個のチョコレートが入り、12月1日から24日まで1日1つずつ開けて楽しめます。評価4.95（21件）です。',
+    affiliateUrl: 'https://item.rakuten.co.jp/lindt-chocolate/9701456/',
+    itemUrl: 'https://item.rakuten.co.jp/lindt-chocolate/9701456/',
+    featureSlug: 'christmas-gifts',
+    featuredDate: '2026-11-25',
+  },
+  {
+    slug: 'loccitane-advent-calendar',
+    name: 'ロクシタン アドベントカレンダー 2026',
+    shopName: 'ロクシタン公式ショップ楽天市場店',
+    price: 19800,
+    shipping: '送料無料',
+    genre: 'ボディケア',
+    description:
+      'ロクシタン公式ショップのホリデーコレクション（10月28日発売）。シア ハンドクリームやイモーテル ディヴァインクリームなど、ベストセラー24点を詰め合わせたアドベントカレンダーで、ペーパーバッグ付きです。評価4.82（39件）です。',
+    affiliateUrl: 'https://item.rakuten.co.jp/loccitane/loc00715/',
+    itemUrl: 'https://item.rakuten.co.jp/loccitane/loc00715/',
+    featureSlug: 'christmas-gifts',
+    featuredDate: '2026-11-25',
+  },
+  {
+    slug: 'tomica-advent-calendar',
+    name: 'タカラトミー トミカ アドベントカレンダー2025',
+    shopName: 'みの76マーケット',
+    price: 2780,
+    shipping: '送料無料',
+    genre: '季節用品',
+    description:
+      '2025年限定生産のトミカのアドベントカレンダー。24日分の窓を1日ずつ開けると、クリスマス仕様のスペシャルトミカ2台や情景パーツが出てきて、箱を開くとプレイマップになります。対象年齢3歳以上です。',
+    affiliateUrl: 'https://item.rakuten.co.jp/mino76market/4904810991861/',
+    itemUrl: 'https://item.rakuten.co.jp/mino76market/4904810991861/',
+    featureSlug: 'christmas-gifts',
+    featuredDate: '2026-11-25',
+  },
+  {
+    slug: 'kobecraft-wreath-red',
+    name: 'KOBE CRAFT ナチュラルクリスマスリース レッド（M・L・LL）',
+    shopName: 'クリスマス専門店 KOBE CRAFT',
+    price: 3000,
+    shipping: '送料無料',
+    genre: 'インテリア・季節用品',
+    description:
+      '松かさや木の皮など天然素材を使った手作りのクリスマスリース。M（約20〜24cm）・L（約30〜35cm）・LL（約36〜39cm）の3サイズから選べます。室内装飾用です。評価4.72（463件）です。',
+    affiliateUrl: 'https://item.rakuten.co.jp/ohmae-xmas/c-3260-0623-02/',
+    itemUrl: 'https://item.rakuten.co.jp/ohmae-xmas/c-3260-0623-02/',
+    featureSlug: 'christmas-gifts',
+    featuredDate: '2026-11-25',
+  },
+  {
+    slug: 'mitas-illumination-100',
+    name: 'mitas LEDイルミネーションライト 100球 10m コンセント式',
+    shopName: 'mitas公式SHOP',
+    price: 1899,
+    shipping: '送料無料',
+    genre: '季節用品',
+    description:
+      '100球・10mのストレート型LEDイルミネーションライト。コンセント式で8パターンの点灯切り替えができ、複数連結も可能です。室内のツリーや窓辺の飾り付けに。評価4.58（1,655件）です。',
+    affiliateUrl: 'https://item.rakuten.co.jp/oobikiyaking/5900000013077e/',
+    itemUrl: 'https://item.rakuten.co.jp/oobikiyaking/5900000013077e/',
+    featureSlug: 'christmas-gifts',
+    featuredDate: '2026-11-25',
+  },
+  {
+    slug: 'led-candle-glass-3set',
+    name: 'LEDキャンドルライト ガラス 3本セット リモコン付',
+    shopName: 'youtatsu楽天市場店',
+    price: 2580,
+    shipping: '送料無料',
+    genre: 'インテリア・季節用品',
+    description:
+      '本物の炎のように揺れるLEDキャンドルライト。ガラス入りの蝋製キャンドルがS・M・Lの3本セットで、リモコンでタイマーや明るさの切り替えができます。火を使わない電池式です。評価4.53（140件）です。',
+    affiliateUrl: 'https://item.rakuten.co.jp/youtatsu/130202/',
+    itemUrl: 'https://item.rakuten.co.jp/youtatsu/130202/',
+    featureSlug: 'christmas-gifts',
+    featuredDate: '2026-11-25',
+  },
+  {
+    slug: 'santa-costume-12set',
+    name: 'サンタ コスプレ 豪華12点セット メンズ',
+    shopName: 'modanic',
+    price: 3980,
+    shipping: '送料無料',
+    genre: 'ファッション・小物',
+    description:
+      '帽子・髭・ウィッグ・鈴・眼鏡・プレゼント袋など12点がそろう大人用サンタコスチュームのセットです（8点セットも選択可）。サイズはM/XL。クリスマスパーティーやイベントの仮装に。評価4.44（182件）です。',
+    affiliateUrl: 'https://item.rakuten.co.jp/long-lifeservice/cl0425/',
+    itemUrl: 'https://item.rakuten.co.jp/long-lifeservice/cl0425/',
+    featureSlug: 'christmas-gifts',
+    featuredDate: '2026-11-25',
+  },
+
 ];
 
 export const tiktokProductBySlug = (slug: string) =>
