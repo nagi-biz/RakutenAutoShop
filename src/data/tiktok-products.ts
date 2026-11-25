@@ -3677,7 +3677,7 @@ export const TIKTOK_PRODUCTS: TiktokProduct[] = [
     genre: 'キッチン調理器具',
     description:
       '美濃焼の土鍋（7号）と小鉢2個のセット。色は黒／白から選べます。日本製です。',
-    affiliateUrl: 'https://item.rakuten.co.jp/auc-utsuwayasan/ss-013',
+    affiliateUrl: 'https://a.r10.to/hg5kpZ',
     itemUrl: 'https://item.rakuten.co.jp/auc-utsuwayasan/ss-013',
     featureSlug: 'winter-nabe',
     featuredDate: '2026-11-25',
@@ -3691,7 +3691,7 @@ export const TIKTOK_PRODUCTS: TiktokProduct[] = [
     genre: 'キッチン調理器具',
     description:
       '美濃焼の土鍋（8号）と小鉢2個のセット。色は黒／白から選べます。日本製です。',
-    affiliateUrl: 'https://item.rakuten.co.jp/auc-utsuwayasan/ss-011',
+    affiliateUrl: 'https://a.r10.to/hguGSM',
     itemUrl: 'https://item.rakuten.co.jp/auc-utsuwayasan/ss-011',
     featureSlug: 'winter-nabe',
     featuredDate: '2026-11-25',
@@ -3705,7 +3705,7 @@ export const TIKTOK_PRODUCTS: TiktokProduct[] = [
     genre: 'キッチン調理器具',
     description:
       '美濃焼の7号土鍋（単品）。直火で使えます。日本製です。',
-    affiliateUrl: 'https://item.rakuten.co.jp/auc-utsuwayasan/ss-006',
+    affiliateUrl: 'https://a.r10.to/hg9vaE',
     itemUrl: 'https://item.rakuten.co.jp/auc-utsuwayasan/ss-006',
     featureSlug: 'winter-nabe',
     featuredDate: '2026-11-25',
@@ -3720,7 +3720,7 @@ export const TIKTOK_PRODUCTS: TiktokProduct[] = [
     genre: 'キッチン調理器具',
     description:
       'イワタニのカセットこんろ「カセットフー タフまる」（CB-ODX-1）。卓上で鍋料理をするときの熱源として使えます。',
-    affiliateUrl: 'https://item.rakuten.co.jp/i-collect/2000005905/',
+    affiliateUrl: 'https://a.r10.to/hPjKxZ',
     itemUrl: 'https://item.rakuten.co.jp/i-collect/2000005905/',
     featureSlug: 'winter-nabe',
     featuredDate: '2026-11-25',
@@ -3734,7 +3734,7 @@ export const TIKTOK_PRODUCTS: TiktokProduct[] = [
     genre: '食品・スイーツ',
     description:
       '国産牛もつ300g・牛すじ100g・スープ・ちゃんぽん麺・薬味のセット（2〜3人前）。スープは醤油・味噌・うま塩・塩とんこつの4種から選べます。野菜は付属しません。',
-    affiliateUrl: 'https://item.rakuten.co.jp/gabai/10000001/',
+    affiliateUrl: 'https://a.r10.to/T34gdT',
     itemUrl: 'https://item.rakuten.co.jp/gabai/10000001/',
     featureSlug: 'winter-nabe',
     featuredDate: '2026-11-25',
@@ -3748,7 +3748,7 @@ export const TIKTOK_PRODUCTS: TiktokProduct[] = [
     genre: '食器・テーブルウェア',
     description:
       '美濃焼のとんすい（鍋の取り鉢）とれんげの2人用セット。日本製です。',
-    affiliateUrl: 'https://item.rakuten.co.jp/auc-utsuwayasan/sp-025',
+    affiliateUrl: 'https://a.r10.to/hgvHz3',
     itemUrl: 'https://item.rakuten.co.jp/auc-utsuwayasan/sp-025',
     featureSlug: 'winter-nabe',
     featuredDate: '2026-11-25',
@@ -3762,7 +3762,7 @@ export const TIKTOK_PRODUCTS: TiktokProduct[] = [
     genre: '食器・テーブルウェア',
     description:
       'レンゲ付きのラーメンどんぶり（切立丼）。鍋の締めのラーメンやうどんに使えます。',
-    affiliateUrl: 'https://item.rakuten.co.jp/auc-utsuwayasan/sp-027',
+    affiliateUrl: 'https://a.r10.to/h5VB9A',
     itemUrl: 'https://item.rakuten.co.jp/auc-utsuwayasan/sp-027',
     featureSlug: 'winter-nabe',
     featuredDate: '2026-11-25',
@@ -3776,7 +3776,7 @@ export const TIKTOK_PRODUCTS: TiktokProduct[] = [
     genre: '食器・テーブルウェア',
     description:
       '菊型の豆皿。鍋の薬味皿や醤油皿として使えます。',
-    affiliateUrl: 'https://item.rakuten.co.jp/auc-utsuwayasan/sp-075',
+    affiliateUrl: 'https://a.r10.to/hF9mOW',
     itemUrl: 'https://item.rakuten.co.jp/auc-utsuwayasan/sp-075',
     featureSlug: 'winter-nabe',
     featuredDate: '2026-11-25',
@@ -3791,7 +3791,7 @@ export const TIKTOK_PRODUCTS: TiktokProduct[] = [
     genre: '食品・スイーツ',
     description:
       '久世福商店の看板商品のだしパック（8g×30包）。焼津で燻した鰹節粉末と削り節をベースに、さば節・いりこ・焼きあご・日高昆布を配合しています。1包を水600ccで煮出すと、4人前の鍋物のだしにも使えます。',
-    affiliateUrl: 'https://item.rakuten.co.jp/sc-rkt/sc-rktsh-3959/',
+    affiliateUrl: 'https://a.r10.to/hggH83',
     itemUrl: 'https://item.rakuten.co.jp/sc-rkt/sc-rktsh-3959/',
     featureSlug: 'winter-nabe',
     featuredDate: '2026-11-25',
@@ -3805,7 +3805,7 @@ export const TIKTOK_PRODUCTS: TiktokProduct[] = [
     genre: '食品・スイーツ',
     description:
       '鰹節専門店にんべんの白だし（500ml・希釈タイプ）。国内製造鰹節・さば節・宗田鰹節・北海道産昆布の合わせだしに本醸造有機醤油を使い、だし素材は通常の白だしの1.5倍使用。鍋ものには本品70mlに水700mlが目安です。',
-    affiliateUrl: 'https://item.rakuten.co.jp/ninben/od683n/',
+    affiliateUrl: 'https://a.r10.to/hgMPT1',
     itemUrl: 'https://item.rakuten.co.jp/ninben/od683n/',
     featureSlug: 'winter-nabe',
     featuredDate: '2026-11-25',
@@ -3819,7 +3819,7 @@ export const TIKTOK_PRODUCTS: TiktokProduct[] = [
     genre: '食品・スイーツ',
     description:
       '銘柄豚「岩中豚」を使った冷凍の水餃子（40個×2袋、約80個・1.6kg超）。鍋やスープに入れるだけで使える、横浜中華の餃子専門店の商品です。',
-    affiliateUrl: 'https://item.rakuten.co.jp/taihogyouza/th4/',
+    affiliateUrl: 'https://a.r10.to/hPqeZv',
     itemUrl: 'https://item.rakuten.co.jp/taihogyouza/th4/',
     featureSlug: 'winter-nabe',
     featuredDate: '2026-11-25',
@@ -3833,7 +3833,7 @@ export const TIKTOK_PRODUCTS: TiktokProduct[] = [
     genre: '食品・スイーツ',
     description:
       '長野・山形・新潟など国産のきのこ7～8種類を各1パックずつ詰め合わせたセット。鍋の具材にそのまま使えます。',
-    affiliateUrl: 'https://item.rakuten.co.jp/yorunoyaoyasan/k230-0906-00-st2/',
+    affiliateUrl: 'https://a.r10.to/TE1k0u',
     itemUrl: 'https://item.rakuten.co.jp/yorunoyaoyasan/k230-0906-00-st2/',
     featureSlug: 'winter-nabe',
     featuredDate: '2026-11-25',
@@ -3847,7 +3847,7 @@ export const TIKTOK_PRODUCTS: TiktokProduct[] = [
     genre: '食器・テーブルウェア',
     description:
       'カレー皿2枚とサラダ鉢2個の2人分セット。水玉柄で色は白／黒から選べます。美濃焼・日本製で、電子レンジ・食洗機に対応します。',
-    affiliateUrl: 'https://item.rakuten.co.jp/auc-utsuwayasan/sd-057',
+    affiliateUrl: 'https://a.r10.to/hgka7D',
     itemUrl: 'https://item.rakuten.co.jp/auc-utsuwayasan/sd-057',
     featureSlug: 'christmas-gifts',
     featuredDate: '2026-11-25',
@@ -3861,7 +3861,7 @@ export const TIKTOK_PRODUCTS: TiktokProduct[] = [
     genre: '食品・スイーツ',
     description:
       'ヨックモックの看板菓子「シガール」の14本入。バターの風味を生かした生地を巻いた焼き菓子で、1本ずつ個包装され、化粧箱に入っています。',
-    affiliateUrl: 'https://item.rakuten.co.jp/yokumoku/1010011201010/',
+    affiliateUrl: 'https://a.r10.to/hgskC9',
     itemUrl: 'https://item.rakuten.co.jp/yokumoku/1010011201010/',
     featureSlug: 'christmas-gifts',
     featuredDate: '2026-11-25',
@@ -3875,7 +3875,7 @@ export const TIKTOK_PRODUCTS: TiktokProduct[] = [
     genre: '食器・テーブルウェア',
     description:
       'カレー皿4枚とサラダ鉢4個の4人分セット。水玉柄で色は白／黒から選べます。美濃焼・日本製で、電子レンジ・食洗機に対応します。',
-    affiliateUrl: 'https://item.rakuten.co.jp/auc-utsuwayasan/sd-059',
+    affiliateUrl: 'https://a.r10.to/hY8gx5',
     itemUrl: 'https://item.rakuten.co.jp/auc-utsuwayasan/sd-059',
     featureSlug: 'christmas-gifts',
     featuredDate: '2026-11-25',
@@ -3889,7 +3889,7 @@ export const TIKTOK_PRODUCTS: TiktokProduct[] = [
     genre: 'ボディケア',
     description:
       'SABONのハンドクリーム（30ml）。3種のボタニカルバターを配合した「バターハンドクリーム」で、香りはデリケート・ジャスミン、グリーン・ローズ、パチュリ・ラベンダー・バニラなどから選べます。',
-    affiliateUrl: 'https://item.rakuten.co.jp/sabon/s0179/',
+    affiliateUrl: 'https://a.r10.to/h5zHqQ',
     itemUrl: 'https://item.rakuten.co.jp/sabon/s0179/',
     featureSlug: 'christmas-gifts',
     featuredDate: '2026-11-25',
@@ -3903,7 +3903,7 @@ export const TIKTOK_PRODUCTS: TiktokProduct[] = [
     genre: '食器・テーブルウェア',
     description:
       '粉引グレーの急須と湯呑みのセット。日本製です。',
-    affiliateUrl: 'https://item.rakuten.co.jp/auc-utsuwayasan/si-006a',
+    affiliateUrl: 'https://a.r10.to/h8MBmX',
     itemUrl: 'https://item.rakuten.co.jp/auc-utsuwayasan/si-006a',
     featureSlug: 'christmas-gifts',
     featuredDate: '2026-11-25',
@@ -3917,7 +3917,7 @@ export const TIKTOK_PRODUCTS: TiktokProduct[] = [
     genre: '食品・スイーツ',
     description:
       '銀座千疋屋のフルーツゼリー9個入。果実の味わいを生かしたゼリーの詰め合わせで、手土産や贈り物に使える千疋屋のギフト商品です。',
-    affiliateUrl: 'https://item.rakuten.co.jp/1894ginza-sembikiya/10000240/',
+    affiliateUrl: 'https://a.r10.to/hHoVlo',
     itemUrl: 'https://item.rakuten.co.jp/1894ginza-sembikiya/10000240/',
     featureSlug: 'christmas-gifts',
     featuredDate: '2026-11-25',
@@ -3932,7 +3932,7 @@ export const TIKTOK_PRODUCTS: TiktokProduct[] = [
     genre: '食器・テーブルウェア',
     description:
       '猫のイラスト「おすわりネコ」のカレー皿2枚とサラダ鉢2個のペアセット（箱入）。美濃焼・日本製で、電子レンジ・食洗機に対応します。',
-    affiliateUrl: 'https://item.rakuten.co.jp/auc-utsuwayasan/ai-021',
+    affiliateUrl: 'https://a.r10.to/h58lzC',
     itemUrl: 'https://item.rakuten.co.jp/auc-utsuwayasan/ai-021',
     featureSlug: 'christmas-gifts',
     featuredDate: '2026-11-25',
@@ -3946,7 +3946,7 @@ export const TIKTOK_PRODUCTS: TiktokProduct[] = [
     genre: 'ボディケア',
     description:
       'SABONの人気アイテムをまとめたギフトキット。シャワーオイル（100mL）、ボディスクラブ（60g）、シルキーボディミルク（50mL）がギフトBOXに入っています。2026年4月リニューアル版です。',
-    affiliateUrl: 'https://item.rakuten.co.jp/sabon/s0078/',
+    affiliateUrl: 'https://a.r10.to/h5po1q',
     itemUrl: 'https://item.rakuten.co.jp/sabon/s0078/',
     featureSlug: 'christmas-gifts',
     featuredDate: '2026-11-25',
@@ -3960,7 +3960,7 @@ export const TIKTOK_PRODUCTS: TiktokProduct[] = [
     genre: '食器・テーブルウェア',
     description:
       '猫のイラスト「おすわりネコ」のマグカップ2個と小皿2枚のペアセット（箱入）。美濃焼・日本製で、電子レンジ・食洗機に対応します。',
-    affiliateUrl: 'https://item.rakuten.co.jp/auc-utsuwayasan/ai-020',
+    affiliateUrl: 'https://a.r10.to/hg2HMO',
     itemUrl: 'https://item.rakuten.co.jp/auc-utsuwayasan/ai-020',
     featureSlug: 'christmas-gifts',
     featuredDate: '2026-11-25',
@@ -3974,7 +3974,7 @@ export const TIKTOK_PRODUCTS: TiktokProduct[] = [
     genre: 'ボディケア',
     description:
       'Aesopのハンドクリーム（75ml・チューブタイプ）。「アンドラム アロマティック ハンドバーム」（旧名：レスレクション）です。楽天市場に公式ショップはなく、輸入品を取り扱うショップの出品です。',
-    affiliateUrl: 'https://item.rakuten.co.jp/cosmeticflora/10000066/',
+    affiliateUrl: 'https://a.r10.to/h5Mhft',
     itemUrl: 'https://item.rakuten.co.jp/cosmeticflora/10000066/',
     featureSlug: 'christmas-gifts',
     featuredDate: '2026-11-25',
@@ -3988,7 +3988,7 @@ export const TIKTOK_PRODUCTS: TiktokProduct[] = [
     genre: '食器・テーブルウェア',
     description:
       'カレー皿4枚とサラダ鉢4個の計8点セット（箱入）。色はアイボリー／ブラックから選べます。美濃焼・日本製で、電子レンジ・食洗機に対応します。',
-    affiliateUrl: 'https://item.rakuten.co.jp/auc-utsuwayasan/kg-208',
+    affiliateUrl: 'https://a.r10.to/hgFrSx',
     itemUrl: 'https://item.rakuten.co.jp/auc-utsuwayasan/kg-208',
     featureSlug: 'christmas-gifts',
     featuredDate: '2026-11-25',
@@ -4002,7 +4002,7 @@ export const TIKTOK_PRODUCTS: TiktokProduct[] = [
     genre: '食器・テーブルウェア',
     description:
       '花模様の食器「花さらさ」7種・計14個のペアセット（小皿・取り皿・大皿・深皿・浅鉢・大鉢・小鉢が各2個）。美濃焼・日本製で、電子レンジ・食洗機に対応します。',
-    affiliateUrl: 'https://item.rakuten.co.jp/auc-utsuwayasan/kg-285',
+    affiliateUrl: 'https://a.r10.to/h9BsCk',
     itemUrl: 'https://item.rakuten.co.jp/auc-utsuwayasan/kg-285',
     featureSlug: 'christmas-gifts',
     featuredDate: '2026-11-25',
@@ -4016,7 +4016,7 @@ export const TIKTOK_PRODUCTS: TiktokProduct[] = [
     genre: '食器・テーブルウェア',
     description:
       '軽量タイプの食器「花がこい」7点・計14個のペアセット（箱入）。小皿・取り皿・中皿・小鉢・浅鉢・茶碗・マグカップが各2個。美濃焼・日本製で、電子レンジ・食洗機に対応します。',
-    affiliateUrl: 'https://item.rakuten.co.jp/auc-utsuwayasan/dt-228',
+    affiliateUrl: 'https://a.r10.to/hg9vQY',
     itemUrl: 'https://item.rakuten.co.jp/auc-utsuwayasan/dt-228',
     featureSlug: 'christmas-gifts',
     featuredDate: '2026-11-25',
@@ -4030,7 +4030,7 @@ export const TIKTOK_PRODUCTS: TiktokProduct[] = [
     genre: '食器・テーブルウェア',
     description:
       '猫と桜のイラストの食器6点セット（箱有）。マグカップ・湯呑・茶碗・小鉢・小皿・中皿が各1個。美濃焼・日本製で、電子レンジ・食洗機に対応します。',
-    affiliateUrl: 'https://item.rakuten.co.jp/auc-utsuwayasan/bl-112',
+    affiliateUrl: 'https://a.r10.to/hg6phb',
     itemUrl: 'https://item.rakuten.co.jp/auc-utsuwayasan/bl-112',
     featureSlug: 'christmas-gifts',
     featuredDate: '2026-11-25',
@@ -4048,7 +4048,7 @@ export const TIKTOK_PRODUCTS: TiktokProduct[] = [
     genre: '食品・スイーツ',
     description:
       '中国の火鍋チェーン「海底撈」の鍋の素。麻辣味・清油味・トマト味・きのこ味など6種類から2袋選べるセットです（1袋150〜220g）。日本公式販売店の出品で、評価4.38（32件）です。',
-    affiliateUrl: 'https://item.rakuten.co.jp/kshouhin/chi-nabe-set-2/',
+    affiliateUrl: 'https://a.r10.to/hgMPQ8',
     itemUrl: 'https://item.rakuten.co.jp/kshouhin/chi-nabe-set-2/',
     featureSlug: 'winter-nabe',
     featuredDate: '2026-11-25',
@@ -4062,7 +4062,7 @@ export const TIKTOK_PRODUCTS: TiktokProduct[] = [
     genre: '食品・スイーツ',
     description:
       'ミツカンのストレートタイプ鍋つゆ「〆まで美味しい」シリーズ10種（ごま豆乳・キムチ・寄せ鍋・焼あごだし・とんこつしょうゆ・濃厚みそ・地鶏昆布だし・鶏うま塩・ゆず塩・貝だし）各1袋（750g、3〜4人前）の詰め合わせです。',
-    affiliateUrl: 'https://item.rakuten.co.jp/e-convini/0420101003654-ha001/',
+    affiliateUrl: 'https://a.r10.to/h5S6Oe',
     itemUrl: 'https://item.rakuten.co.jp/e-convini/0420101003654-ha001/',
     featureSlug: 'winter-nabe',
     featuredDate: '2026-11-25',
@@ -4076,7 +4076,7 @@ export const TIKTOK_PRODUCTS: TiktokProduct[] = [
     genre: '食品・スイーツ',
     description:
       '1個で1人分のポーションタイプ鍋の素「プチッと鍋」の寄せ鍋（23g×6個入）×3袋。うすくち醤油をベースに、鰹と昆布の旨みとほんのり生姜を効かせた味わいです。',
-    affiliateUrl: 'https://item.rakuten.co.jp/easylifeshop/mu0b0897a648/',
+    affiliateUrl: 'https://a.r10.to/hYeith',
     itemUrl: 'https://item.rakuten.co.jp/easylifeshop/mu0b0897a648/',
     featureSlug: 'winter-nabe',
     featuredDate: '2026-11-25',
@@ -4090,7 +4090,7 @@ export const TIKTOK_PRODUCTS: TiktokProduct[] = [
     genre: '食品・スイーツ',
     description:
       'もやしが主役の鍋スープ（750g×2袋）。醤油に阿波尾鶏・とんこつのだしの旨みと、ローストオニオン・ローストガーリックの香ばしさ、ごま油のコクを加えた、とろみ仕立てのスープです。ダイショー公式ショップの出品です。',
-    affiliateUrl: 'https://item.rakuten.co.jp/oec-daisho/31168-2/',
+    affiliateUrl: 'https://a.r10.to/hPKMa0',
     itemUrl: 'https://item.rakuten.co.jp/oec-daisho/31168-2/',
     featureSlug: 'winter-nabe',
     featuredDate: '2026-11-25',
@@ -4104,7 +4104,7 @@ export const TIKTOK_PRODUCTS: TiktokProduct[] = [
     genre: '食品・スイーツ',
     description:
       '九州発の焼きあご（飛び魚）だしを使った4倍濃縮のつゆ（1000ml紙パック）。鍋物や湯豆腐、うどん、おでんなどに使える万能つゆです。評価4.63（8件）です。',
-    affiliateUrl: 'https://item.rakuten.co.jp/cheeky/u517538/',
+    affiliateUrl: 'https://a.r10.to/hRDel6',
     itemUrl: 'https://item.rakuten.co.jp/cheeky/u517538/',
     featureSlug: 'winter-nabe',
     featuredDate: '2026-11-25',
@@ -4122,7 +4122,7 @@ export const TIKTOK_PRODUCTS: TiktokProduct[] = [
     genre: '食品・スイーツ',
     description:
       'リンツ公式ショップのアドベントカレンダー。リンドールなど15種・24個のチョコレートが入り、12月1日から24日まで1日1つずつ開けて楽しめます。評価4.95（21件）です。',
-    affiliateUrl: 'https://item.rakuten.co.jp/lindt-chocolate/9701456/',
+    affiliateUrl: 'https://a.r10.to/hgFrLw',
     itemUrl: 'https://item.rakuten.co.jp/lindt-chocolate/9701456/',
     featureSlug: 'christmas-gifts',
     featuredDate: '2026-11-25',
@@ -4136,7 +4136,7 @@ export const TIKTOK_PRODUCTS: TiktokProduct[] = [
     genre: 'ボディケア',
     description:
       'ロクシタン公式ショップのホリデーコレクション（10月28日発売）。シア ハンドクリームやイモーテル ディヴァインクリームなど、ベストセラー24点を詰め合わせたアドベントカレンダーで、ペーパーバッグ付きです。評価4.82（39件）です。',
-    affiliateUrl: 'https://item.rakuten.co.jp/loccitane/loc00715/',
+    affiliateUrl: 'https://a.r10.to/hPELhH',
     itemUrl: 'https://item.rakuten.co.jp/loccitane/loc00715/',
     featureSlug: 'christmas-gifts',
     featuredDate: '2026-11-25',
@@ -4150,7 +4150,7 @@ export const TIKTOK_PRODUCTS: TiktokProduct[] = [
     genre: '季節用品',
     description:
       '2025年限定生産のトミカのアドベントカレンダー。24日分の窓を1日ずつ開けると、クリスマス仕様のスペシャルトミカ2台や情景パーツが出てきて、箱を開くとプレイマップになります。対象年齢3歳以上です。',
-    affiliateUrl: 'https://item.rakuten.co.jp/mino76market/4904810991861/',
+    affiliateUrl: 'https://a.r10.to/h5PJDx',
     itemUrl: 'https://item.rakuten.co.jp/mino76market/4904810991861/',
     featureSlug: 'christmas-gifts',
     featuredDate: '2026-11-25',
@@ -4164,7 +4164,7 @@ export const TIKTOK_PRODUCTS: TiktokProduct[] = [
     genre: 'インテリア・季節用品',
     description:
       '松かさや木の皮など天然素材を使った手作りのクリスマスリース。M（約20〜24cm）・L（約30〜35cm）・LL（約36〜39cm）の3サイズから選べます。室内装飾用です。評価4.72（463件）です。',
-    affiliateUrl: 'https://item.rakuten.co.jp/ohmae-xmas/c-3260-0623-02/',
+    affiliateUrl: 'https://a.r10.to/hPGQBx',
     itemUrl: 'https://item.rakuten.co.jp/ohmae-xmas/c-3260-0623-02/',
     featureSlug: 'christmas-gifts',
     featuredDate: '2026-11-25',
@@ -4178,7 +4178,7 @@ export const TIKTOK_PRODUCTS: TiktokProduct[] = [
     genre: '季節用品',
     description:
       '100球・10mのストレート型LEDイルミネーションライト。コンセント式で8パターンの点灯切り替えができ、複数連結も可能です。室内のツリーや窓辺の飾り付けに。評価4.58（1,655件）です。',
-    affiliateUrl: 'https://item.rakuten.co.jp/oobikiyaking/5900000013077e/',
+    affiliateUrl: 'https://a.r10.to/hPTQrH',
     itemUrl: 'https://item.rakuten.co.jp/oobikiyaking/5900000013077e/',
     featureSlug: 'christmas-gifts',
     featuredDate: '2026-11-25',
@@ -4192,7 +4192,7 @@ export const TIKTOK_PRODUCTS: TiktokProduct[] = [
     genre: 'インテリア・季節用品',
     description:
       '本物の炎のように揺れるLEDキャンドルライト。ガラス入りの蝋製キャンドルがS・M・Lの3本セットで、リモコンでタイマーや明るさの切り替えができます。火を使わない電池式です。評価4.53（140件）です。',
-    affiliateUrl: 'https://item.rakuten.co.jp/youtatsu/130202/',
+    affiliateUrl: 'https://a.r10.to/hYrFO6',
     itemUrl: 'https://item.rakuten.co.jp/youtatsu/130202/',
     featureSlug: 'christmas-gifts',
     featuredDate: '2026-11-25',
@@ -4206,7 +4206,7 @@ export const TIKTOK_PRODUCTS: TiktokProduct[] = [
     genre: 'ファッション・小物',
     description:
       '帽子・髭・ウィッグ・鈴・眼鏡・プレゼント袋など12点がそろう大人用サンタコスチュームのセットです（8点セットも選択可）。サイズはM/XL。クリスマスパーティーやイベントの仮装に。評価4.44（182件）です。',
-    affiliateUrl: 'https://item.rakuten.co.jp/long-lifeservice/cl0425/',
+    affiliateUrl: 'https://a.r10.to/hPnmFA',
     itemUrl: 'https://item.rakuten.co.jp/long-lifeservice/cl0425/',
     featureSlug: 'christmas-gifts',
     featuredDate: '2026-11-25',
