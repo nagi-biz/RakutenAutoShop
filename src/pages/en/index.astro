@@ -2,6 +2,8 @@
 import { getCollection } from 'astro:content';
 import fs from 'node:fs';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import SeasonalBanner from '../../components/SeasonalBanner.astro';
+import CampaignBanner from '../../components/CampaignBanner.astro';
 import { getUI } from '../../i18n/ui';
 import { GENRES, genreCounts } from '../../lib/genres';
 
@@ -36,30 +38,10 @@ const articles = allArticles
 ---
 
 <BaseLayout title={t.homeTitle} lang="en" altPath="/">
-  <section class="event-banner" id="bf-banner">
-    <p class="event-banner-label">🖤 BLACK FRIDAY 🖤</p>
-    <h2 class="event-banner-title">Rakuten Black Friday — starts Nov 19, 8:00 PM JST</h2>
-    <p class="event-banner-meta">
-      Entry is open now! The sale runs until Nov 25, 1:59 AM JST.<br />
-      Earn boosted points by shopping around, plus up to 50% OFF coupons in the first 2 hours.
-    </p>
-    <a
-      class="event-banner-btn"
-      href="https://event.rakuten.co.jp/campaign/point-up/blackfriday/"
-      target="_blank"
-      rel="sponsored noopener">Enter on the official event page</a
-    >
-  </section>
-  <script is:inline>
-    (function () {
-      if (Date.now() > new Date('2026-11-25T01:59:00+09:00').getTime()) {
-        var el = document.getElementById('bf-banner');
-        if (el) el.style.display = 'none';
-      }
-    })();
-  </script>
+  <SeasonalBanner lang="en" />
+  <CampaignBanner lang="en" />
 
-  <h1>{t.homeHeading}</h1>
+  <h1><span data-seasonal-accent hidden>🎄 </span>{t.homeHeading}</h1>
   <p>{t.homeIntro}</p>
   <p>
     New to shopping on Rakuten Ichiba from outside Japan?
