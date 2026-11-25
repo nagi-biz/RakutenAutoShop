@@ -6,6 +6,8 @@ import SeasonalBanner from '../../components/SeasonalBanner.astro';
 import CampaignBanner from '../../components/CampaignBanner.astro';
 import { getUI } from '../../i18n/ui';
 import { GENRES, genreCounts } from '../../lib/genres';
+import { FEATURES } from '../../data/features';
+import { TIKTOK_PRODUCTS } from '../../data/tiktok-products';
 
 const t = getUI('en');
 
@@ -62,6 +64,28 @@ const articles = allArticles
           </a>
         </li>
       ))
+    }
+  </ul>
+
+  <h2 class="section-heading">Features</h2>
+  <ul class="feature-grid">
+    {
+      FEATURES.map((f) => {
+        const fp = TIKTOK_PRODUCTS.find((p) => p.featureSlug === f.slug);
+        return (
+          <li class="feature-card">
+            <a href={`${base}/en/features/${f.slug}/`}>
+              {fp && <img src={`${base}/products/${fp.slug}.jpg`} alt="" loading="lazy" />}
+              <span class="feature-card-body">
+                <span class="feature-card-title">
+                  {f.emoji} {f.title.en}
+                </span>
+                <span class="feature-card-intro">{f.intro.en}</span>
+              </span>
+            </a>
+          </li>
+        );
+      })
     }
   </ul>
 
