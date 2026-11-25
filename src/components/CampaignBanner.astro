@@ -1,0 +1,39 @@
+---
+import { CAMPAIGN_BANNER } from '../data/seasonal';
+
+interface Props {
+  lang: 'ja' | 'en';
+}
+
+const { lang } = Astro.props;
+const cb = CAMPAIGN_BANNER;
+---
+
+{
+  cb && (
+    <>
+      <a
+        class="campaign-banner"
+        id="campaign-banner"
+        href={cb.href}
+        target="_blank"
+        rel="sponsored noopener"
+        style="display:none"
+      >
+        <img src={cb.image} alt={cb.alt[lang]} loading="lazy" />
+      </a>
+      <script is:inline define:vars={{ cStart: cb.start, cEnd: cb.end }}>
+        (function () {
+          var now = Date.now();
+          var inPeriod =
+            (!cStart || now >= new Date(cStart).getTime()) &&
+            (!cEnd || now <= new Date(cEnd).getTime());
+          if (inPeriod) {
+            var el = document.getElementById('campaign-banner');
+            if (el) el.style.display = '';
+          }
+        })();
+      </script>
+    </>
+  )
+}
