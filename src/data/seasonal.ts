@@ -36,11 +36,11 @@ end: '2026-12-25T23:59:59+09:00',
 label: { ja: '🎄 CHRISTMAS 🎄', en: '🎄 CHRISTMAS 🎄'},
 title: { ja: '🎄 クリスマスギフト特集', en: '🎄 Christmas Gift Picks'},
 meta: {
-ja: '贈り物に人気の商品を集めました。リンク集ページでまとめてチェックできます。',
-en: 'A hand-picked collection of popular gift ideas — browse them all on our link page.',
+ja: '贈り物に人気の商品を集めました。特集ページでまとめてチェックできます。',
+en: 'A hand-picked collection of popular gift ideas — browse them all on our feature page.',
 },
-button: { ja: 'リンク集でギフト候補を見る', en: 'See gift picks on the link page'},
-path: '/tiktok/',
+button: { ja: 'ギフト特集ページを見る', en: 'See the gift feature page'},
+path: '/features/christmas-gifts/',
 };
 
 export interface CampaignBanner {
